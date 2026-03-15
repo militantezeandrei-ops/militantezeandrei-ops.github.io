@@ -1,9 +1,9 @@
-// Initialize Lucide Icons
+// ── Start Lucide Icons ──
 if (typeof lucide !== 'undefined') {
     lucide.createIcons();
 }
 
-// Cursor Glow Effect
+// ── Cursor Glow Effect ──
 const cursorGlow = document.getElementById('cursor-glow');
 if (cursorGlow) {
     document.addEventListener('mousemove', (e) => {
@@ -12,21 +12,23 @@ if (cursorGlow) {
     });
 }
 
-// Navbar Scroll Effect
+// ── Navbar: Add background when user scrolls down ──
 const navbar = document.getElementById('navbar');
 if (navbar) {
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
-            navbar.classList.add('glass', 'border-white/10');
+            navbar.classList.add('glass');
             navbar.classList.remove('border-transparent');
+            navbar.classList.add('border-dark-border');
         } else {
-            navbar.classList.remove('glass', 'border-white/10');
+            navbar.classList.remove('glass');
             navbar.classList.add('border-transparent');
+            navbar.classList.remove('border-dark-border');
         }
     });
 }
 
-// Mobile Menu Toggle
+// ── Mobile Menu Open/Close ──
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 
@@ -35,7 +37,7 @@ if (mobileMenuBtn && mobileMenu) {
         mobileMenu.classList.toggle('hidden');
     });
 
-    // Close mobile menu when clicking a link
+    // Close menu when a link is clicked
     mobileMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             mobileMenu.classList.add('hidden');
@@ -43,7 +45,7 @@ if (mobileMenuBtn && mobileMenu) {
     });
 }
 
-// Scroll Reveal Animation
+// ── Scroll Reveal: Show elements as user scrolls down ──
 const revealElements = document.querySelectorAll('.reveal');
 
 if (revealElements.length > 0) {
@@ -52,7 +54,7 @@ if (revealElements.length > 0) {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
 
-                // Animate skill bars if inside the element
+                // Fill skill bars when they come into view
                 const skillBars = entry.target.querySelectorAll('.skill-bar');
                 skillBars.forEach(bar => {
                     setTimeout(() => {
@@ -69,7 +71,7 @@ if (revealElements.length > 0) {
     revealElements.forEach(el => revealObserver.observe(el));
 }
 
-// Contact Form Handling
+// ── Contact Form: Send message and show feedback ──
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
@@ -81,7 +83,7 @@ if (contactForm) {
         const originalText = btn.innerHTML;
         const formData = new FormData(contactForm);
 
-        // Visual feedback - Loading
+        // Show loading state
         btn.innerHTML = '<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> Sending...';
         btn.disabled = true;
         if (typeof lucide !== 'undefined') lucide.createIcons();
@@ -90,30 +92,28 @@ if (contactForm) {
             const response = await fetch('https://formspree.io/f/xykdojdv', {
                 method: 'POST',
                 body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
+                headers: { 'Accept': 'application/json' }
             });
 
             if (response.ok) {
+                // Success state
                 btn.innerHTML = '<i data-lucide="check" class="w-5 h-5"></i> Message Sent!';
-                btn.classList.add('bg-green-500', 'text-white');
-                btn.classList.remove('bg-white', 'text-dark');
+                btn.classList.add('!bg-primary', '!text-black');
                 if (typeof lucide !== 'undefined') lucide.createIcons();
                 contactForm.reset();
 
+                // Reset button after 4 seconds
                 setTimeout(() => {
                     btn.innerHTML = originalText;
-                    btn.classList.remove('bg-green-500', 'text-white');
-                    btn.classList.add('bg-white', 'text-dark');
+                    btn.classList.remove('!bg-primary', '!text-black');
                     if (typeof lucide !== 'undefined') lucide.createIcons();
                 }, 4000);
             } else {
-                // If AJAX fails, fall back to normal submission
+                // Fallback: submit the form the normal way
                 contactForm.submit();
             }
         } catch (error) {
-            // If there's a network/CORS error, fall back to normal submission
+            // Fallback on network error
             contactForm.submit();
         } finally {
             btn.disabled = false;
@@ -121,7 +121,7 @@ if (contactForm) {
     });
 }
 
-// Smooth Scroll for Navigation Links
+// ── Smooth Scroll: Glide to section when nav links are clicked ──
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -130,10 +130,39 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
         const target = document.querySelector(targetAttr);
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     });
 });
+
+// ── Typewriter Effect on Hero Title ──
+const typeTarget = document.getElementById('typewriter');
+if (typeTarget) {
+    const words = ['Developer', 'Designer', 'Builder', 'Freelancer'];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    function type() {
+        const current = words[wordIndex];
+        if (!deleting) {
+            typeTarget.textContent = current.substring(0, charIndex + 1);
+            charIndex++;
+            if (charIndex === current.length) {
+                deleting = true;
+                setTimeout(type, 1800);
+                return;
+            }
+        } else {
+            typeTarget.textContent = current.substring(0, charIndex - 1);
+            charIndex--;
+            if (charIndex === 0) {
+                deleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+            }
+        }
+        setTimeout(type, deleting ? 60 : 100);
+    }
+
+    type();
+}

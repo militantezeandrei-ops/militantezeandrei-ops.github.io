@@ -9,779 +9,756 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
     <script src="js/config.js"></script>
     <link rel="stylesheet" href="css/style.css">
 
-
     <base target="_blank">
 </head>
 
-<body class="antialiased selection:bg-primary selection:text-white">
+<body class="antialiased">
 
-    <!-- Cursor Glow Effect -->
+    <!-- Mouse glow that follows your cursor -->
     <div id="cursor-glow" class="cursor-glow hidden md:block"></div>
 
-    <!-- Navigation -->
+    <!-- ── Navigation ── -->
     <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <a href="#" class="font-display font-bold text-2xl tracking-tighter">
-                    ZDM<span class="text-primary">.</span>
+                <a href="#" class="logo-text text-2xl tracking-widest text-white flex items-center gap-1">
+                    ZDM<span class="neon-text">_</span>
                 </a>
 
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about"
-                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
-                    <a href="#work"
-                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Projects</a>
-                    <a href="#skills"
-                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Skills</a>
-                    <a href="#certifications"
-                        class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors">Certifications</a>
-                    <a href="#contact"
-                        class="px-6 py-2.5 bg-white text-dark font-semibold rounded-full hover:bg-primary hover:text-white transition-all duration-300 transform hover:scale-105">
+                    <a href="#about" class="nav-link text-gray-400 hover:text-primary transition-colors">About</a>
+                    <a href="#work" class="nav-link text-gray-400 hover:text-primary transition-colors">Projects</a>
+                    <a href="#skills" class="nav-link text-gray-400 hover:text-primary transition-colors">Skills</a>
+                    <a href="#certifications" class="nav-link text-gray-400 hover:text-primary transition-colors">Certs</a>
+                    <a href="#contact" class="btn-solid px-6 py-2.5 rounded text-sm">
                         Hire Me
                     </a>
                 </div>
 
-                <button id="mobile-menu-btn" class="md:hidden p-2">
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-400 hover:text-primary transition-colors">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden glass border-t border-white/10">
-            <div class="px-6 py-4 space-y-4">
-                <a href="#about" class="block text-lg font-medium text-gray-300 hover:text-white">About</a>
-                <a href="#work" class="block text-lg font-medium text-gray-300 hover:text-white">Projects</a>
-                <a href="#skills" class="block text-lg font-medium text-gray-300 hover:text-white">Skills</a>
-                <a href="#certifications"
-                    class="block text-lg font-medium text-gray-300 hover:text-white">Certifications</a>
-                <a href="#contact" class="block text-lg font-medium text-primary">Contact Me</a>
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-dark-border">
+            <div class="px-6 py-5 space-y-4">
+                <a href="#about" class="block mono text-sm tracking-widest text-gray-300 hover:text-primary transition-colors">// ABOUT</a>
+                <a href="#work" class="block mono text-sm tracking-widest text-gray-300 hover:text-primary transition-colors">// PROJECTS</a>
+                <a href="#skills" class="block mono text-sm tracking-widest text-gray-300 hover:text-primary transition-colors">// SKILLS</a>
+                <a href="#certifications" class="block mono text-sm tracking-widest text-gray-300 hover:text-primary transition-colors">// CERTIFICATIONS</a>
+                <a href="#contact" class="block mono text-sm tracking-widest text-primary">// CONTACT</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden grid-pattern">
-        <!-- Background Elements -->
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-[100px] animate-pulse-slow">
-            </div>
-            <div class="absolute bottom-20 right-10 w-96 h-96 bg-secondary/20 rounded-full blur-[100px] animate-pulse-slow"
-                style="animation-delay: 2s;"></div>
-            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/10 rounded-full blur-[120px] animate-pulse-slow"
-                style="animation-delay: 4s;"></div>
+    <!-- ── Hero Section ── -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden grid-pattern scanlines">
+
+        <!-- Background glow blobs -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-[120px] animate-pulse-slow"
+                style="background: rgba(0,255,65,0.05);"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full blur-[100px] animate-pulse-slow"
+                style="background: rgba(0,255,65,0.04); animation-delay: 2s;"></div>
+            <!-- Horizontal scan line -->
+            <div class="absolute left-0 right-0 h-px opacity-20"
+                style="background: linear-gradient(90deg, transparent, #00FF41, transparent); top: 30%; animation: none;"></div>
         </div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
             <div class="reveal active">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6 border-primary/30">
-                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                    <span class="text-sm font-medium text-gray-300">Available for Freelance Work</span>
+
+                <!-- Status Badge -->
+                <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded glass mb-8 border border-primary/20">
+                    <span class="w-2 h-2 rounded-full status-dot"></span>
+                    <span class="mono text-xs tracking-widest text-gray-300">OPEN FOR FREELANCE WORK</span>
                 </div>
 
-                <h1 class="font-display font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6">
-                    Zeandrei<br>
-                    <span class="gradient-text">Militante</span>
+                <!-- Name -->
+                <h1 class="font-display font-bold text-5xl md:text-7xl lg:text-8xl leading-none mb-4 tracking-tight">
+                    ZEANDREI<br>
+                    <span class="gradient-text" style="text-shadow: 0 0 40px rgba(0,255,65,0.3);">MILITANTE</span>
                 </h1>
 
-                <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-6 leading-relaxed">
-                    Detail-oriented IT Student & Freelance Web/App Developer from Marilao, Bulacan. Delivering clean
-                    code and modern graphic design with on-time project completion.
-                </p>
-
-                <div class="flex flex-wrap justify-center gap-3 mb-10">
-                    <span class="tech-badge px-4 py-2 rounded-full text-sm font-medium text-primary">PHP</span>
-                    <span class="tech-badge px-4 py-2 rounded-full text-sm font-medium text-secondary">MySQL</span>
-                    <span class="tech-badge px-4 py-2 rounded-full text-sm font-medium text-accent">JavaScript</span>
-                    <span class="tech-badge px-4 py-2 rounded-full text-sm font-medium text-primary">Graphic
-                        Design</span>
+                <!-- Typewriter line -->
+                <div class="flex items-center justify-center gap-2 mb-6">
+                    <span class="mono text-gray-500 text-lg">&gt;_</span>
+                    <span class="mono text-primary text-lg" id="typewriter">Developer</span>
+                    <span class="neon-text mono text-lg blink">|</span>
                 </div>
 
+                <!-- Short description -->
+                <p class="text-gray-400 text-base md:text-lg max-w-xl mx-auto mb-8 leading-relaxed">
+                    IT Student & Freelance Web/App Developer from Marilao, Bulacan.
+                    Clean code. Sharp designs. Delivered on time.
+                </p>
+
+                <!-- Tech stack tags -->
+                <div class="flex flex-wrap justify-center gap-3 mb-10">
+                    <span class="tech-badge px-4 py-1.5 rounded">PHP</span>
+                    <span class="tech-badge px-4 py-1.5 rounded">MySQL</span>
+                    <span class="tech-badge px-4 py-1.5 rounded">JavaScript</span>
+                    <span class="tech-badge px-4 py-1.5 rounded">Graphic Design</span>
+                </div>
+
+                <!-- CTA Buttons -->
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <a href="#work"
-                        class="group px-8 py-4 bg-white text-dark font-semibold rounded-full hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2">
+                        class="btn-solid group px-8 py-3.5 rounded flex items-center gap-2 text-sm">
                         View My Projects
                         <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                     </a>
                     <a href="https://github.com/militantezeandrei-ops" target="_blank"
-                        class="px-8 py-4 glass rounded-full font-semibold hover:bg-white/10 transition-all duration-300 flex items-center gap-2">
-                        <i data-lucide="github" class="w-5 h-5"></i>
+                        class="btn-neon px-8 py-3.5 rounded flex items-center gap-2 text-sm">
+                        <i data-lucide="github" class="w-4 h-4"></i>
                         GitHub Profile
                     </a>
                 </div>
+
             </div>
 
-            <!-- Scroll Indicator -->
-            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-                <i data-lucide="chevron-down" class="w-6 h-6 text-gray-500"></i>
+            <!-- Scroll down hint -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce opacity-40">
+                <i data-lucide="chevron-down" class="w-5 h-5 text-primary"></i>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-32 relative">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <!-- ── About Section ── -->
+    <section id="about" class="py-28 relative">
+        <div class="neon-divider mb-0"></div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-28">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+                <!-- Profile Photo + Stats -->
                 <div class="reveal">
                     <div class="relative w-fit mx-auto">
-                        <div
-                            class="absolute -inset-4 bg-gradient-to-r from-primary via-secondary to-accent rounded-full opacity-30 blur-xl">
-                        </div>
-                        <div class="relative glass rounded-full p-2">
-                            <div
-                                class="w-48 h-48 md:w-64 md:h-64 aspect-square rounded-full overflow-hidden bg-dark-light">
+                        <!-- Neon ring around photo -->
+                        <div class="absolute -inset-3 rounded-full opacity-20"
+                            style="background: conic-gradient(from 0deg, #00FF41, transparent, #00FF41, transparent); animation: spin 8s linear infinite;"></div>
+                        <div class="relative rounded-full p-1 border border-primary/30"
+                            style="box-shadow: 0 0 30px rgba(0,255,65,0.2);">
+                            <div class="w-52 h-52 md:w-64 md:h-64 rounded-full overflow-hidden bg-dark-card">
                                 <img src="assets/profile.jpg" alt="Zeandrei D. Militante"
                                     class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
                             </div>
                         </div>
-                        <!-- Floating Stats -->
-                        <div
-                            class="absolute -bottom-6 -right-6 glass px-6 py-4 rounded-2xl border border-primary/30 animate-float">
+
+                        <!-- Floating stat: Projects -->
+                        <div class="absolute -bottom-6 -right-6 stat-float px-5 py-3 rounded animate-float bracket-card">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
-                                    <i data-lucide="code-2" class="w-5 h-5 text-primary"></i>
+                                <div class="w-9 h-9 rounded flex items-center justify-center"
+                                    style="background: rgba(0,255,65,0.1);">
+                                    <i data-lucide="code-2" class="w-4 h-4 text-primary"></i>
                                 </div>
                                 <div>
-                                    <p class="font-bold text-lg">3+</p>
-                                    <p class="text-xs text-gray-400">GitHub Projects</p>
+                                    <p class="font-bold text-base text-primary">3+</p>
+                                    <p class="mono text-xs text-gray-500">GitHub Projects</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="absolute -top-6 -left-6 glass px-6 py-4 rounded-2xl border border-secondary/30 animate-float"
+                        <!-- Floating stat: Role -->
+                        <div class="absolute -top-6 -left-6 stat-float px-5 py-3 rounded animate-float bracket-card"
                             style="animation-delay: 1s;">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-secondary/20 rounded-full flex items-center justify-center">
-                                    <i data-lucide="graduation-cap" class="w-5 h-5 text-secondary"></i>
+                                <div class="w-9 h-9 rounded flex items-center justify-center"
+                                    style="background: rgba(0,255,65,0.1);">
+                                    <i data-lucide="terminal" class="w-4 h-4 text-primary"></i>
                                 </div>
                                 <div>
-                                    <p class="font-bold text-lg">4th Year</p>
-                                    <p class="text-xs text-gray-400">IT Student</p>
+                                    <p class="mono text-xs text-gray-500">IT Student</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Bio Text -->
                 <div class="reveal">
-                    <p class="text-primary font-medium mb-2 tracking-widest uppercase text-sm">About Me</p>
-                    <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">
-                        Building Digital<br>Solutions with <span class="gradient-text">Precision</span>
+                    <p class="section-label mb-3">// About Me</p>
+                    <h2 class="font-display font-bold text-4xl md:text-5xl mb-6 leading-tight tracking-tight">
+                        Building Real Solutions<br>with <span class="gradient-text">Precision</span>
                     </h2>
 
-                    <div class="space-y-4 text-gray-400 text-lg leading-relaxed mb-8">
+                    <div class="space-y-4 text-gray-400 text-base leading-relaxed mb-8">
                         <p>
-                            I'm a versatile Information Technology student at <strong class="text-white">Pambayang
-                                Dalubhasaan ng Marilao</strong> (Expected Graduation: 2027) with a strong foundation in
-                            web and application development. Currently on my 4th year, gaining advanced knowledge in
-                            software development, database management, and systems analysis.
+                            I'm an IT student at <strong class="text-white">Pambayang Dalubhasaan ng Marilao</strong>
+                            (graduating 2027), currently in my 4th year. I study web development, database systems, and software design.
                         </p>
                         <p>
-                            Since June 2024, I've been working as a <strong class="text-white">Freelance Web & App
-                                Developer</strong>, delivering custom solutions for various clients. I specialize in
-                            creating high-quality visual assets and functional back-end systems depends on the kind of
-                            system.
+                            Since June 2024, I've been doing <strong class="text-white">freelance web and app projects</strong> for real clients.
+                            I build the back-end logic and the front-end look — both from scratch.
                         </p>
                         <p>
-                            What sets me apart is my commitment to <strong class="text-white">early task
-                                completion</strong> and my ability to bridge technical development with creative graphic
-                            design. I'm fluent in both English and Tagalog, ensuring clear communication throughout
-                            every project phase.
+                            I always finish work <strong class="text-white">before the deadline</strong> and speak both
+                            English and Tagalog, so talking through projects is never a problem.
                         </p>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
-                        <div class="glass p-6 rounded-xl glass-hover transition-all">
-                            <i data-lucide="clock" class="w-8 h-8 text-primary mb-3"></i>
-                            <h3 class="font-display font-bold text-lg mb-1">On-Time Delivery</h3>
-                            <p class="text-gray-400 text-sm">Consistently meeting deadlines ahead of schedule</p>
+                        <div class="neon-card p-5 rounded bracket-card">
+                            <i data-lucide="clock" class="w-7 h-7 text-primary mb-3"></i>
+                            <h3 class="font-display font-bold text-base mb-1">Early Delivery</h3>
+                            <p class="text-gray-500 text-sm">Work done before the deadline, every time</p>
                         </div>
-                        <div class="glass p-6 rounded-xl glass-hover transition-all">
-                            <i data-lucide="palette" class="w-8 h-8 text-secondary mb-3"></i>
-                            <h3 class="font-display font-bold text-lg mb-1">Design + Code</h3>
-                            <p class="text-gray-400 text-sm">Combining graphic design with clean coding</p>
+                        <div class="neon-card p-5 rounded bracket-card">
+                            <i data-lucide="layers" class="w-7 h-7 text-primary mb-3"></i>
+                            <h3 class="font-display font-bold text-base mb-1">Design + Code</h3>
+                            <p class="text-gray-500 text-sm">Good-looking and fully working — both</p>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="work" class="py-32 relative bg-dark-light/30">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <!-- ── Projects Section ── -->
+    <section id="work" class="py-28 relative" style="background: #050505;">
+        <div class="neon-divider mb-0"></div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-28">
+
             <div class="text-center mb-16 reveal">
-                <p class="text-primary font-medium mb-2 tracking-widest uppercase text-sm">Portfolio</p>
-                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Featured Projects</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">Real-world applications built with modern technologies. Check
-                    out my GitHub for source code and detailed documentation.</p>
+                <p class="section-label mb-3">// Portfolio</p>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-4 tracking-tight">Featured Projects</h2>
+                <p class="text-gray-500 max-w-xl mx-auto text-base">
+                    Real apps built from scratch. Source code on GitHub.
+                </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
+
                 <!-- Project 1: Edebt -->
-                <div class="project-card group reveal">
-                    <div class="relative overflow-hidden rounded-2xl glass aspect-[4/3] mb-6 border border-white/5">
-                        <div class="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20"></div>
+                <div class="project-card group reveal neon-card rounded-xl overflow-hidden">
+                    <div class="relative overflow-hidden aspect-[4/3]">
+                        <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(0,255,65,0.05), rgba(0,0,0,0.8));"></div>
                         <div class="absolute inset-0">
                             <img src="assets/projects/edebt_admin1.png" alt="Edebt Admin Dashboard"
-                                class="w-full h-full object-cover opacity-40 group-hover:scale-110 transition-transform duration-700">
+                                class="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700">
                         </div>
-
-                        <!-- Floating Admin Dashboard (Top Right) -->
-                        <div
-                            class="absolute top-6 right-6 w-1/2 aspect-video rounded-lg overflow-hidden border border-white/20 shadow-2xl transform translate-x-12 -translate-y-12 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-700 hidden md:block opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100">
-                            <img src="assets/projects/edebt_admin.png" alt="Edebt Admin Interface"
-                                class="w-full h-full object-cover">
+                        <!-- Floating preview on hover -->
+                        <div class="absolute top-4 right-4 w-1/2 aspect-video rounded overflow-hidden border border-primary/20 shadow-2xl transform translate-x-10 -translate-y-10 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-700 hidden md:block opacity-0 group-hover:opacity-100">
+                            <img src="assets/projects/edebt_admin.png" alt="Edebt Admin" class="w-full h-full object-cover">
                         </div>
-
-                        <!-- Floating Handwritten Slip (Bottom Left) -->
-                        <div
-                            class="absolute bottom-6 left-6 w-1/3 aspect-[3/4] rounded-lg overflow-hidden border border-white/20 shadow-2xl transform -translate-x-12 translate-y-12 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-700 hidden md:block delay-100 opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100">
-                            <img src="assets/projects/edebt_handwritten_slip.png" alt="Handwritten Orders"
-                                class="w-full h-full object-cover">
+                        <div class="absolute bottom-4 left-4 w-1/3 aspect-[3/4] rounded overflow-hidden border border-primary/20 shadow-2xl transform -translate-x-10 translate-y-10 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-700 hidden md:block delay-100 opacity-0 group-hover:opacity-100">
+                            <img src="assets/projects/edebt_handwritten_slip.png" alt="Handwritten Orders" class="w-full h-full object-cover">
                         </div>
-
-                        <!-- Restored Hover Info Overlay -->
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-dark via-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                            <div
-                                class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 w-full">
-                                <div class="flex gap-2 mb-3">
-                                    <span
-                                        class="px-3 py-1 bg-primary/20 rounded-full text-xs font-medium text-primary border border-primary/30">JavaScript</span>
-                                    <span
-                                        class="px-3 py-1 bg-secondary/20 rounded-full text-xs font-medium text-secondary border border-secondary/30">Web
-                                        App</span>
+                        <!-- Hover overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
+                            <div class="transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300 w-full">
+                                <div class="flex gap-2 mb-2">
+                                    <span class="px-2.5 py-0.5 rounded mono text-xs text-primary border border-primary/30" style="background: rgba(0,255,65,0.08);">JavaScript</span>
+                                    <span class="px-2.5 py-0.5 rounded mono text-xs text-primary border border-primary/30" style="background: rgba(0,255,65,0.08);">Web App</span>
                                 </div>
-                                <h3 class="font-display font-bold text-xl mb-1">Edebt</h3>
-                                <p class="text-gray-400 text-sm">Admin Control & Automated Data Extraction</p>
+                                <h3 class="font-display font-bold text-lg">Edebt</h3>
+                                <p class="text-gray-400 text-xs">Admin control + auto data reading</p>
                             </div>
                         </div>
                     </div>
-                    <div class="flex justify-between items-start mb-3">
-                        <div>
-                            <h3 class="font-display font-bold text-xl mb-1 group-hover:text-primary transition-colors">
-                                Edebt</h3>
-                            <p class="text-gray-400 text-sm">Centralized monitoring with mobile-led data digitizing</p>
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h3 class="font-display font-bold text-lg mb-0.5 group-hover:text-primary transition-colors">Edebt</h3>
+                                <p class="text-gray-500 text-sm">Debt tracker with mobile scanning</p>
+                            </div>
+                            <a href="https://github.com/militantezeandrei-ops/Edebt" target="_blank"
+                                class="p-2 rounded glass hover:bg-primary/10 hover:text-primary transition-colors">
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
                         </div>
-                        <a href="https://github.com/militantezeandrei-ops/Edebt" target="_blank"
-                            class="p-2 glass rounded-lg hover:bg-white/10 transition-colors">
-                            <i data-lucide="external-link" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-                    <p class="text-gray-500 text-sm mb-4">A centralized web platform for admin monitoring and control.
-                        It integrates with a mobile app that automatically extracts and organizes data from handwritten
-                        customer order slips using digital recognition.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span
-                            class="text-xs px-3 py-1 rounded-full bg-white/5 text-gray-300 border border-white/10">JavaScript</span>
-                        <span
-                            class="text-xs px-3 py-1 rounded-full bg-white/5 text-gray-300 border border-white/10">HTML/CSS</span>
-                        <span
-                            class="text-xs px-3 py-1 rounded-full bg-white/5 text-gray-300 border border-white/10">LocalStorage</span>
+                        <p class="text-gray-600 text-sm mb-4">A web dashboard for admins to track and manage debts. Pairs with a mobile app that reads handwritten order slips and saves the data automatically.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="mono text-xs px-2.5 py-0.5 rounded border border-dark-border text-gray-500">JavaScript</span>
+                            <span class="mono text-xs px-2.5 py-0.5 rounded border border-dark-border text-gray-500">HTML/CSS</span>
+                            <span class="mono text-xs px-2.5 py-0.5 rounded border border-dark-border text-gray-500">LocalStorage</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Project 2: EcoDefill -->
-                <div class="project-card group reveal">
-                    <div class="relative overflow-hidden rounded-2xl glass aspect-[4/3] mb-6 border border-white/5">
-                        <div class="absolute inset-0 bg-gradient-to-br from-green-600/20 to-blue-600/20"></div>
+                <div class="project-card group reveal neon-card rounded-xl overflow-hidden">
+                    <div class="relative overflow-hidden aspect-[4/3]">
+                        <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(0,255,65,0.06), rgba(0,0,0,0.8));"></div>
                         <div class="absolute inset-0">
-                            <img src="assets/projects/ecodefill_admin.png" alt="EcoDefill Admin Dashboard"
-                                class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700">
+                            <img src="assets/projects/ecodefill_admin.png" alt="EcoDefill Admin"
+                                class="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700">
                         </div>
-                        <div
-                            class="absolute bottom-4 right-4 w-1/4 aspect-[9/19] rounded-lg overflow-hidden border border-white/20 shadow-2xl transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 hidden md:block text-center">
-                            <img src="assets/projects/ecodefill_mobile.png" alt="EcoDefill Mobile App"
-                                class="h-full object-cover">
+                        <div class="absolute bottom-3 right-3 w-1/4 aspect-[9/19] rounded overflow-hidden border border-primary/20 shadow-2xl transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500 hidden md:block">
+                            <img src="assets/projects/ecodefill_mobile.png" alt="EcoDefill Mobile" class="h-full object-cover">
                         </div>
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-dark via-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                            <div
-                                class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 w-full">
-                                <div class="flex gap-2 mb-3">
-                                    <span
-                                        class="px-3 py-1 bg-accent/20 rounded-full text-xs font-medium text-accent border border-accent/30">TypeScript</span>
-                                    <span
-                                        class="px-3 py-1 bg-green-500/20 rounded-full text-xs font-medium text-green-400 border border-green-500/30">Eco-Tech</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
+                            <div class="transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300 w-full">
+                                <div class="flex gap-2 mb-2">
+                                    <span class="px-2.5 py-0.5 rounded mono text-xs text-primary border border-primary/30" style="background: rgba(0,255,65,0.08);">TypeScript</span>
+                                    <span class="px-2.5 py-0.5 rounded mono text-xs text-primary border border-primary/30" style="background: rgba(0,255,65,0.08);">IoT</span>
                                 </div>
-                                <h3 class="font-display font-bold text-xl mb-1">EcoDefill</h3>
-                                <p class="text-gray-400 text-sm">IoT Machine Monitoring & Sustainability</p>
+                                <h3 class="font-display font-bold text-lg">EcoDefill</h3>
+                                <p class="text-gray-400 text-xs">Smart machine tracking + eco rewards</p>
                             </div>
                         </div>
                     </div>
-                    <div class="flex justify-between items-start mb-3">
-                        <div>
-                            <h3 class="font-display font-bold text-xl mb-1 group-hover:text-accent transition-colors">
-                                EcoDefill</h3>
-                            <p class="text-gray-400 text-sm">Eco-friendly refill system with IoT integration</p>
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h3 class="font-display font-bold text-lg mb-0.5 group-hover:text-primary transition-colors">EcoDefill</h3>
+                                <p class="text-gray-500 text-sm">Eco-friendly refill machine with IoT</p>
+                            </div>
+                            <a href="https://github.com/militantezeandrei-ops/EcoDefill" target="_blank"
+                                class="p-2 rounded glass hover:bg-primary/10 hover:text-primary transition-colors">
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
                         </div>
-                        <a href="https://github.com/militantezeandrei-ops/EcoDefill" target="_blank"
-                            class="p-2 glass rounded-lg hover:bg-white/10 transition-colors">
-                            <i data-lucide="external-link" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-                    <p class="text-gray-500 text-sm mb-4">An IoT-integrated platform for monitoring waste-to-water
-                        machines. Includes a mobile app that saves user points from waste contributions for future
-                        drinking water refills.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span
-                            class="text-xs px-3 py-1 rounded-full bg-white/5 text-gray-300 border border-white/10">TypeScript</span>
-                        <span
-                            class="text-xs px-3 py-1 rounded-full bg-white/5 text-gray-300 border border-white/10">Node.js</span>
-                        <span
-                            class="text-xs px-3 py-1 rounded-full bg-white/5 text-gray-300 border border-white/10">Modern
-                            UI</span>
+                        <p class="text-gray-600 text-sm mb-4">Tracks waste-to-water refill machines in real time. Users earn points for dropping off waste and can use those points to refill drinking water.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="mono text-xs px-2.5 py-0.5 rounded border border-dark-border text-gray-500">TypeScript</span>
+                            <span class="mono text-xs px-2.5 py-0.5 rounded border border-dark-border text-gray-500">Node.js</span>
+                            <span class="mono text-xs px-2.5 py-0.5 rounded border border-dark-border text-gray-500">IoT</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Project 3: Marmet -->
-                <div class="project-card group reveal">
-                    <div class="relative overflow-hidden rounded-2xl glass aspect-[4/3] mb-6 border border-white/5">
-                        <div class="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-pink-600/20"></div>
+                <div class="project-card group reveal neon-card rounded-xl overflow-hidden">
+                    <div class="relative overflow-hidden aspect-[4/3]">
+                        <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(0,255,65,0.04), rgba(0,0,0,0.8));"></div>
                         <div class="absolute inset-0">
                             <img src="assets/projects/marmet_showcase.png" alt="Marmet Showcase"
-                                class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700">
+                                class="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700">
                         </div>
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-dark via-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                            <div
-                                class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 w-full">
-                                <div class="flex gap-2 mb-3">
-                                    <span
-                                        class="px-3 py-1 bg-purple-500/20 rounded-full text-xs font-medium text-purple-400 border border-purple-500/30">PHP</span>
-                                    <span
-                                        class="px-3 py-1 bg-blue-500/20 rounded-full text-xs font-medium text-blue-400 border border-blue-500/30">MySQL</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
+                            <div class="transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300 w-full">
+                                <div class="flex gap-2 mb-2">
+                                    <span class="px-2.5 py-0.5 rounded mono text-xs text-primary border border-primary/30" style="background: rgba(0,255,65,0.08);">PHP</span>
+                                    <span class="px-2.5 py-0.5 rounded mono text-xs text-primary border border-primary/30" style="background: rgba(0,255,65,0.08);">MySQL</span>
                                 </div>
-                                <h3 class="font-display font-bold text-xl mb-1">Marmet</h3>
-                                <p class="text-gray-400 text-sm">Full-Stack E-Commerce & Analytics</p>
+                                <h3 class="font-display font-bold text-lg">Marmet</h3>
+                                <p class="text-gray-400 text-xs">Full online shop with admin tools</p>
                             </div>
                         </div>
                     </div>
-                    <div class="flex justify-between items-start mb-3">
-                        <div>
-                            <h3
-                                class="font-display font-bold text-xl mb-1 group-hover:text-secondary transition-colors">
-                                Marmet</h3>
-                            <p class="text-gray-400 text-sm">Online marketplace with staff and admin controls</p>
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h3 class="font-display font-bold text-lg mb-0.5 group-hover:text-primary transition-colors">Marmet</h3>
+                                <p class="text-gray-500 text-sm">Online store with full admin control</p>
+                            </div>
+                            <a href="https://github.com/militantezeandrei-ops/Marmet" target="_blank"
+                                class="p-2 rounded glass hover:bg-primary/10 hover:text-primary transition-colors">
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
                         </div>
-                        <a href="https://github.com/militantezeandrei-ops/Marmet" target="_blank"
-                            class="p-2 glass rounded-lg hover:bg-white/10 transition-colors">
-                            <i data-lucide="external-link" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-                    <p class="text-gray-500 text-sm mb-4">A complete e-commerce solution where customers can browse and
-                        order products in real-time. Features staff order confirmation portals, admin supply monitoring,
-                        sales analytics, and demand forecasting.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span
-                            class="text-xs px-3 py-1 rounded-full bg-white/5 text-gray-300 border border-white/10">PHP</span>
-                        <span
-                            class="text-xs px-3 py-1 rounded-full bg-white/5 text-gray-300 border border-white/10">MySQL</span>
-                        <span
-                            class="text-xs px-3 py-1 rounded-full bg-white/5 text-gray-300 border border-white/10">Bootstrap</span>
+                        <p class="text-gray-600 text-sm mb-4">A full e-commerce site where customers order live. Staff confirm orders, admins track stock, and the system shows sales charts and demand trends.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="mono text-xs px-2.5 py-0.5 rounded border border-dark-border text-gray-500">PHP</span>
+                            <span class="mono text-xs px-2.5 py-0.5 rounded border border-dark-border text-gray-500">MySQL</span>
+                            <span class="mono text-xs px-2.5 py-0.5 rounded border border-dark-border text-gray-500">Bootstrap</span>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
-            <div class="text-center mt-12 reveal">
+            <div class="text-center mt-10 reveal">
                 <a href="https://github.com/militantezeandrei-ops" target="_blank"
-                    class="inline-flex items-center gap-2 px-8 py-4 glass rounded-full font-semibold hover:bg-white/10 transition-all duration-300 border border-white/20 hover:border-primary/50">
-                    <i data-lucide="github" class="w-5 h-5"></i>
-                    View All Repositories on GitHub
+                    class="btn-neon inline-flex items-center gap-2 px-8 py-3.5 rounded text-sm">
+                    <i data-lucide="github" class="w-4 h-4"></i>
+                    See All Repos on GitHub
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-32 relative">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <!-- ── Skills Section ── -->
+    <section id="skills" class="py-28 relative">
+        <div class="neon-divider mb-0"></div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-28">
+
             <div class="text-center mb-16 reveal">
-                <p class="text-primary font-medium mb-2 tracking-widest uppercase text-sm">Expertise</p>
-                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Technical Skills</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">Proficient in modern web technologies with a focus on
-                    delivering complete, production-ready solutions.</p>
+                <p class="section-label mb-3">// Expertise</p>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-4 tracking-tight">Skills</h2>
+                <p class="text-gray-500 max-w-xl mx-auto text-base">
+                    What I know and how well I know it — no fluff.
+                </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Programming & Web -->
-                <div
-                    class="glass rounded-2xl p-8 reveal hover:border-primary/50 transition-all duration-300 border border-transparent">
-                    <div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-6">
-                        <i data-lucide="code-2" class="w-6 h-6 text-primary"></i>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Coding & Web -->
+                <div class="neon-card rounded-xl p-7 reveal bracket-card">
+                    <div class="w-11 h-11 rounded flex items-center justify-center mb-5" style="background: rgba(0,255,65,0.08);">
+                        <i data-lucide="code-2" class="w-5 h-5 text-primary"></i>
                     </div>
-                    <h3 class="font-display font-bold text-xl mb-4">Programming & Web</h3>
+                    <h3 class="font-display font-bold text-xl mb-5 tracking-wide">Coding & Web</h3>
                     <div class="space-y-4">
                         <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-sm text-gray-300">PHP</span>
-                                <span class="text-sm text-primary">90%</span>
+                            <div class="flex justify-between mb-1.5">
+                                <span class="mono text-sm text-gray-400">PHP</span>
+                                <span class="mono text-sm text-primary">90%</span>
                             </div>
-                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                <div class="skill-bar h-full bg-gradient-to-r from-primary to-secondary rounded-full"
-                                    style="width: 0%" data-width="90%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-sm text-gray-300">JavaScript</span>
-                                <span class="text-sm text-primary">85%</span>
-                            </div>
-                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                <div class="skill-bar h-full bg-gradient-to-r from-primary to-secondary rounded-full"
-                                    style="width: 0%" data-width="85%"></div>
+                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="90%"></div>
                             </div>
                         </div>
                         <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-sm text-gray-300">MySQL</span>
-                                <span class="text-sm text-primary">88%</span>
+                            <div class="flex justify-between mb-1.5">
+                                <span class="mono text-sm text-gray-400">JavaScript</span>
+                                <span class="mono text-sm text-primary">85%</span>
                             </div>
-                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                <div class="skill-bar h-full bg-gradient-to-r from-primary to-secondary rounded-full"
-                                    style="width: 0%" data-width="88%"></div>
+                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="85%"></div>
                             </div>
                         </div>
                         <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-sm text-gray-300">CSS/HTML</span>
-                                <span class="text-sm text-primary">92%</span>
+                            <div class="flex justify-between mb-1.5">
+                                <span class="mono text-sm text-gray-400">MySQL</span>
+                                <span class="mono text-sm text-primary">88%</span>
                             </div>
-                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                <div class="skill-bar h-full bg-gradient-to-r from-primary to-secondary rounded-full"
-                                    style="width: 0%" data-width="92%"></div>
+                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="88%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1.5">
+                                <span class="mono text-sm text-gray-400">HTML / CSS</span>
+                                <span class="mono text-sm text-primary">92%</span>
+                            </div>
+                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="92%"></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Design & Productivity -->
-                <div
-                    class="glass rounded-2xl p-8 reveal hover:border-secondary/50 transition-all duration-300 border border-transparent">
-                    <div class="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center mb-6">
-                        <i data-lucide="palette" class="w-6 h-6 text-secondary"></i>
+                <!-- Design & Tools -->
+                <div class="neon-card rounded-xl p-7 reveal bracket-card">
+                    <div class="w-11 h-11 rounded flex items-center justify-center mb-5" style="background: rgba(0,255,65,0.08);">
+                        <i data-lucide="palette" class="w-5 h-5 text-primary"></i>
                     </div>
-                    <h3 class="font-display font-bold text-xl mb-4">Design & Productivity</h3>
+                    <h3 class="font-display font-bold text-xl mb-5 tracking-wide">Design & Tools</h3>
                     <div class="space-y-4">
                         <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-sm text-gray-300">Graphic Design</span>
-                                <span class="text-sm text-secondary">90%</span>
+                            <div class="flex justify-between mb-1.5">
+                                <span class="mono text-sm text-gray-400">Graphic Design</span>
+                                <span class="mono text-sm text-primary">90%</span>
                             </div>
-                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                <div class="skill-bar h-full bg-gradient-to-r from-secondary to-accent rounded-full"
-                                    style="width: 0%" data-width="90%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-sm text-gray-300">UI/UX Prototyping</span>
-                                <span class="text-sm text-secondary">85%</span>
-                            </div>
-                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                <div class="skill-bar h-full bg-gradient-to-r from-secondary to-accent rounded-full"
-                                    style="width: 0%" data-width="85%"></div>
+                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="90%"></div>
                             </div>
                         </div>
                         <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-sm text-gray-300">Microsoft Office</span>
-                                <span class="text-sm text-secondary">95%</span>
+                            <div class="flex justify-between mb-1.5">
+                                <span class="mono text-sm text-gray-400">UI/UX Design</span>
+                                <span class="mono text-sm text-primary">85%</span>
                             </div>
-                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                <div class="skill-bar h-full bg-gradient-to-r from-secondary to-accent rounded-full"
-                                    style="width: 0%" data-width="95%"></div>
+                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="85%"></div>
                             </div>
                         </div>
                         <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-sm text-gray-300">Client Presentation</span>
-                                <span class="text-sm text-secondary">88%</span>
+                            <div class="flex justify-between mb-1.5">
+                                <span class="mono text-sm text-gray-400">MS Office</span>
+                                <span class="mono text-sm text-primary">95%</span>
                             </div>
-                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                <div class="skill-bar h-full bg-gradient-to-r from-secondary to-accent rounded-full"
-                                    style="width: 0%" data-width="88%"></div>
+                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1.5">
+                                <span class="mono text-sm text-gray-400">Presentations</span>
+                                <span class="mono text-sm text-primary">88%</span>
+                            </div>
+                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="88%"></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Soft Skills -->
-                <div
-                    class="glass rounded-2xl p-8 reveal hover:border-accent/50 transition-all duration-300 border border-transparent">
-                    <div class="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center mb-6">
-                        <i data-lucide="users" class="w-6 h-6 text-accent"></i>
+                <!-- People Skills -->
+                <div class="neon-card rounded-xl p-7 reveal bracket-card">
+                    <div class="w-11 h-11 rounded flex items-center justify-center mb-5" style="background: rgba(0,255,65,0.08);">
+                        <i data-lucide="users" class="w-5 h-5 text-primary"></i>
                     </div>
-                    <h3 class="font-display font-bold text-xl mb-4">Professional Skills</h3>
+                    <h3 class="font-display font-bold text-xl mb-5 tracking-wide">People Skills</h3>
                     <div class="space-y-4">
                         <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-sm text-gray-300">Time Management</span>
-                                <span class="text-sm text-accent">95%</span>
+                            <div class="flex justify-between mb-1.5">
+                                <span class="mono text-sm text-gray-400">Time Management</span>
+                                <span class="mono text-sm text-primary">95%</span>
                             </div>
-                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                <div class="skill-bar h-full bg-gradient-to-r from-accent to-primary rounded-full"
-                                    style="width: 0%" data-width="95%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-sm text-gray-300">Technical Troubleshooting</span>
-                                <span class="text-sm text-accent">90%</span>
-                            </div>
-                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                <div class="skill-bar h-full bg-gradient-to-r from-accent to-primary rounded-full"
-                                    style="width: 0%" data-width="90%"></div>
+                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="95%"></div>
                             </div>
                         </div>
                         <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-sm text-gray-300">Bilingual Communication</span>
-                                <span class="text-sm text-accent">92%</span>
+                            <div class="flex justify-between mb-1.5">
+                                <span class="mono text-sm text-gray-400">Troubleshooting</span>
+                                <span class="mono text-sm text-primary">90%</span>
                             </div>
-                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                <div class="skill-bar h-full bg-gradient-to-r from-accent to-primary rounded-full"
-                                    style="width: 0%" data-width="92%"></div>
+                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="90%"></div>
                             </div>
                         </div>
                         <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-sm text-gray-300">Client Relations</span>
-                                <span class="text-sm text-accent">87%</span>
+                            <div class="flex justify-between mb-1.5">
+                                <span class="mono text-sm text-gray-400">English / Tagalog</span>
+                                <span class="mono text-sm text-primary">92%</span>
                             </div>
-                            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
-                                <div class="skill-bar h-full bg-gradient-to-r from-accent to-primary rounded-full"
-                                    style="width: 0%" data-width="87%"></div>
+                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="92%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1.5">
+                                <span class="mono text-sm text-gray-400">Client Relations</span>
+                                <span class="mono text-sm text-primary">87%</span>
+                            </div>
+                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
+                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="87%"></div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <!-- Languages -->
-            <div class="mt-12 glass rounded-2xl p-8 reveal border border-white/10">
-                <h3 class="font-display font-bold text-2xl mb-6 flex items-center gap-3">
-                    <i data-lucide="languages" class="w-6 h-6 text-primary"></i>
-                    Language Proficiency
+            <div class="mt-10 neon-card rounded-xl p-7 reveal">
+                <h3 class="font-display font-bold text-xl mb-6 flex items-center gap-3 tracking-wide">
+                    <i data-lucide="languages" class="w-5 h-5 text-primary"></i>
+                    Languages I Speak
                 </h3>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="flex items-center justify-between p-4 rounded border border-dark-border" style="background: rgba(255,255,255,0.02);">
                         <div class="flex items-center gap-3">
                             <span class="text-2xl">🇺🇸</span>
                             <div>
-                                <p class="font-semibold">English</p>
-                                <p class="text-sm text-gray-400">Fluent (Oral & Written)</p>
+                                <p class="font-bold tracking-wide">English</p>
+                                <p class="mono text-xs text-gray-500">Fluent — spoken & written</p>
                             </div>
                         </div>
-                        <div class="flex gap-1">
-                            <div class="w-3 h-3 rounded-full bg-primary"></div>
-                            <div class="w-3 h-3 rounded-full bg-primary"></div>
-                            <div class="w-3 h-3 rounded-full bg-primary"></div>
-                            <div class="w-3 h-3 rounded-full bg-primary"></div>
-                            <div class="w-3 h-3 rounded-full bg-primary/30"></div>
+                        <div class="flex gap-1.5">
+                            <div class="w-2.5 h-2.5 rounded-full bg-primary pulse-neon"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+                            <div class="w-2.5 h-2.5 rounded-full" style="background: rgba(0,255,65,0.2);"></div>
                         </div>
                     </div>
-                    <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/10">
+                    <div class="flex items-center justify-between p-4 rounded border border-dark-border" style="background: rgba(255,255,255,0.02);">
                         <div class="flex items-center gap-3">
                             <span class="text-2xl">🇵🇭</span>
                             <div>
-                                <p class="font-semibold">Tagalog</p>
-                                <p class="text-sm text-gray-400">Native/Fluent</p>
+                                <p class="font-bold tracking-wide">Tagalog</p>
+                                <p class="mono text-xs text-gray-500">Native / Fluent</p>
                             </div>
                         </div>
-                        <div class="flex gap-1">
-                            <div class="w-3 h-3 rounded-full bg-secondary"></div>
-                            <div class="w-3 h-3 rounded-full bg-secondary"></div>
-                            <div class="w-3 h-3 rounded-full bg-secondary"></div>
-                            <div class="w-3 h-3 rounded-full bg-secondary"></div>
-                            <div class="w-3 h-3 rounded-full bg-secondary"></div>
+                        <div class="flex gap-1.5">
+                            <div class="w-2.5 h-2.5 rounded-full bg-primary pulse-neon"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
-    <!-- Certifications Section -->
-    <section id="certifications" class="py-32 relative bg-dark-light/30">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <!-- ── Certifications Section ── -->
+    <section id="certifications" class="py-28 relative" style="background: #050505;">
+        <div class="neon-divider mb-0"></div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-28">
+
             <div class="text-center mb-16 reveal">
-                <p class="text-primary font-medium mb-2 tracking-widest uppercase text-sm">Continuous Learning</p>
-                <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Certifications & Seminars</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">Committed to staying current with industry trends and
-                    expanding my technical knowledge.</p>
+                <p class="section-label mb-3">// Always Learning</p>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-4 tracking-tight">Certifications</h2>
+                <p class="text-gray-500 max-w-xl mx-auto text-base">
+                    Courses and workshops that leveled up my skills.
+                </p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-6">
-                <div
-                    class="glass rounded-2xl p-8 reveal glass-hover transition-all duration-300 border-l-4 border-primary">
-                    <div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-4">
-                        <i data-lucide="award" class="w-6 h-6 text-primary"></i>
+                <div class="neon-card cert-card rounded-xl p-7 reveal bracket-card glass-hover transition-all duration-300">
+                    <div class="w-11 h-11 rounded flex items-center justify-center mb-5" style="background: rgba(0,255,65,0.08);">
+                        <i data-lucide="award" class="w-5 h-5 text-primary"></i>
                     </div>
-                    <h3 class="font-display font-bold text-lg mb-2">Advanced Web Development</h3>
-                    <p class="text-primary font-medium text-sm mb-2">Certificate of Completion</p>
-                    <p class="text-gray-400 text-sm">Comprehensive training in modern web technologies and best
-                        practices.</p>
+                    <h3 class="font-display font-bold text-lg mb-1 tracking-wide">Advanced Web Development</h3>
+                    <p class="mono text-xs text-primary mb-3">Certificate of Completion</p>
+                    <p class="text-gray-500 text-sm">Hands-on training in modern web tools and best practices.</p>
                 </div>
 
-                <div
-                    class="glass rounded-2xl p-8 reveal glass-hover transition-all duration-300 border-l-4 border-secondary">
-                    <div class="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center mb-4">
-                        <i data-lucide="pen-tool" class="w-6 h-6 text-secondary"></i>
+                <div class="neon-card cert-card rounded-xl p-7 reveal bracket-card glass-hover transition-all duration-300">
+                    <div class="w-11 h-11 rounded flex items-center justify-center mb-5" style="background: rgba(0,255,65,0.08);">
+                        <i data-lucide="pen-tool" class="w-5 h-5 text-primary"></i>
                     </div>
-                    <h3 class="font-display font-bold text-lg mb-2">Graphic Design & Visual Branding</h3>
-                    <p class="text-secondary font-medium text-sm mb-2">Certificate of Participation</p>
-                    <p class="text-gray-400 text-sm">Workshop focused on client-centered design and brand identity
-                        creation.</p>
+                    <h3 class="font-display font-bold text-lg mb-1 tracking-wide">Graphic Design & Branding</h3>
+                    <p class="mono text-xs text-primary mb-3">Certificate of Participation</p>
+                    <p class="text-gray-500 text-sm">Workshop on making visual brands that clients actually want.</p>
                 </div>
 
-                <div
-                    class="glass rounded-2xl p-8 reveal glass-hover transition-all duration-300 border-l-4 border-accent">
-                    <div class="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center mb-4">
-                        <i data-lucide="smartphone" class="w-6 h-6 text-accent"></i>
+                <div class="neon-card cert-card rounded-xl p-7 reveal bracket-card glass-hover transition-all duration-300">
+                    <div class="w-11 h-11 rounded flex items-center justify-center mb-5" style="background: rgba(0,255,65,0.08);">
+                        <i data-lucide="smartphone" class="w-5 h-5 text-primary"></i>
                     </div>
-                    <h3 class="font-display font-bold text-lg mb-2">Modern Trends in App Development</h3>
-                    <p class="text-accent font-medium text-sm mb-2">Seminar Attendee</p>
-                    <p class="text-gray-400 text-sm">Explored emerging technologies and frameworks in mobile application
-                        development.</p>
+                    <h3 class="font-display font-bold text-lg mb-1 tracking-wide">App Development Trends</h3>
+                    <p class="mono text-xs text-primary mb-3">Seminar Attendee</p>
+                    <p class="text-gray-500 text-sm">Learned the latest tools and ideas shaping mobile app development.</p>
                 </div>
             </div>
+
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-32 relative">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <!-- ── Contact Section ── -->
+    <section id="contact" class="py-28 relative">
+        <div class="neon-divider mb-0"></div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-28">
             <div class="grid lg:grid-cols-2 gap-16">
+
+                <!-- Contact Info -->
                 <div class="reveal">
-                    <p class="text-primary font-medium mb-2 tracking-widest uppercase text-sm">Get In Touch</p>
-                    <h2 class="font-display font-bold text-4xl md:text-5xl mb-6">Let's Build Something<br>Amazing
-                        Together</h2>
-                    <p class="text-gray-400 text-lg mb-8 leading-relaxed">
-                        I'm currently available for freelance projects and open to new opportunities. Whether you need a
-                        web application, mobile app, or graphic design work, I'm ready to deliver on-time, high-quality
-                        solutions tailored to your needs.
+                    <p class="section-label mb-3">// Get In Touch</p>
+                    <h2 class="font-display font-bold text-4xl md:text-5xl mb-5 tracking-tight leading-tight">
+                        Let's Build Something<br><span class="gradient-text">Together</span>
+                    </h2>
+                    <p class="text-gray-400 text-base mb-8 leading-relaxed">
+                        Available for freelance work right now. Need a website, app, or design? 
+                        Let's talk — I deliver quality work on time, every time.
                     </p>
 
-                    <div class="space-y-6 mb-8">
+                    <div class="space-y-5 mb-8">
                         <div class="flex items-center gap-4">
-                            <div
-                                class="w-12 h-12 glass rounded-full flex items-center justify-center border border-primary/30">
-                                <i data-lucide="mail" class="w-5 h-5 text-primary"></i>
+                            <div class="w-11 h-11 rounded flex items-center justify-center border border-primary/20" style="background: rgba(0,255,65,0.06);">
+                                <i data-lucide="mail" class="w-4 h-4 text-primary"></i>
                             </div>
                             <div>
-                                <p class="text-sm text-gray-400">Email</p>
-                                <a href="mailto:militantezeandrei@gmail.com"
-                                    class="font-semibold hover:text-primary transition-colors">militantezeandrei@gmail.com</a>
+                                <p class="mono text-xs text-gray-500 mb-0.5">EMAIL</p>
+                                <a href="/cdn-cgi/l/email-protection#94f9fdf8fde0f5fae0f1eef1f5faf0e6f1fdd4f3f9f5fdf8baf7fbf9" class="font-semibold hover:text-primary transition-colors text-sm"><span class="__cf_email__" data-cfemail="cfa2a6a3a6bbaea1bbaab5aaaea1abbdaaa68fa8a2aea6a3e1aca0a2">[email&#160;protected]</span></a>
                             </div>
                         </div>
                         <div class="flex items-center gap-4">
-                            <div
-                                class="w-12 h-12 glass rounded-full flex items-center justify-center border border-secondary/30">
-                                <i data-lucide="phone" class="w-5 h-5 text-secondary"></i>
+                            <div class="w-11 h-11 rounded flex items-center justify-center border border-primary/20" style="background: rgba(0,255,65,0.06);">
+                                <i data-lucide="phone" class="w-4 h-4 text-primary"></i>
                             </div>
                             <div>
-                                <p class="text-sm text-gray-400">Phone</p>
-                                <a href="tel:09760590774"
-                                    class="font-semibold hover:text-secondary transition-colors">0976 059 0774</a>
+                                <p class="mono text-xs text-gray-500 mb-0.5">PHONE</p>
+                                <a href="tel:09760590774" class="font-semibold hover:text-primary transition-colors text-sm">0976 059 0774</a>
                             </div>
                         </div>
                         <div class="flex items-center gap-4">
-                            <div
-                                class="w-12 h-12 glass rounded-full flex items-center justify-center border border-accent/30">
-                                <i data-lucide="map-pin" class="w-5 h-5 text-accent"></i>
+                            <div class="w-11 h-11 rounded flex items-center justify-center border border-primary/20" style="background: rgba(0,255,65,0.06);">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-primary"></i>
                             </div>
                             <div>
-                                <p class="text-sm text-gray-400">Location</p>
-                                <p class="font-semibold">Marilao, Bulacan, Philippines</p>
+                                <p class="mono text-xs text-gray-500 mb-0.5">LOCATION</p>
+                                <p class="font-semibold text-sm">Marilao, Bulacan, Philippines</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="flex gap-4">
+                    <!-- Social Links -->
+                    <div class="flex gap-3">
                         <a href="https://github.com/militantezeandrei-ops" target="_blank"
-                            class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300 border border-white/10 hover:border-primary">
-                            <i data-lucide="github" class="w-5 h-5"></i>
+                            class="w-11 h-11 rounded flex items-center justify-center border border-dark-border hover:border-primary hover:text-primary transition-all duration-300 text-gray-400"
+                            style="background: rgba(255,255,255,0.03);">
+                            <i data-lucide="github" class="w-4 h-4"></i>
                         </a>
                         <a href="https://www.linkedin.com/in/militante-zeandrei-d-231262323/" target="_blank"
-                            class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-secondary hover:text-white transition-all duration-300 border border-white/10 hover:border-secondary">
-                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                            class="w-11 h-11 rounded flex items-center justify-center border border-dark-border hover:border-primary hover:text-primary transition-all duration-300 text-gray-400"
+                            style="background: rgba(255,255,255,0.03);">
+                            <i data-lucide="linkedin" class="w-4 h-4"></i>
                         </a>
                         <a href="https://www.facebook.com/Zeandreipogi123" target="_blank"
-                            class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-300 border border-white/10 hover:border-blue-600">
-                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                            class="w-11 h-11 rounded flex items-center justify-center border border-dark-border hover:border-primary hover:text-primary transition-all duration-300 text-gray-400"
+                            style="background: rgba(255,255,255,0.03);">
+                            <i data-lucide="facebook" class="w-4 h-4"></i>
                         </a>
                         <a href="https://x.com/ZDM2002" target="_blank"
-                            class="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-white transition-all duration-300 border border-white/10">
-                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                            class="w-11 h-11 rounded flex items-center justify-center border border-dark-border hover:border-primary hover:text-primary transition-all duration-300 text-gray-400"
+                            style="background: rgba(255,255,255,0.03);">
+                            <i data-lucide="twitter" class="w-4 h-4"></i>
                         </a>
                     </div>
                 </div>
 
+                <!-- Contact Form -->
                 <div class="reveal">
                     <form id="contact-form" action="https://formspree.io/f/xykdojdv" method="POST"
-                        class="glass rounded-2xl p-8 space-y-6 border border-white/10">
-                        <div class="grid md:grid-cols-2 gap-6">
+                        class="neon-card rounded-xl p-7 space-y-5">
+                        <div class="grid md:grid-cols-2 gap-5">
                             <div>
-                                <label class="block text-sm font-medium mb-2 text-gray-300">Name</label>
+                                <label class="block mono text-xs text-gray-500 mb-2 tracking-widest">NAME</label>
                                 <input type="text" name="name"
-                                    class="w-full px-4 py-3 bg-dark border border-white/10 rounded-lg focus:border-primary focus:outline-none transition-colors text-white placeholder-gray-500"
+                                    class="w-full px-4 py-3 rounded border border-dark-border text-white text-sm placeholder-gray-600 transition-all"
+                                    style="background: rgba(255,255,255,0.03);"
                                     placeholder="Your Name" required>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium mb-2 text-gray-300">Email</label>
+                                <label class="block mono text-xs text-gray-500 mb-2 tracking-widest">EMAIL</label>
                                 <input type="email" name="email"
-                                    class="w-full px-4 py-3 bg-dark border border-white/10 rounded-lg focus:border-primary focus:outline-none transition-colors text-white placeholder-gray-500"
+                                    class="w-full px-4 py-3 rounded border border-dark-border text-white text-sm placeholder-gray-600 transition-all"
+                                    style="background: rgba(255,255,255,0.03);"
                                     placeholder="your@email.com" required>
                             </div>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium mb-2 text-gray-300">Project Type</label>
+                            <label class="block mono text-xs text-gray-500 mb-2 tracking-widest">PROJECT TYPE</label>
                             <select name="service"
-                                class="w-full px-4 py-3 bg-dark border border-white/10 rounded-lg focus:border-primary focus:outline-none transition-colors text-white">
-                                <option value="">Select a service...</option>
-                                <option value="web">Web Development</option>
-                                <option value="app">App Development</option>
+                                class="w-full px-4 py-3 rounded border border-dark-border text-white text-sm transition-all"
+                                style="background: #0a0a0a;">
+                                <option value="">Pick a type...</option>
+                                <option value="web">Website</option>
+                                <option value="app">Mobile App</option>
                                 <option value="design">Graphic Design</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium mb-2 text-gray-300">Message</label>
+                            <label class="block mono text-xs text-gray-500 mb-2 tracking-widest">MESSAGE</label>
                             <textarea name="message" rows="5"
-                                class="w-full px-4 py-3 bg-dark border border-white/10 rounded-lg focus:border-primary focus:outline-none transition-colors text-white placeholder-gray-500 resize-none"
-                                placeholder="Tell me about your project requirements..." required></textarea>
+                                class="w-full px-4 py-3 rounded border border-dark-border text-white text-sm placeholder-gray-600 transition-all resize-none"
+                                style="background: rgba(255,255,255,0.03);"
+                                placeholder="Tell me what you need built..." required></textarea>
                         </div>
                         <button type="submit"
-                            class="w-full py-4 bg-white text-dark font-semibold rounded-lg hover:bg-primary hover:text-white transition-all duration-300 flex items-center justify-center gap-2 group">
+                            class="btn-solid w-full py-3.5 rounded text-sm flex items-center justify-center gap-2 group">
                             Send Message
                             <i data-lucide="send" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                         </button>
                     </form>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-8 border-t border-white/10 bg-dark-light/30">
+    <!-- ── Footer ── -->
+    <footer class="py-7 border-t" style="border-color: #1a1a1a; background: #050505;">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-2">
-                <span class="font-display font-bold text-xl">ZDM</span>
-                <span class="text-gray-400">© 2024 Zeandrei D. Militante. All rights reserved.</span>
+            <div class="flex items-center gap-3">
+                <span class="logo-text text-lg text-white">ZDM<span class="text-primary">_</span></span>
+                <span class="text-gray-600 text-sm">© 2024 Zeandrei D. Militante</span>
             </div>
-            <div class="flex gap-6 text-sm text-gray-400">
-                <span class="flex items-center gap-2">
-                    <i data-lucide="code" class="w-4 h-4"></i>
+            <div class="flex gap-6 text-sm text-gray-600">
+                <span class="flex items-center gap-2 mono text-xs">
+                    <i data-lucide="code" class="w-3 h-3 text-primary"></i>
                     Built with passion in Bulacan
+                </span>
+                <span class="flex items-center gap-2 mono text-xs">
+                    <i data-lucide="zap" class="w-3 h-3 text-primary"></i>
+                    Always improving
                 </span>
             </div>
         </div>
@@ -789,5 +766,4 @@
 
     <script src="js/script.js"></script>
 </body>
-
 </html>
