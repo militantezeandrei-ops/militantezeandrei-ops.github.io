@@ -1,6 +1,5 @@
 # ZDM_ | Zeandrei D. Militante Portfolio 
 
-![Zeandrei Militante Portfolio Showcase](https://raw.githubusercontent.com/militantezeandrei-ops/militantezeandrei-ops.github.io/main/assets/profile.jpg)
 
 A high-performance, cyberpunk-inspired professional portfolio built for **Zeandrei D. Militante**, a Web & App Developer from Marilao, Bulacan. This project showcases technical expertise through a futurist aesthetic, utilizing modern web technologies and a precision-focused design system.
 
