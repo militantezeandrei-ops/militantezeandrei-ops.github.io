@@ -318,6 +318,81 @@
             padding: 14px;
         }
         .project-img-wrap:hover .project-overlay { opacity: 1; }
+        .project-card {
+            cursor: pointer;
+        }
+
+        .project-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 1200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+        }
+
+        .project-modal-overlay.open {
+            display: flex;
+        }
+
+        .project-modal {
+            width: min(560px, 100%);
+            background: #0b0b0b;
+            border: 1px solid rgba(0, 255, 65, 0.25);
+            border-radius: 12px;
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45), 0 0 25px rgba(0, 255, 65, 0.08);
+            overflow: hidden;
+        }
+
+        .project-modal-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            border-bottom: 1px solid #1a1a1a;
+            background: #090909;
+        }
+
+        .project-modal-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.03em;
+        }
+
+        .project-modal-close {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #1f1f1f;
+            border-radius: 6px;
+            background: #101010;
+            color: #8a8a8a;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .project-modal-close:hover {
+            color: var(--neon);
+            border-color: rgba(0, 255, 65, 0.35);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.15);
+        }
+
+        .project-modal-body {
+            padding: 18px 16px;
+        }
+
+        .project-modal-desc {
+            font-size: 0.9rem;
+            line-height: 1.65;
+            color: #a6a6a6;
+        }
 
         /* ── Mobile sidebar toggle ── */
         .sidebar-overlay {
@@ -866,7 +941,16 @@
                     <div class="projects-grid" style="flex:1;min-height:0;overflow-y:auto;">
 
                         <!-- Edebt -->
-                        <div class="neon-card rounded-xl overflow-hidden" style="display:flex;flex-direction:column;">
+                        <div
+                            class="neon-card rounded-xl overflow-hidden project-card"
+                            style="display:flex;flex-direction:column;"
+                            role="button"
+                            tabindex="0"
+                            onclick="openProjectModal(this)"
+                            onkeydown="onProjectCardKeydown(event, this)"
+                            data-project-title="Edebt"
+                            data-project-description="Web dashboard for admins to track debts. Paired with a mobile app that reads handwritten order slips and auto-saves data."
+                        >
                             <div class="project-img-wrap" style="aspect-ratio: 16/9; flex-shrink:0; overflow: hidden; position: relative;">
                                 <img src="assets/projects/edebt_admin1.png" alt="Edebt" style="width:100%; height:100%; object-fit:cover; opacity:0.55;">
                                 <div class="project-overlay">
@@ -885,7 +969,7 @@
                                         <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;">Edebt</p>
                                         <p style="font-size:0.72rem;color:#555;">Debt tracker with mobile scanning</p>
                                     </div>
-                                    <a href="https://github.com/militantezeandrei-ops/Edebt" target="_blank" style="color:#444;transition:color 0.2s;padding:4px;" class="hover:text-primary">
+                                    <a href="https://github.com/militantezeandrei-ops/Edebt" target="_blank" style="color:#444;transition:color 0.2s;padding:4px;" class="hover:text-primary" onclick="event.stopPropagation();">
                                         <i data-lucide="external-link" style="width:13px;height:13px;"></i>
                                     </a>
                                 </div>
@@ -899,7 +983,16 @@
                         </div>
 
                         <!-- EcoDefill -->
-                        <div class="neon-card rounded-xl overflow-hidden" style="display:flex;flex-direction:column;">
+                        <div
+                            class="neon-card rounded-xl overflow-hidden project-card"
+                            style="display:flex;flex-direction:column;"
+                            role="button"
+                            tabindex="0"
+                            onclick="openProjectModal(this)"
+                            onkeydown="onProjectCardKeydown(event, this)"
+                            data-project-title="EcoDefill"
+                            data-project-description="Tracks waste-to-water refill machines in real time. Users earn points for dropping off waste and redeem points to refill drinking water."
+                        >
                             <div class="project-img-wrap" style="aspect-ratio: 16/9; flex-shrink:0; overflow: hidden; position: relative;">
                                 <img src="assets/projects/ecodefill_admin.png" alt="EcoDefill" style="width:100%; height:100%; object-fit:cover; opacity:0.55;">
                                 <div class="project-overlay">
@@ -918,7 +1011,7 @@
                                         <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;">EcoDefill</p>
                                         <p style="font-size:0.72rem;color:#555;">Eco-friendly refill machine + IoT</p>
                                     </div>
-                                    <a href="https://github.com/militantezeandrei-ops/EcoDefill" target="_blank" style="color:#444;transition:color 0.2s;padding:4px;" class="hover:text-primary">
+                                    <a href="https://github.com/militantezeandrei-ops/EcoDefill" target="_blank" style="color:#444;transition:color 0.2s;padding:4px;" class="hover:text-primary" onclick="event.stopPropagation();">
                                         <i data-lucide="external-link" style="width:13px;height:13px;"></i>
                                     </a>
                                 </div>
@@ -932,7 +1025,16 @@
                         </div>
 
                         <!-- Marmet -->
-                        <div class="neon-card rounded-xl overflow-hidden" style="display:flex;flex-direction:column;">
+                        <div
+                            class="neon-card rounded-xl overflow-hidden project-card"
+                            style="display:flex;flex-direction:column;"
+                            role="button"
+                            tabindex="0"
+                            onclick="openProjectModal(this)"
+                            onkeydown="onProjectCardKeydown(event, this)"
+                            data-project-title="Marmet"
+                            data-project-description="Full e-commerce site where customers order live. Staff confirm orders, admins track stock, and the system shows sales charts and demand trends."
+                        >
                             <div class="project-img-wrap" style="aspect-ratio: 16/9; flex-shrink:0; overflow: hidden; position: relative;">
                                 <img src="assets/projects/marmet_showcase.png" alt="Marmet" style="width:100%; height:100%; object-fit:cover; opacity:0.55;">
                                 <div class="project-overlay">
@@ -951,7 +1053,7 @@
                                         <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;">Marmet</p>
                                         <p style="font-size:0.72rem;color:#555;">E-commerce with full admin control</p>
                                     </div>
-                                    <a href="https://github.com/militantezeandrei-ops/Marmet" target="_blank" style="color:#444;transition:color 0.2s;padding:4px;" class="hover:text-primary">
+                                    <a href="https://github.com/militantezeandrei-ops/Marmet" target="_blank" style="color:#444;transition:color 0.2s;padding:4px;" class="hover:text-primary" onclick="event.stopPropagation();">
                                         <i data-lucide="external-link" style="width:13px;height:13px;"></i>
                                     </a>
                                 </div>
@@ -1264,6 +1366,20 @@
             </a>
         </nav>
 
+        <div id="project-modal-overlay" class="project-modal-overlay" onclick="closeProjectModal(event)">
+            <div class="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" onclick="event.stopPropagation();">
+                <div class="project-modal-head">
+                    <p id="project-modal-title" class="project-modal-title">Project Details</p>
+                    <button class="project-modal-close" type="button" onclick="closeProjectModal()">
+                        <i data-lucide="x" style="width:14px;height:14px;"></i>
+                    </button>
+                </div>
+                <div class="project-modal-body">
+                    <p id="project-modal-description" class="project-modal-desc"></p>
+                </div>
+            </div>
+        </div>
+
     </div><!-- /os-shell -->
 
     <script>
@@ -1346,6 +1462,34 @@
             closeSidebar();
         }
 
+        // ── Project modal
+        const projectModalOverlay = document.getElementById('project-modal-overlay');
+        const projectModalTitle = document.getElementById('project-modal-title');
+        const projectModalDescription = document.getElementById('project-modal-description');
+
+        function openProjectModal(cardEl) {
+            const title = cardEl.getAttribute('data-project-title') || 'Project';
+            const description = cardEl.getAttribute('data-project-description') || 'No description available.';
+
+            projectModalTitle.textContent = title;
+            projectModalDescription.textContent = description;
+            projectModalOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function closeProjectModal() {
+            projectModalOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function onProjectCardKeydown(event, cardEl) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                openProjectModal(cardEl);
+            }
+        }
+
         // ── Mobile sidebar
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('sidebar-overlay');
@@ -1359,6 +1503,12 @@
             sidebar.classList.remove('open');
             overlay.classList.remove('open');
         }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && projectModalOverlay.classList.contains('open')) {
+                closeProjectModal();
+            }
+        });
 
         // ── Contact form
         const form = document.getElementById('contact-form');
