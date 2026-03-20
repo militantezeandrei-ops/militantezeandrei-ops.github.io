@@ -1,769 +1,1398 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeandrei D. Militante | Web & App Developer</title>
+    <title>ZDM_ | Zeandrei D. Militante</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00FF41',
+                        'dark': '#0a0a0a',
+                        'dark-card': '#0f0f0f',
+                        'dark-border': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        display: ['Rajdhani', 'sans-serif'],
+                        mono: ['Share Tech Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
 
-    <script src="js/config.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+        :root {
+            --neon: #00FF41;
+            --neon-dim: #00cc33;
+            --neon-glow: rgba(0, 255, 65, 0.4);
+            --neon-soft: rgba(0, 255, 65, 0.1);
+        }
 
-    <base target="_blank">
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+            color: #e0e0e0;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        ::selection { background: var(--neon); color: #000; }
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--neon); border-radius: 2px; }
+
+        /* ── Layout Shell ── */
+        .os-shell {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* ── Top Bar ── */
+        .top-bar {
+            height: 52px;
+            min-height: 52px;
+            background: #050505;
+            border-bottom: 1px solid #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 22px;
+            z-index: 100;
+            flex-shrink: 0;
+        }
+
+        /* ── Main Area ── */
+        .main-area {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            width: 280px;
+            min-width: 280px;
+            background: #050505;
+            border-right: 1px solid #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        /* ── Content Panel ── */
+        .content-panel {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            background: #000;
+        }
+
+        /* ── Grid BG ── */
+        .grid-bg {
+            background-image:
+                linear-gradient(rgba(0,255,65,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,65,0.025) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        /* ── Scanlines ── */
+        .scanlines::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,65,0.012) 2px, rgba(0,255,65,0.012) 4px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ── Panel ── */
+        .panel {
+            display: none;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .panel.active { display: flex; flex-direction: column; }
+
+        /* ── Nav Items ── */
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 20px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.88rem;
+            letter-spacing: 0.08em;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 2px solid transparent;
+            text-decoration: none;
+        }
+
+        .nav-item:hover { color: #aaa; background: rgba(255,255,255,0.02); }
+
+        .nav-item.active {
+            color: var(--neon);
+            border-left-color: var(--neon);
+            background: rgba(0,255,65,0.04);
+            text-shadow: 0 0 8px rgba(0,255,65,0.5);
+        }
+
+        /* ── Neon Text ── */
+        .neon-text {
+            color: var(--neon);
+            text-shadow: 0 0 7px var(--neon), 0 0 20px var(--neon);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00FF41 0%, #00cc33 50%, #39ff14 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ── Cards ── */
+        .neon-card {
+            border: 1px solid #1a1a1a;
+            background: #0f0f0f;
+            transition: all 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neon-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .neon-card:hover::before { opacity: 1; }
+
+        .neon-card:hover {
+            border-color: rgba(0,255,65,0.35);
+            box-shadow: 0 0 18px rgba(0,255,65,0.07);
+            transform: translateY(-3px);
+        }
+
+        /* ── Tech Badge ── */
+        .tech-badge {
+            background: rgba(0,255,65,0.06);
+            border: 1px solid rgba(0,255,65,0.22);
+            color: var(--neon);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            transition: all 0.2s;
+            padding: 3px 10px;
+            border-radius: 3px;
+        }
+
+        .tech-badge:hover {
+            background: rgba(0,255,65,0.14);
+            box-shadow: 0 0 10px var(--neon-glow);
+        }
+
+        /* ── Buttons ── */
+        .btn-neon {
+            background: transparent;
+            color: var(--neon);
+            border: 1px solid var(--neon);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.25s;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--neon);
+            transform: translateX(-100%);
+            transition: transform 0.25s;
+            z-index: -1;
+        }
+
+        .btn-neon:hover::before { transform: translateX(0); }
+        .btn-neon:hover { color: #000; box-shadow: 0 0 18px var(--neon-glow); }
+
+        .btn-solid {
+            background: var(--neon);
+            color: #000;
+            border: 1px solid var(--neon);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.25s;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 0 12px rgba(0,255,65,0.3);
+        }
+
+        .btn-solid:hover {
+            background: #000;
+            color: var(--neon);
+            box-shadow: 0 0 22px var(--neon-glow);
+        }
+
+        /* ── Cert card ── */
+        .cert-card { border-left: 2px solid var(--neon); }
+
+        /* ── Section label ── */
+        .section-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--neon);
+            text-transform: uppercase;
+        }
+
+        /* ── Status dot ── */
+        @keyframes neon-blink {
+            0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--neon); }
+            50% { opacity: 0.4; box-shadow: none; }
+        }
+
+        .status-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--neon);
+            animation: neon-blink 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        /* ── Typewriter ── */
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .blink { animation: blink 1s step-end infinite; }
+
+        /* ── Cursor glow ── */
+        .cursor-glow {
+            width: 280px; height: 280px;
+            background: radial-gradient(circle, rgba(0,255,65,0.07) 0%, rgba(0,255,65,0.02) 40%, transparent 70%);
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+        }
+
+        /* ── Project image hover ── */
+        .project-img-wrap { position: relative; overflow: hidden; }
+        .project-img-wrap img { transition: transform 0.5s; }
+        .project-img-wrap:hover img { transform: scale(1.06); }
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: flex-end;
+            padding: 14px;
+        }
+        .project-img-wrap:hover .project-overlay { opacity: 1; }
+
+        /* ── Mobile sidebar toggle ── */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 200;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0; left: 0; bottom: 0;
+                z-index: 300;
+                transform: translateX(-100%);
+                transition: transform 0.25s;
+                width: 280px;
+            }
+
+            .sidebar.open { transform: translateX(0); }
+            .sidebar-overlay.open { display: block; }
+            .mobile-menu-btn { display: flex !important; }
+
+            .top-bar {
+                height: 52px;
+                min-height: 52px;
+            }
+        }
+
+        .mobile-menu-btn { display: none; }
+
+        /* ── Bottom status bar ── */
+        .status-bar {
+            height: 26px;
+            min-height: 26px;
+            background: #050505;
+            border-top: 1px solid #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 14px;
+            flex-shrink: 0;
+        }
+
+        /* ── Glass ── */
+        .glass {
+            background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid #1a1a1a;
+        }
+
+        /* ── Float anim ── */
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        /* ── Pulse neon ── */
+        @keyframes pulse-neon {
+            0%, 100% { box-shadow: 0 0 5px rgba(0,255,65,0.4); }
+            50% { box-shadow: 0 0 14px rgba(0,255,65,0.7), 0 0 28px rgba(0,255,65,0.2); }
+        }
+        .pulse-neon { animation: pulse-neon 2.5s ease-in-out infinite; }
+
+        /* ── Bracket corners ── */
+        .bracket::before, .bracket::after {
+            content: '';
+            position: absolute;
+            width: 10px; height: 10px;
+            border-color: var(--neon);
+            border-style: solid;
+            opacity: 0.5;
+        }
+        .bracket::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+        .bracket::after  { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+
+        /* ── Sidebar profile section ── */
+        .profile-img-ring {
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,255,65,0.3);
+            overflow: hidden;
+            box-shadow: 0 0 18px rgba(0,255,65,0.15);
+            flex-shrink: 0;
+        }
+
+        /* ── Divider ── */
+        .neon-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon), transparent);
+            opacity: 0.2;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--neon) !important;
+            box-shadow: 0 0 0 1px var(--neon), 0 0 10px rgba(0,255,65,0.2) !important;
+        }
+
+        /* ── Projects grid responsive ── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            align-content: start;
+        }
+
+        /* ── Skills grid responsive ── */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            align-content: start;
+        }
+
+        /* ── Certifications grid responsive ── */
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            flex-shrink: 0;
+        }
+
+        /* ── About grid responsive ── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        /* ── Contact grid responsive ── */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 18px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.25fr;
+            gap: 22px;
+            align-items: flex-start;
+        }
+
+        /* ── Form row ── */
+        .form-row-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (max-width: 900px) {
+            .projects-grid { grid-template-columns: 1fr 1fr; }
+            .skills-grid { grid-template-columns: 1fr 1fr; }
+            .certs-grid { grid-template-columns: 1fr 1fr; }
+            .about-grid { grid-template-columns: 1fr; overflow-y: auto; }
+            .contact-grid { grid-template-columns: 1fr; gap: 20px; }
+            .form-card-container { display: flex; justify-content: center; width: 100%; }
+        }
+
+        .mobile-bottom-nav { display: none; }
+        .nav-item-mobile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #555;
+            text-decoration: none;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.6rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .nav-item-mobile i { width: 22px; height: 22px; }
+        .nav-item-mobile.active {
+            color: var(--neon);
+            text-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .mobile-bottom-nav {
+                display: flex;
+                position: relative;
+                height: 70px;
+                background: rgba(8, 8, 8, 0.95);
+                backdrop-filter: blur(12px);
+                border-top: 1px solid rgba(0, 255, 65, 0.15);
+                z-index: 1000;
+                justify-content: space-around;
+                align-items: center;
+                padding: 0 10px;
+                box-shadow: 0 -5px 25px rgba(0, 255, 65, 0.05);
+                flex-shrink: 0;
+            }
+            .os-shell {
+                height: 100vh;
+                height: 100dvh;
+            }
+            .main-area { flex: 1; height: auto; }
+            .status-bar { display: none; }
+            .top-bar { padding: 0 16px; position: sticky; top: 0; z-index: 500; }
+            .mobile-menu-btn { display: none !important; }
+            .panel { padding-bottom: 24px !important; }
+            .nav-item-mobile { flex: 1; min-width: 0; }
+        }
+
+        .contact-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 10px;
+            background: rgba(15, 15, 15, 0.6);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .contact-input:focus {
+            outline: none;
+            border-color: var(--neon);
+            background: rgba(0, 255, 65, 0.05);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1), inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .contact-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            color: #666;
+            letter-spacing: 0.2em;
+            display: block;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+        .form-group:focus-within .contact-label {
+            color: var(--neon);
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.4);
+        }
+        .nav-item-mobile span { font-size: 0.65rem; font-weight: 500; }
+        .nav-item-mobile i { margin-bottom: 2px; }
+
+        @media (max-width: 600px) {
+            .projects-grid { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .certs-grid { grid-template-columns: 1fr; }
+            .form-row-grid { grid-template-columns: 1fr; }
+            .panel { padding: 14px; padding-bottom: 18px !important; }
+            .home-name { font-size: 3rem !important; }
+            .nav-item-mobile span { font-size: 0.58rem; }
+        }
+    </style>
 </head>
-
-<body class="antialiased">
-
-    <!-- Mouse glow that follows your cursor -->
+<body>
+    <!-- Cursor glow -->
     <div id="cursor-glow" class="cursor-glow hidden md:block"></div>
 
-    <!-- ── Navigation ── -->
-    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <a href="#" class="logo-text text-2xl tracking-widest text-white flex items-center gap-1">
-                    ZDM<span class="neon-text">_</span>
-                </a>
+    <div class="os-shell">
 
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="nav-link text-gray-400 hover:text-primary transition-colors">About</a>
-                    <a href="#work" class="nav-link text-gray-400 hover:text-primary transition-colors">Projects</a>
-                    <a href="#skills" class="nav-link text-gray-400 hover:text-primary transition-colors">Skills</a>
-                    <a href="#certifications" class="nav-link text-gray-400 hover:text-primary transition-colors">Certs</a>
-                    <a href="#contact" class="btn-solid px-6 py-2.5 rounded text-sm">
-                        Let's Connect
-                    </a>
-                </div>
-
-                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-400 hover:text-primary transition-colors">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
+        <!-- ── Top Bar ── -->
+        <div class="top-bar">
+            <div class="flex items-center gap-4">
+                <!-- Mobile hamburger -->
+                <button id="mobile-menu-btn" class="mobile-menu-btn items-center justify-center w-8 h-8 text-gray-500 hover:text-primary transition-colors mr-1" style="color:#555;">
+                    <i data-lucide="menu" style="width:18px;height:18px;"></i>
                 </button>
+                <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.2rem;letter-spacing:0.15em;color:#fff;">ZDM<span class="neon-text">_</span></span>
+                <span style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#333;letter-spacing:0.08em;">portfolio.exe</span>
+            </div>
+            <div class="flex items-center gap-5">
+                <span class="flex items-center gap-2" style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#444;">
+                    <span class="status-dot"></span>
+                    OPEN FOR WORK
+                </span>
+                <span style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#333;" id="clock">--:--</span>
             </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden glass border-t border-dark-border">
-            <div class="px-6 py-5 space-y-4">
-                <a href="#about" class="block mono text-sm tracking-widest text-gray-300 hover:text-primary transition-colors">// ABOUT</a>
-                <a href="#work" class="block mono text-sm tracking-widest text-gray-300 hover:text-primary transition-colors">// PROJECTS</a>
-                <a href="#skills" class="block mono text-sm tracking-widest text-gray-300 hover:text-primary transition-colors">// SKILLS</a>
-                <a href="#certifications" class="block mono text-sm tracking-widest text-gray-300 hover:text-primary transition-colors">// CERTIFICATIONS</a>
-                <a href="#contact" class="block mono text-sm tracking-widest text-primary">// CONTACT</a>
-            </div>
-        </div>
-    </nav>
+        <!-- ── Main Area ── -->
+        <div class="main-area">
 
-    <!-- ── Hero Section ── -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden grid-pattern scanlines">
-
-        <!-- Background glow blobs -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-[120px] animate-pulse-slow"
-                style="background: rgba(0,255,65,0.05);"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full blur-[100px] animate-pulse-slow"
-                style="background: rgba(0,255,65,0.04); animation-delay: 2s;"></div>
-            <!-- Horizontal scan line -->
-            <div class="absolute left-0 right-0 h-px opacity-20"
-                style="background: linear-gradient(90deg, transparent, #00FF41, transparent); top: 30%; animation: none;"></div>
-        </div>
-
-        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
-            <div class="reveal active">
-
-                <!-- Status Badge -->
-                <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded glass mb-8 border border-primary/20">
-                    <span class="w-2 h-2 rounded-full status-dot"></span>
-                    <span class="mono text-xs tracking-widest text-gray-300">OPEN FOR FREELANCE WORK</span>
+            <!-- ── Sidebar ── -->
+            <div class="sidebar" id="sidebar">
+                <!-- Profile -->
+                <div style="padding:22px 20px 16px;border-bottom:1px solid #1a1a1a;">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="profile-img-ring" style="width:88px;height:88px;">
+                            <img src="assets/profile.jpg" alt="Zeandrei" style="width:100%;height:100%;object-fit:cover;">
+                        </div>
+                        <div>
+                            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem;color:#fff;line-height:1.1;">ZEANDREI</p>
+                            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem;color:#fff;line-height:1.1;">MILITANTE</p>
+                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:#555;margin-top:5px;">&gt;_ <span id="sidebar-type" style="color:var(--neon);">Developer</span></p>
+                        </div>
+                    </div>
+                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:#444;line-height:1.9;">
+                        <div>📍 Marilao, Bulacan</div>
+                        <div>🎓 PDM — 4th Year IT</div>
+                        <div style="color:var(--neon);">✓ Freelance: Since 2024</div>
+                    </div>
                 </div>
 
-                <!-- Name -->
-                <h1 class="font-display font-bold text-5xl md:text-7xl lg:text-8xl leading-none mb-4 tracking-tight">
-                    ZEANDREI<br>
-                    <span class="gradient-text" style="text-shadow: 0 0 40px rgba(0,255,65,0.3);">MILITANTE</span>
-                </h1>
-
-                <!-- Typewriter line -->
-                <div class="flex items-center justify-center gap-2 mb-6">
-                    <span class="mono text-gray-500 text-lg">&gt;_</span>
-                    <span class="mono text-primary text-lg" id="typewriter">Developer</span>
-                    <span class="neon-text mono text-lg blink">|</span>
-                </div>
-
-                <!-- Short description -->
-                <p class="text-gray-400 text-base md:text-lg max-w-xl mx-auto mb-8 leading-relaxed">
-                    IT Student & Freelance Web/App Developer from Marilao, Bulacan.
-                    Clean code. Sharp designs. Delivered on time.
-                </p>
-
-                <!-- Tech stack tags -->
-                <div class="flex flex-wrap justify-center gap-3 mb-10">
-                    <span class="tech-badge px-4 py-1.5 rounded">PHP</span>
-                    <span class="tech-badge px-4 py-1.5 rounded">MySQL</span>
-                    <span class="tech-badge px-4 py-1.5 rounded">JavaScript</span>
-                    <span class="tech-badge px-4 py-1.5 rounded">Graphic Design</span>
-                </div>
-
-                <!-- CTA Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="#work"
-                        class="btn-solid group px-8 py-3.5 rounded flex items-center gap-2 text-sm">
-                        View My Projects
-                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                <!-- Nav -->
+                <div style="padding:12px 0;flex:1;">
+                    <p style="font-family:'Share Tech Mono',monospace;font-size:0.68rem;letter-spacing:0.15em;color:#2a2a2a;padding:8px 20px 6px;text-transform:uppercase;">Navigation</p>
+                    <a class="nav-item active" data-panel="home" onclick="switchPanel('home',this)">
+                        <i data-lucide="terminal" style="width:17px;height:17px;flex-shrink:0;"></i>
+                        // home
                     </a>
-                    <a href="https://github.com/militantezeandrei-ops" target="_blank"
-                        class="btn-neon px-8 py-3.5 rounded flex items-center gap-2 text-sm">
-                        <i data-lucide="github" class="w-4 h-4"></i>
-                        GitHub Profile
+                    <a class="nav-item" data-panel="about" onclick="switchPanel('about',this)">
+                        <i data-lucide="user" style="width:17px;height:17px;flex-shrink:0;"></i>
+                        // about
+                    </a>
+                    <a class="nav-item" data-panel="projects" onclick="switchPanel('projects',this)">
+                        <i data-lucide="folder-code" style="width:17px;height:17px;flex-shrink:0;"></i>
+                        // projects
+                    </a>
+                    <a class="nav-item" data-panel="skills" onclick="switchPanel('skills',this)">
+                        <i data-lucide="cpu" style="width:17px;height:17px;flex-shrink:0;"></i>
+                        // skills
+                    </a>
+                    <a class="nav-item" data-panel="certs" onclick="switchPanel('certs',this)">
+                        <i data-lucide="award" style="width:17px;height:17px;flex-shrink:0;"></i>
+                        // certifications
+                    </a>
+                    <a class="nav-item" data-panel="contact" onclick="switchPanel('contact',this)">
+                        <i data-lucide="send" style="width:17px;height:17px;flex-shrink:0;"></i>
+                        // contact
                     </a>
                 </div>
 
+                <!-- Sidebar tech tags -->
+                <div style="padding:14px 20px;border-top:1px solid #1a1a1a;">
+                    <p style="font-family:'Share Tech Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;color:#2a2a2a;margin-bottom:10px;text-transform:uppercase;">Stack</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:5px;">
+                        <span class="tech-badge">PHP</span>
+                        <span class="tech-badge">MySQL</span>
+                        <span class="tech-badge">JS</span>
+                        <span class="tech-badge">CSS</span>
+                        <span class="tech-badge">UI/UX</span>
+                    </div>
+                </div>
             </div>
 
-            <!-- Scroll down hint -->
-            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce opacity-40">
-                <i data-lucide="chevron-down" class="w-5 h-5 text-primary"></i>
-            </div>
-        </div>
-    </section>
+            <!-- Mobile overlay -->
+            <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
 
-    <!-- ── About Section ── -->
-    <section id="about" class="py-28 relative">
-        <div class="neon-divider mb-0"></div>
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-28">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <!-- ── Content Panel ── -->
+            <div class="content-panel grid-bg scanlines">
 
-                <!-- Profile Photo + Stats -->
-                <div class="reveal">
-                    <div class="relative w-fit mx-auto">
-                        <!-- Neon ring around photo -->
-                        <div class="absolute -inset-3 rounded-full opacity-20"
-                            style="background: conic-gradient(from 0deg, #00FF41, transparent, #00FF41, transparent); animation: spin 8s linear infinite;"></div>
-                        <div class="relative rounded-full p-1 border border-primary/30"
-                            style="box-shadow: 0 0 30px rgba(0,255,65,0.2);">
-                            <div class="w-52 h-52 md:w-64 md:h-64 rounded-full overflow-hidden bg-dark-card">
-                                <img src="assets/profile.jpg" alt="Zeandrei D. Militante"
-                                    class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                <!-- ════ HOME PANEL ════ -->
+                <div class="panel active" id="panel-home">
+                    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;max-width:680px;margin:0 auto;width:100%;">
+
+                        <!-- Status badge -->
+                        <div class="flex items-center gap-3 mb-6" style="background:rgba(0,255,65,0.05);border:1px solid rgba(0,255,65,0.2);padding:8px 18px;border-radius:4px;">
+                            <span class="status-dot"></span>
+                            <span style="font-family:'Share Tech Mono',monospace;font-size:0.68rem;letter-spacing:0.18em;color:#aaa;">OPEN FOR FREELANCE WORK</span>
+                        </div>
+
+                        <!-- Name -->
+                        <h1 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(2.8rem,7vw,5.5rem);line-height:0.95;letter-spacing:-0.01em;margin-bottom:16px;">
+                            ZEANDREI<br>
+                            <span class="gradient-text">MILITANTE</span>
+                        </h1>
+
+                        <!-- Typewriter -->
+                        <div class="flex items-center justify-center gap-2 mb-4">
+                            <span style="font-family:'Share Tech Mono',monospace;color:#444;font-size:1rem;">&gt;_</span>
+                            <span style="font-family:'Share Tech Mono',monospace;color:var(--neon);font-size:1rem;" id="typewriter">Developer</span>
+                            <span class="neon-text blink" style="font-family:'Share Tech Mono',monospace;font-size:1rem;">|</span>
+                        </div>
+
+                        <p style="color:#666;font-size:0.92rem;max-width:440px;line-height:1.7;margin-bottom:28px;">
+                            IT student &amp; Freelance Web/App Developer from Marilao, Bulacan.
+                            Clean code. Sharp designs. Delivered on time.
+                        </p>
+
+                        <!-- Tech badges -->
+                        <div class="flex flex-wrap justify-center gap-2 mb-8">
+                            <span class="tech-badge">PHP</span>
+                            <span class="tech-badge">MySQL</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">UI/UX</span>
+                            <span class="tech-badge">Graphic Design</span>
+                        </div>
+
+                        <!-- CTAs -->
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <a onclick="switchPanel('projects',null)" class="btn-solid flex items-center gap-2 px-6 py-2.5 rounded text-sm cursor-pointer">
+                                View Projects
+                                <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
+                            </a>
+                            <a href="https://github.com/militantezeandrei-ops" target="_blank" class="btn-neon flex items-center gap-2 px-6 py-2.5 rounded text-sm">
+                                <i data-lucide="github" style="width:14px;height:14px;"></i>
+                                GitHub
+                            </a>
+                            <a onclick="switchPanel('contact',null)" class="btn-neon flex items-center gap-2 px-6 py-2.5 rounded text-sm cursor-pointer">
+                                <i data-lucide="send" style="width:14px;height:14px;"></i>
+                                Contact
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Stats bar at bottom of home -->
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #1a1a1a;flex-shrink:0;">
+                        <div style="padding:14px 18px;border-right:1px solid #1a1a1a;text-align:center;">
+                            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;color:var(--neon);line-height:1;">3+</p>
+                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:#444;letter-spacing:0.1em;margin-top:3px;">PROJECTS</p>
+                        </div>
+                        <div style="padding:14px 18px;border-right:1px solid #1a1a1a;text-align:center;">
+                            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;color:var(--neon);line-height:1;">2024</p>
+                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:#444;letter-spacing:0.1em;margin-top:3px;">FREELANCE SINCE</p>
+                        </div>
+                        <div style="padding:14px 18px;text-align:center;">
+                            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;color:var(--neon);line-height:1;">2027</p>
+                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:#444;letter-spacing:0.1em;margin-top:3px;">GRADUATING</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ════ ABOUT PANEL ════ -->
+                <div class="panel" id="panel-about">
+                    <p class="section-label mb-1">// about.exe</p>
+                    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.4rem);margin-bottom:18px;">Building Real Solutions with <span class="gradient-text">Precision</span></h2>
+
+                    <div class="about-grid">
+
+                        <!-- Left: Bio + photo -->
+                        <div style="display:flex;flex-direction:column;gap:14px;overflow-y:auto;min-height:0;">
+                            <!-- Photo + floating stats -->
+                            <div class="neon-card rounded-xl p-5" style="position:relative;flex-shrink:0;">
+                                <div style="display:flex;align-items:center;gap:14px;">
+                                    <div style="width:80px;height:80px;border-radius:50%;border:1px solid rgba(0,255,65,0.3);overflow:hidden;box-shadow:0 0 18px rgba(0,255,65,0.15);flex-shrink:0;">
+                                        <img src="assets/profile.jpg" alt="Zeandrei" style="width:100%;height:100%;object-fit:cover;">
+                                    </div>
+                                    <div>
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.2rem;color:#fff;">Zeandrei D. Militante</p>
+                                        <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--neon);">&gt;_ Web &amp; App Developer</p>
+                                        <p style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:#444;margin-top:4px;">Marilao, Bulacan, PH</p>
+                                    </div>
+                                </div>
+                                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px;border-top:1px solid #1a1a1a;padding-top:14px;">
+                                    <div style="text-align:center;">
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.3rem;color:var(--neon);">3+</p>
+                                        <p style="font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:#444;">PROJECTS</p>
+                                    </div>
+                                    <div style="text-align:center;border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;">
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.3rem;color:var(--neon);">4th</p>
+                                        <p style="font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:#444;">YEAR IT</p>
+                                    </div>
+                                    <div style="text-align:center;">
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.3rem;color:var(--neon);">2+</p>
+                                        <p style="font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:#444;">LANG</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bio text -->
+                            <div class="neon-card rounded-xl p-5" style="flex-shrink:0;">
+                                <p class="section-label mb-3">// bio.txt</p>
+                                <div style="color:#888;font-size:0.85rem;line-height:1.75;display:flex;flex-direction:column;gap:10px;">
+                                    <p>I'm an IT student at <strong style="color:#ccc;">Pambayang Dalubhasaan ng Marilao</strong> (graduating 2027), currently in my 4th year — studying web development, databases, and software design.</p>
+                                    <p>Since June 2024, I've been doing <strong style="color:#ccc;">freelance web and app projects</strong> for real clients. I build both the back-end logic and the front-end — from scratch.</p>
+                                    <p>I always finish work <strong style="color:#ccc;">before the deadline</strong> and communicate clearly in English and Tagalog.</p>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Floating stat: Projects -->
-                        <div class="absolute -bottom-6 -right-6 stat-float px-5 py-3 rounded animate-float bracket-card">
-                            <div class="flex items-center gap-3">
-                                <div class="w-9 h-9 rounded flex items-center justify-center"
-                                    style="background: rgba(0,255,65,0.1);">
-                                    <i data-lucide="code-2" class="w-4 h-4 text-primary"></i>
+                        <!-- Right: traits + languages -->
+                        <div style="display:flex;flex-direction:column;gap:14px;overflow-y:auto;min-height:0;">
+                            <!-- 2 trait cards -->
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex-shrink:0;">
+                                <div class="neon-card rounded-xl p-4 bracket" style="position:relative;">
+                                    <i data-lucide="clock" style="width:22px;height:22px;color:var(--neon);margin-bottom:8px;"></i>
+                                    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;margin-bottom:4px;">Early Delivery</p>
+                                    <p style="font-size:0.75rem;color:#555;line-height:1.5;">Done before deadline, every time.</p>
+                                </div>
+                                <div class="neon-card rounded-xl p-4 bracket" style="position:relative;">
+                                    <i data-lucide="layers" style="width:22px;height:22px;color:var(--neon);margin-bottom:8px;"></i>
+                                    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;margin-bottom:4px;">Design + Code</p>
+                                    <p style="font-size:0.75rem;color:#555;line-height:1.5;">Good-looking and fully working.</p>
+                                </div>
+                                <div class="neon-card rounded-xl p-4 bracket" style="position:relative;">
+                                    <i data-lucide="git-branch" style="width:22px;height:22px;color:var(--neon);margin-bottom:8px;"></i>
+                                    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;margin-bottom:4px;">Full-Stack</p>
+                                    <p style="font-size:0.75rem;color:#555;line-height:1.5;">Front + back from scratch.</p>
+                                </div>
+                                <div class="neon-card rounded-xl p-4 bracket" style="position:relative;">
+                                    <i data-lucide="users" style="width:22px;height:22px;color:var(--neon);margin-bottom:8px;"></i>
+                                    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;margin-bottom:4px;">Client-Focused</p>
+                                    <p style="font-size:0.75rem;color:#555;line-height:1.5;">Clear comms, smooth process.</p>
+                                </div>
+                            </div>
+
+                            <!-- Languages -->
+                            <div class="neon-card rounded-xl p-5" style="flex-shrink:0;">
+                                <p class="section-label mb-3">// languages.cfg</p>
+                                <div style="display:flex;flex-direction:column;gap:10px;">
+                                    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid #1a1a1a;border-radius:6px;background:rgba(255,255,255,0.01);">
+                                        <div style="display:flex;align-items:center;gap:10px;">
+                                            <span style="font-size:1.2rem;">🇺🇸</span>
+                                            <div>
+                                                <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.9rem;color:#fff;">English</p>
+                                                <p style="font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:#555;">Fluent — spoken &amp; written</p>
+                                            </div>
+                                        </div>
+                                        <div style="display:flex;gap:4px;">
+                                            <div style="width:8px;height:8px;border-radius:50%;background:var(--neon);" class="pulse-neon"></div>
+                                            <div style="width:8px;height:8px;border-radius:50%;background:var(--neon);"></div>
+                                            <div style="width:8px;height:8px;border-radius:50%;background:var(--neon);"></div>
+                                            <div style="width:8px;height:8px;border-radius:50%;background:var(--neon);"></div>
+                                            <div style="width:8px;height:8px;border-radius:50%;background:rgba(0,255,65,0.2);"></div>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid #1a1a1a;border-radius:6px;background:rgba(255,255,255,0.01);">
+                                        <div style="display:flex;align-items:center;gap:10px;">
+                                            <span style="font-size:1.2rem;">🇵🇭</span>
+                                            <div>
+                                                <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.9rem;color:#fff;">Tagalog</p>
+                                                <p style="font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:#555;">Native / Fluent</p>
+                                            </div>
+                                        </div>
+                                        <div style="display:flex;gap:4px;">
+                                            <div style="width:8px;height:8px;border-radius:50%;background:var(--neon);" class="pulse-neon"></div>
+                                            <div style="width:8px;height:8px;border-radius:50%;background:var(--neon);"></div>
+                                            <div style="width:8px;height:8px;border-radius:50%;background:var(--neon);"></div>
+                                            <div style="width:8px;height:8px;border-radius:50%;background:var(--neon);"></div>
+                                            <div style="width:8px;height:8px;border-radius:50%;background:var(--neon);"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                         
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ════ PROJECTS PANEL ════ -->
+                <div class="panel" id="panel-projects">
+                    <p class="section-label mb-1">// projects.dir</p>
+                    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:4px;">Featured <span class="gradient-text">Projects</span></h2>
+                    <p style="font-size:0.8rem;color:#555;margin-bottom:18px;">Real apps built from scratch. Source code on GitHub.</p>
+
+                    <div class="projects-grid" style="flex:1;min-height:0;overflow-y:auto;">
+
+                        <!-- Edebt -->
+                        <div class="neon-card rounded-xl overflow-hidden" style="display:flex;flex-direction:column;">
+                            <div class="project-img-wrap" style="aspect-ratio: 16/9; flex-shrink:0; overflow: hidden; position: relative;">
+                                <img src="assets/projects/edebt_admin1.png" alt="Edebt" style="width:100%; height:100%; object-fit:cover; opacity:0.55;">
+                                <div class="project-overlay">
+                                    <div>
+                                        <div style="display:flex;gap:5px;margin-bottom:5px;">
+                                            <span class="tech-badge" style="font-size:0.6rem;padding:2px 7px;">JavaScript</span>
+                                            <span class="tech-badge" style="font-size:0.6rem;padding:2px 7px;">Web App</span>
+                                        </div>
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;">Edebt</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="padding:14px;flex:1;display:flex;flex-direction:column;">
+                                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                                    <div>
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;">Edebt</p>
+                                        <p style="font-size:0.72rem;color:#555;">Debt tracker with mobile scanning</p>
+                                    </div>
+                                    <a href="https://github.com/militantezeandrei-ops/Edebt" target="_blank" style="color:#444;transition:color 0.2s;padding:4px;" class="hover:text-primary">
+                                        <i data-lucide="external-link" style="width:13px;height:13px;"></i>
+                                    </a>
+                                </div>
+                                <p style="font-size:0.75rem;color:#555;line-height:1.6;flex:1;">Web dashboard for admins to track debts. Paired with a mobile app that reads handwritten order slips and auto-saves data.</p>
+                                <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:10px;">
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;padding:2px 7px;border:1px solid #1a1a1a;border-radius:3px;color:#444;">JavaScript</span>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;padding:2px 7px;border:1px solid #1a1a1a;border-radius:3px;color:#444;">HTML/CSS</span>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;padding:2px 7px;border:1px solid #1a1a1a;border-radius:3px;color:#444;">LocalStorage</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- EcoDefill -->
+                        <div class="neon-card rounded-xl overflow-hidden" style="display:flex;flex-direction:column;">
+                            <div class="project-img-wrap" style="aspect-ratio: 16/9; flex-shrink:0; overflow: hidden; position: relative;">
+                                <img src="assets/projects/ecodefill_admin.png" alt="EcoDefill" style="width:100%; height:100%; object-fit:cover; opacity:0.55;">
+                                <div class="project-overlay">
+                                    <div>
+                                        <div style="display:flex;gap:5px;margin-bottom:5px;">
+                                            <span class="tech-badge" style="font-size:0.6rem;padding:2px 7px;">TypeScript</span>
+                                            <span class="tech-badge" style="font-size:0.6rem;padding:2px 7px;">IoT</span>
+                                        </div>
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;">EcoDefill</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="padding:14px;flex:1;display:flex;flex-direction:column;">
+                                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                                    <div>
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;">EcoDefill</p>
+                                        <p style="font-size:0.72rem;color:#555;">Eco-friendly refill machine + IoT</p>
+                                    </div>
+                                    <a href="https://github.com/militantezeandrei-ops/EcoDefill" target="_blank" style="color:#444;transition:color 0.2s;padding:4px;" class="hover:text-primary">
+                                        <i data-lucide="external-link" style="width:13px;height:13px;"></i>
+                                    </a>
+                                </div>
+                                <p style="font-size:0.75rem;color:#555;line-height:1.6;flex:1;">Tracks waste-to-water refill machines in real time. Users earn points for dropping off waste and redeem points to refill drinking water.</p>
+                                <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:10px;">
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;padding:2px 7px;border:1px solid #1a1a1a;border-radius:3px;color:#444;">TypeScript</span>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;padding:2px 7px;border:1px solid #1a1a1a;border-radius:3px;color:#444;">Node.js</span>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;padding:2px 7px;border:1px solid #1a1a1a;border-radius:3px;color:#444;">IoT</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Marmet -->
+                        <div class="neon-card rounded-xl overflow-hidden" style="display:flex;flex-direction:column;">
+                            <div class="project-img-wrap" style="aspect-ratio: 16/9; flex-shrink:0; overflow: hidden; position: relative;">
+                                <img src="assets/projects/marmet_showcase.png" alt="Marmet" style="width:100%; height:100%; object-fit:cover; opacity:0.55;">
+                                <div class="project-overlay">
+                                    <div>
+                                        <div style="display:flex;gap:5px;margin-bottom:5px;">
+                                            <span class="tech-badge" style="font-size:0.6rem;padding:2px 7px;">PHP</span>
+                                            <span class="tech-badge" style="font-size:0.6rem;padding:2px 7px;">MySQL</span>
+                                        </div>
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;">Marmet</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="padding:14px;flex:1;display:flex;flex-direction:column;">
+                                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                                    <div>
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;">Marmet</p>
+                                        <p style="font-size:0.72rem;color:#555;">E-commerce with full admin control</p>
+                                    </div>
+                                    <a href="https://github.com/militantezeandrei-ops/Marmet" target="_blank" style="color:#444;transition:color 0.2s;padding:4px;" class="hover:text-primary">
+                                        <i data-lucide="external-link" style="width:13px;height:13px;"></i>
+                                    </a>
+                                </div>
+                                <p style="font-size:0.75rem;color:#555;line-height:1.6;flex:1;">Full e-commerce site where customers order live. Staff confirm orders, admins track stock, and the system shows sales charts and demand trends.</p>
+                                <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:10px;">
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;padding:2px 7px;border:1px solid #1a1a1a;border-radius:3px;color:#444;">PHP</span>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;padding:2px 7px;border:1px solid #1a1a1a;border-radius:3px;color:#444;">MySQL</span>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;padding:2px 7px;border:1px solid #1a1a1a;border-radius:3px;color:#444;">Bootstrap</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div style="padding-top:14px;flex-shrink:0;">
+                        <a href="https://github.com/militantezeandrei-ops" target="_blank" class="btn-neon flex items-center gap-2 px-5 py-2.5 rounded text-xs w-fit">
+                            <i data-lucide="github" style="width:13px;height:13px;"></i>
+                            See All Repos on GitHub
+                        </a>
+                    </div>
+                </div>
+                <div class="panel" id="panel-skills">
+                    <p class="section-label mb-1">// skills.exe</p>
+                    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:4px;">Expertise <span class="gradient-text">Stack</span></h2>
+                    <p style="font-size:0.8rem;color:#555;margin-bottom:18px;">What I know and how well I know it — no fluff.</p>
+
+                    <div class="skills-grid" style="flex:1;min-height:0;overflow-y:auto;">
+
+                        <!-- Coding & Web -->
+                        <div class="neon-card rounded-xl p-5">
+                            <div style="width:36px;height:36px;border-radius:6px;background:rgba(0,255,65,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                                <i data-lucide="code-2" style="width:17px;height:17px;color:var(--neon);"></i>
+                            </div>
+                            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:16px;color:#fff;">Coding &amp; Web</h3>
+                            <div style="display:flex;flex-direction:column;gap:14px;">
+                                <div class="group">
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#ccc;display:block;margin-bottom:4px;">PHP</span>
+                                    <p style="font-size:0.75rem;color:#555;line-height:1.55;">Custom back-end logic, robust APIs, and secure server-side systems.</p>
                                 </div>
                                 <div>
-                                    <p class="font-bold text-base text-primary">3+</p>
-                                    <p class="mono text-xs text-gray-500">GitHub Projects</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Floating stat: Role -->
-                        <div class="absolute -top-6 -left-6 stat-float px-5 py-3 rounded animate-float bracket-card"
-                            style="animation-delay: 1s;">
-                            <div class="flex items-center gap-3">
-                                <div class="w-9 h-9 rounded flex items-center justify-center"
-                                    style="background: rgba(0,255,65,0.1);">
-                                    <i data-lucide="terminal" class="w-4 h-4 text-primary"></i>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#ccc;display:block;margin-bottom:4px;">JavaScript</span>
+                                    <p style="font-size:0.75rem;color:#555;line-height:1.55;">Dynamic web interactions, DOM manipulation, and modern ES6 features.</p>
                                 </div>
                                 <div>
-                                    <p class="mono text-xs text-gray-500">IT Student</p>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#ccc;display:block;margin-bottom:4px;">MySQL</span>
+                                    <p style="font-size:0.75rem;color:#555;line-height:1.55;">Database schema architecture, optimized complex queries, and data management.</p>
+                                </div>
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#ccc;display:block;margin-bottom:4px;">HTML / CSS</span>
+                                    <p style="font-size:0.75rem;color:#555;line-height:1.55;">Responsive layouts, modern styling interfaces, and clean structural design.</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <!-- Bio Text -->
-                <div class="reveal">
-                    <p class="section-label mb-3">// About Me</p>
-                    <h2 class="font-display font-bold text-4xl md:text-5xl mb-6 leading-tight tracking-tight">
-                        Building Real Solutions<br>with <span class="gradient-text">Precision</span>
-                    </h2>
-
-                    <div class="space-y-4 text-gray-400 text-base leading-relaxed mb-8">
-                        <p>
-                            I'm an IT student at <strong class="text-white">Pambayang Dalubhasaan ng Marilao</strong>
-                            (graduating 2027), currently in my 4th year. I study web development, database systems, and software design.
-                        </p>
-                        <p>
-                            Since June 2024, I've been doing <strong class="text-white">freelance web and app projects</strong> for real clients.
-                            I build the back-end logic and the front-end look — both from scratch.
-                        </p>
-                        <p>
-                            I always finish work <strong class="text-white">before the deadline</strong> and speak both
-                            English and Tagalog, so talking through projects is never a problem.
-                        </p>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="neon-card p-5 rounded bracket-card">
-                            <i data-lucide="clock" class="w-7 h-7 text-primary mb-3"></i>
-                            <h3 class="font-display font-bold text-base mb-1">Early Delivery</h3>
-                            <p class="text-gray-500 text-sm">Work done before the deadline, every time</p>
-                        </div>
-                        <div class="neon-card p-5 rounded bracket-card">
-                            <i data-lucide="layers" class="w-7 h-7 text-primary mb-3"></i>
-                            <h3 class="font-display font-bold text-base mb-1">Design + Code</h3>
-                            <p class="text-gray-500 text-sm">Good-looking and fully working — both</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ── Projects Section ── -->
-    <section id="work" class="py-28 relative" style="background: #050505;">
-        <div class="neon-divider mb-0"></div>
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-28">
-
-            <div class="text-center mb-16 reveal">
-                <p class="section-label mb-3">// Portfolio</p>
-                <h2 class="font-display font-bold text-4xl md:text-5xl mb-4 tracking-tight">Featured Projects</h2>
-                <p class="text-gray-500 max-w-xl mx-auto text-base">
-                    Real apps built from scratch. Source code on GitHub.
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
-
-                <!-- Project 1: Edebt -->
-                <div class="project-card group reveal neon-card rounded-xl overflow-hidden">
-                    <div class="relative overflow-hidden aspect-[4/3]">
-                        <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(0,255,65,0.05), rgba(0,0,0,0.8));"></div>
-                        <div class="absolute inset-0">
-                            <img src="assets/projects/edebt_admin1.png" alt="Edebt Admin Dashboard"
-                                class="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700">
-                        </div>
-                        <!-- Floating preview on hover -->
-                        <div class="absolute top-4 right-4 w-1/2 aspect-video rounded overflow-hidden border border-primary/20 shadow-2xl transform translate-x-10 -translate-y-10 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-700 hidden md:block opacity-0 group-hover:opacity-100">
-                            <img src="assets/projects/edebt_admin.png" alt="Edebt Admin" class="w-full h-full object-cover">
-                        </div>
-                        <div class="absolute bottom-4 left-4 w-1/3 aspect-[3/4] rounded overflow-hidden border border-primary/20 shadow-2xl transform -translate-x-10 translate-y-10 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-700 hidden md:block delay-100 opacity-0 group-hover:opacity-100">
-                            <img src="assets/projects/edebt_handwritten_slip.png" alt="Handwritten Orders" class="w-full h-full object-cover">
-                        </div>
-                        <!-- Hover overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
-                            <div class="transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300 w-full">
-                                <div class="flex gap-2 mb-2">
-                                    <span class="px-2.5 py-0.5 rounded mono text-xs text-primary border border-primary/30" style="background: rgba(0,255,65,0.08);">JavaScript</span>
-                                    <span class="px-2.5 py-0.5 rounded mono text-xs text-primary border border-primary/30" style="background: rgba(0,255,65,0.08);">Web App</span>
+                        <!-- Design & Tools -->
+                        <div class="neon-card rounded-xl p-5">
+                            <div style="width:36px;height:36px;border-radius:6px;background:rgba(0,255,65,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                                <i data-lucide="palette" style="width:17px;height:17px;color:var(--neon);"></i>
+                            </div>
+                            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:16px;color:#fff;">Design &amp; Tools</h3>
+                            <div style="display:flex;flex-direction:column;gap:14px;">
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#ccc;display:block;margin-bottom:4px;">Graphic Design</span>
+                                    <p style="font-size:0.75rem;color:#555;line-height:1.55;">Visual asset creation, brand identity, and engaging marketing materials.</p>
                                 </div>
-                                <h3 class="font-display font-bold text-lg">Edebt</h3>
-                                <p class="text-gray-400 text-xs">Admin control + auto data reading</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-5">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <h3 class="font-display font-bold text-lg mb-0.5 group-hover:text-primary transition-colors">Edebt</h3>
-                                <p class="text-gray-500 text-sm">Debt tracker with mobile scanning</p>
-                            </div>
-                            <a href="https://github.com/militantezeandrei-ops/Edebt" target="_blank"
-                                class="p-2 rounded glass hover:bg-primary/10 hover:text-primary transition-colors">
-                                <i data-lucide="external-link" class="w-4 h-4"></i>
-                            </a>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">A web dashboard for admins to track and manage debts. Pairs with a mobile app that reads handwritten order slips and saves the data automatically.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="mono text-xs px-2.5 py-0.5 rounded border border-dark-border text-gray-500">JavaScript</span>
-                            <span class="mono text-xs px-2.5 py-0.5 rounded border border-dark-border text-gray-500">HTML/CSS</span>
-                            <span class="mono text-xs px-2.5 py-0.5 rounded border border-dark-border text-gray-500">LocalStorage</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 2: EcoDefill -->
-                <div class="project-card group reveal neon-card rounded-xl overflow-hidden">
-                    <div class="relative overflow-hidden aspect-[4/3]">
-                        <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(0,255,65,0.06), rgba(0,0,0,0.8));"></div>
-                        <div class="absolute inset-0">
-                            <img src="assets/projects/ecodefill_admin.png" alt="EcoDefill Admin"
-                                class="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700">
-                        </div>
-                        <div class="absolute bottom-3 right-3 w-1/4 aspect-[9/19] rounded overflow-hidden border border-primary/20 shadow-2xl transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500 hidden md:block">
-                            <img src="assets/projects/ecodefill_mobile.png" alt="EcoDefill Mobile" class="h-full object-cover">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
-                            <div class="transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300 w-full">
-                                <div class="flex gap-2 mb-2">
-                                    <span class="px-2.5 py-0.5 rounded mono text-xs text-primary border border-primary/30" style="background: rgba(0,255,65,0.08);">TypeScript</span>
-                                    <span class="px-2.5 py-0.5 rounded mono text-xs text-primary border border-primary/30" style="background: rgba(0,255,65,0.08);">IoT</span>
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#ccc;display:block;margin-bottom:4px;">UI/UX Design</span>
+                                    <p style="font-size:0.75rem;color:#555;line-height:1.55;">User-centric interfaces, clear navigation, and intuitive digital experiences.</p>
                                 </div>
-                                <h3 class="font-display font-bold text-lg">EcoDefill</h3>
-                                <p class="text-gray-400 text-xs">Smart machine tracking + eco rewards</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-5">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <h3 class="font-display font-bold text-lg mb-0.5 group-hover:text-primary transition-colors">EcoDefill</h3>
-                                <p class="text-gray-500 text-sm">Eco-friendly refill machine with IoT</p>
-                            </div>
-                            <a href="https://github.com/militantezeandrei-ops/EcoDefill" target="_blank"
-                                class="p-2 rounded glass hover:bg-primary/10 hover:text-primary transition-colors">
-                                <i data-lucide="external-link" class="w-4 h-4"></i>
-                            </a>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">Tracks waste-to-water refill machines in real time. Users earn points for dropping off waste and can use those points to refill drinking water.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="mono text-xs px-2.5 py-0.5 rounded border border-dark-border text-gray-500">TypeScript</span>
-                            <span class="mono text-xs px-2.5 py-0.5 rounded border border-dark-border text-gray-500">Node.js</span>
-                            <span class="mono text-xs px-2.5 py-0.5 rounded border border-dark-border text-gray-500">IoT</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 3: Marmet -->
-                <div class="project-card group reveal neon-card rounded-xl overflow-hidden">
-                    <div class="relative overflow-hidden aspect-[4/3]">
-                        <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(0,255,65,0.04), rgba(0,0,0,0.8));"></div>
-                        <div class="absolute inset-0">
-                            <img src="assets/projects/marmet_showcase.png" alt="Marmet Showcase"
-                                class="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
-                            <div class="transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300 w-full">
-                                <div class="flex gap-2 mb-2">
-                                    <span class="px-2.5 py-0.5 rounded mono text-xs text-primary border border-primary/30" style="background: rgba(0,255,65,0.08);">PHP</span>
-                                    <span class="px-2.5 py-0.5 rounded mono text-xs text-primary border border-primary/30" style="background: rgba(0,255,65,0.08);">MySQL</span>
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#ccc;display:block;margin-bottom:4px;">MS Office</span>
+                                    <p style="font-size:0.75rem;color:#555;line-height:1.55;">Advanced document formatting, systematic data organization, and reporting.</p>
                                 </div>
-                                <h3 class="font-display font-bold text-lg">Marmet</h3>
-                                <p class="text-gray-400 text-xs">Full online shop with admin tools</p>
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#ccc;display:block;margin-bottom:4px;">Presentations</span>
+                                    <p style="font-size:0.75rem;color:#555;line-height:1.55;">Compelling professional pitch decks, visual storytelling, and slide design.</p>
+                                </div>
                             </div>
+                        </div>
+
+                        <!-- People Skills -->
+                        <div class="neon-card rounded-xl p-5">
+                            <div style="width:36px;height:36px;border-radius:6px;background:rgba(0,255,65,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                                <i data-lucide="users" style="width:17px;height:17px;color:var(--neon);"></i>
+                            </div>
+                            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:16px;color:#fff;">People Skills</h3>
+                            <div style="display:flex;flex-direction:column;gap:14px;">
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#ccc;display:block;margin-bottom:4px;">Time Management</span>
+                                    <p style="font-size:0.75rem;color:#555;line-height:1.55;">Consistent early deliveries, strict punctuality, and task prioritization.</p>
+                                </div>
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#ccc;display:block;margin-bottom:4px;">Troubleshooting</span>
+                                    <p style="font-size:0.75rem;color:#555;line-height:1.55;">Efficiently identifying, debugging, and resolving complex technical issues.</p>
+                                </div>
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#ccc;display:block;margin-bottom:4px;">English / Tagalog</span>
+                                    <p style="font-size:0.75rem;color:#555;line-height:1.55;">Clear and professional communication with local and international clients.</p>
+                                </div>
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#ccc;display:block;margin-bottom:4px;">Client Relations</span>
+                                    <p style="font-size:0.75rem;color:#555;line-height:1.55;">Managing client expectations, requirements gathering, and progress tracking.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ════ CERTS PANEL ════ -->
+                <div class="panel" id="panel-certs">
+                    <p class="section-label mb-1">// certifications.log</p>
+                    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:4px;">Always <span class="gradient-text">Learning</span></h2>
+                    <p style="font-size:0.8rem;color:#555;margin-bottom:22px;">Courses and workshops that leveled up my skills.</p>
+
+                    <div class="certs-grid">
+
+                        <div class="neon-card cert-card rounded-xl p-6 bracket" style="position:relative;">
+                            <div style="width:36px;height:36px;border-radius:6px;background:rgba(0,255,65,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                                <i data-lucide="award" style="width:17px;height:17px;color:var(--neon);"></i>
+                            </div>
+                            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;margin-bottom:4px;">Advanced Web Development</h3>
+                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--neon);margin-bottom:8px;">Certificate of Completion</p>
+                            <p style="font-size:0.75rem;color:#555;line-height:1.6;">Hands-on training in modern web tools and best practices.</p>
+                        </div>
+
+                        <div class="neon-card cert-card rounded-xl p-6 bracket" style="position:relative;">
+                            <div style="width:36px;height:36px;border-radius:6px;background:rgba(0,255,65,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                                <i data-lucide="pen-tool" style="width:17px;height:17px;color:var(--neon);"></i>
+                            </div>
+                            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;margin-bottom:4px;">Graphic Design &amp; Branding</h3>
+                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--neon);margin-bottom:8px;">Certificate of Participation</p>
+                            <p style="font-size:0.75rem;color:#555;line-height:1.6;">Workshop on making visual brands that clients actually want.</p>
+                        </div>
+
+                        <div class="neon-card cert-card rounded-xl p-6 bracket" style="position:relative;">
+                            <div style="width:36px;height:36px;border-radius:6px;background:rgba(0,255,65,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                                <i data-lucide="smartphone" style="width:17px;height:17px;color:var(--neon);"></i>
+                            </div>
+                            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;margin-bottom:4px;">App Development Trends</h3>
+                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--neon);margin-bottom:8px;">Seminar Attendee</p>
+                            <p style="font-size:0.75rem;color:#555;line-height:1.6;">Latest tools and ideas shaping mobile app development.</p>
                         </div>
                     </div>
-                    <div class="p-5">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <h3 class="font-display font-bold text-lg mb-0.5 group-hover:text-primary transition-colors">Marmet</h3>
-                                <p class="text-gray-500 text-sm">Online store with full admin control</p>
-                            </div>
-                            <a href="https://github.com/militantezeandrei-ops/Marmet" target="_blank"
-                                class="p-2 rounded glass hover:bg-primary/10 hover:text-primary transition-colors">
-                                <i data-lucide="external-link" class="w-4 h-4"></i>
-                            </a>
-                        </div>
-                        <p class="text-gray-600 text-sm mb-4">A full e-commerce site where customers order live. Staff confirm orders, admins track stock, and the system shows sales charts and demand trends.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="mono text-xs px-2.5 py-0.5 rounded border border-dark-border text-gray-500">PHP</span>
-                            <span class="mono text-xs px-2.5 py-0.5 rounded border border-dark-border text-gray-500">MySQL</span>
-                            <span class="mono text-xs px-2.5 py-0.5 rounded border border-dark-border text-gray-500">Bootstrap</span>
+
+                    <!-- Terminal log style timeline -->
+                    <div class="neon-card rounded-xl p-5 mt-4" style="flex:1;min-height:0;overflow-y:auto;">
+                        <p class="section-label mb-3">// activity.log</p>
+                        <div style="font-family:'Share Tech Mono',monospace;font-size:0.68rem;line-height:2;color:#444;">
+                            <p><span style="color:var(--neon);">[2024]</span> Started freelance development career</p>
+                            <p><span style="color:var(--neon);">[2024]</span> Completed Advanced Web Development cert</p>
+                            <p><span style="color:var(--neon);">[2024]</span> Completed Graphic Design &amp; Branding workshop</p>
+                            <p><span style="color:var(--neon);">[2023]</span> Attended App Development Trends seminar</p>
+                            <p><span style="color:var(--neon);">[2023]</span> Enrolled at Pambayang Dalubhasaan ng Marilao</p>
+                            <p><span style="color:var(--neon);">[2023]</span> Started learning PHP &amp; MySQL</p>
+                            <p><span style="color:#333;">[...]</span> <span style="color:#2a2a2a;">more loading...</span> <span class="blink" style="color:var(--neon);">_</span></p>
                         </div>
                     </div>
                 </div>
 
-            </div>
+                <!-- ════ CONTACT PANEL ════ -->
+                <div class="panel" id="panel-contact">
+                    <p class="section-label mb-1">// contact.sh</p>
+                    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:4px;">Let's Build Something <span class="gradient-text">Together</span></h2>
+                    <p style="font-size:0.8rem;color:#555;margin-bottom:18px;">Available for freelance work right now.</p>
 
-            <div class="text-center mt-10 reveal">
-                <a href="https://github.com/militantezeandrei-ops" target="_blank"
-                    class="btn-neon inline-flex items-center gap-2 px-8 py-3.5 rounded text-sm">
-                    <i data-lucide="github" class="w-4 h-4"></i>
-                    See All Repos on GitHub
-                </a>
-            </div>
-        </div>
-    </section>
+                    <div class="contact-grid" style="flex:1; min-height:0; overflow-y:auto; padding-bottom: 30px;">
 
-    <!-- ── Skills Section ── -->
-    <section id="skills" class="py-28 relative">
-        <div class="neon-divider mb-0"></div>
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-28">
+                        <!-- Contact Info -->
+                        <div style="display:flex;flex-direction:column;gap:12px;">
+                            <div class="neon-card rounded-xl p-5" style="flex-shrink:0;">
+                                <p class="section-label mb-4">// reach_me.cfg</p>
+                                <div style="display:flex;flex-direction:column;gap:14px;">
+                                    <div style="display:flex;align-items:center;gap:12px;">
+                                        <div style="width:36px;height:36px;border-radius:6px;background:rgba(0,255,65,0.06);border:1px solid rgba(0,255,65,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                            <i data-lucide="mail" style="width:15px;height:15px;color:var(--neon);"></i>
+                                        </div>
+                                        <div>
+                                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:#444;margin-bottom:2px;">EMAIL</p>
+                                            <a href="mailto:militantezeandrei@gmail.com" style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:0.82rem;color:#ccc;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#00FF41'" onmouseout="this.style.color='#ccc'">militantezeandrei@gmail.com</a>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex;align-items:center;gap:12px;">
+                                        <div style="width:36px;height:36px;border-radius:6px;background:rgba(0,255,65,0.06);border:1px solid rgba(0,255,65,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                            <i data-lucide="phone" style="width:15px;height:15px;color:var(--neon);"></i>
+                                        </div>
+                                        <div>
+                                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:#444;margin-bottom:2px;">PHONE</p>
+                                            <a href="tel:09760590774" style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:0.82rem;color:#ccc;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#00FF41'" onmouseout="this.style.color='#ccc'">0976 059 0774</a>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex;align-items:center;gap:12px;">
+                                        <div style="width:36px;height:36px;border-radius:6px;background:rgba(0,255,65,0.06);border:1px solid rgba(0,255,65,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                            <i data-lucide="map-pin" style="width:15px;height:15px;color:var(--neon);"></i>
+                                        </div>
+                                        <div>
+                                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:#444;margin-bottom:2px;">LOCATION</p>
+                                            <p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:0.82rem;color:#ccc;">Marilao, Bulacan, Philippines</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-            <div class="text-center mb-16 reveal">
-                <p class="section-label mb-3">// Expertise</p>
-                <h2 class="font-display font-bold text-4xl md:text-5xl mb-4 tracking-tight">Skills</h2>
-                <p class="text-gray-500 max-w-xl mx-auto text-base">
-                    What I know and how well I know it — no fluff.
-                </p>
-            </div>
+                            <!-- Social -->
+                            <div class="neon-card rounded-xl p-5" style="flex-shrink:0;">
+                                <p class="section-label mb-3">// socials.sh</p>
+                                <div style="display:flex;flex-direction:column;gap:8px;">
+                                    <a href="https://github.com/militantezeandrei-ops" target="_blank" class="btn-neon flex items-center gap-3 px-4 py-2.5 rounded text-xs">
+                                        <i data-lucide="github" style="width:13px;height:13px;"></i> GitHub — militantezeandrei-ops
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/militante-zeandrei-d-231262323/" target="_blank" class="btn-neon flex items-center gap-3 px-4 py-2.5 rounded text-xs">
+                                        <i data-lucide="linkedin" style="width:13px;height:13px;"></i> LinkedIn Profile
+                                    </a>
+                                    <a href="https://www.facebook.com/Zeandreipogi123" target="_blank" class="btn-neon flex items-center gap-3 px-4 py-2.5 rounded text-xs">
+                                        <i data-lucide="facebook" style="width:13px;height:13px;"></i> Facebook
+                                    </a>
+                                    <a href="https://x.com/ZDM2002" target="_blank" class="btn-neon flex items-center gap-3 px-4 py-2.5 rounded text-xs">
+                                        <i data-lucide="twitter" style="width:13px;height:13px;"></i> X / Twitter — @ZDM2002
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Contact Form -->
+                        <div class="form-card-container">
+                            <div class="neon-card rounded-xl p-6" style="flex-shrink:0; align-self:start; width: 100%; max-width: 550px;">
+                                <p class="section-label mb-4">// send_message.php</p>
+                                <form id="contact-form" action="https://formspree.io/f/xykdojdv" method="POST" style="display:flex;flex-direction:column;gap:20px;">
+                                    <div class="form-row-grid" style="gap:15px;">
+                                        <div class="form-group">
+                                            <label class="contact-label">NAME_ENTRY</label>
+                                            <input type="text" name="name" placeholder="John Doe" required class="contact-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="contact-label">EMAIL_ADDRESS</label>
+                                            <input type="email" name="email" placeholder="john@example.com" required class="contact-input">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="contact-label">SERVICE_TYPE</label>
+                                        <select name="service" class="contact-input" style="background:#0a0a0a;">
+                                            <option value="">Select service...</option>
+                                            <option value="web">Full-Stack Development</option>
+                                            <option value="app">Mobile Application</option>
+                                            <option value="design">UI/UX & Graphic Design</option>
+                                            <option value="other">Consultation / Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="contact-label">PROJECT_BRIEF</label>
+                                        <textarea name="message" rows="5" placeholder="Tell me about your project mission..." required class="contact-input" style="resize:none;"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn-solid flex items-center justify-center gap-3 py-3.5 px-6 rounded-lg text-sm font-bold tracking-widest uppercase transition-all hover:scale-[1.02] active:scale-[0.98]" style="width:100%; font-family:'Share Tech Mono', monospace;">
+                                        Initialize Transmission
+                                        <i data-lucide="send" style="width:16px;height:16px;"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
 
-                <!-- Coding & Web -->
-                <div class="neon-card rounded-xl p-7 reveal bracket-card">
-                    <div class="w-11 h-11 rounded flex items-center justify-center mb-5" style="background: rgba(0,255,65,0.08);">
-                        <i data-lucide="code-2" class="w-5 h-5 text-primary"></i>
-                    </div>
-                    <h3 class="font-display font-bold text-xl mb-5 tracking-wide">Coding & Web</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <div class="flex justify-between mb-1.5">
-                                <span class="mono text-sm text-gray-400">PHP</span>
-                                <span class="mono text-sm text-primary">90%</span>
-                            </div>
-                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
-                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="90%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1.5">
-                                <span class="mono text-sm text-gray-400">JavaScript</span>
-                                <span class="mono text-sm text-primary">85%</span>
-                            </div>
-                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
-                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="85%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1.5">
-                                <span class="mono text-sm text-gray-400">MySQL</span>
-                                <span class="mono text-sm text-primary">88%</span>
-                            </div>
-                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
-                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="88%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1.5">
-                                <span class="mono text-sm text-gray-400">HTML / CSS</span>
-                                <span class="mono text-sm text-primary">92%</span>
-                            </div>
-                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
-                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="92%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Design & Tools -->
-                <div class="neon-card rounded-xl p-7 reveal bracket-card">
-                    <div class="w-11 h-11 rounded flex items-center justify-center mb-5" style="background: rgba(0,255,65,0.08);">
-                        <i data-lucide="palette" class="w-5 h-5 text-primary"></i>
-                    </div>
-                    <h3 class="font-display font-bold text-xl mb-5 tracking-wide">Design & Tools</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <div class="flex justify-between mb-1.5">
-                                <span class="mono text-sm text-gray-400">Graphic Design</span>
-                                <span class="mono text-sm text-primary">90%</span>
-                            </div>
-                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
-                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="90%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1.5">
-                                <span class="mono text-sm text-gray-400">UI/UX Design</span>
-                                <span class="mono text-sm text-primary">85%</span>
-                            </div>
-                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
-                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="85%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1.5">
-                                <span class="mono text-sm text-gray-400">MS Office</span>
-                                <span class="mono text-sm text-primary">95%</span>
-                            </div>
-                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
-                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="95%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1.5">
-                                <span class="mono text-sm text-gray-400">Presentations</span>
-                                <span class="mono text-sm text-primary">88%</span>
-                            </div>
-                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
-                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="88%"></div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
-                <!-- People Skills -->
-                <div class="neon-card rounded-xl p-7 reveal bracket-card">
-                    <div class="w-11 h-11 rounded flex items-center justify-center mb-5" style="background: rgba(0,255,65,0.08);">
-                        <i data-lucide="users" class="w-5 h-5 text-primary"></i>
-                    </div>
-                    <h3 class="font-display font-bold text-xl mb-5 tracking-wide">People Skills</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <div class="flex justify-between mb-1.5">
-                                <span class="mono text-sm text-gray-400">Time Management</span>
-                                <span class="mono text-sm text-primary">95%</span>
-                            </div>
-                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
-                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="95%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1.5">
-                                <span class="mono text-sm text-gray-400">Troubleshooting</span>
-                                <span class="mono text-sm text-primary">90%</span>
-                            </div>
-                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
-                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="90%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1.5">
-                                <span class="mono text-sm text-gray-400">English / Tagalog</span>
-                                <span class="mono text-sm text-primary">92%</span>
-                            </div>
-                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
-                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="92%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-1.5">
-                                <span class="mono text-sm text-gray-400">Client Relations</span>
-                                <span class="mono text-sm text-primary">87%</span>
-                            </div>
-                            <div class="h-1.5 rounded-full overflow-hidden" style="background: rgba(255,255,255,0.06);">
-                                <div class="skill-bar h-full rounded-full" style="width: 0%; background: linear-gradient(90deg, #00FF41, #00cc33); box-shadow: 0 0 10px rgba(0,255,65,0.4);" data-width="87%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div><!-- /content-panel -->
+        </div><!-- /main-area -->
 
-            </div>
-
-            <!-- Languages -->
-            <div class="mt-10 neon-card rounded-xl p-7 reveal">
-                <h3 class="font-display font-bold text-xl mb-6 flex items-center gap-3 tracking-wide">
-                    <i data-lucide="languages" class="w-5 h-5 text-primary"></i>
-                    Languages I Speak
-                </h3>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="flex items-center justify-between p-4 rounded border border-dark-border" style="background: rgba(255,255,255,0.02);">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl">🇺🇸</span>
-                            <div>
-                                <p class="font-bold tracking-wide">English</p>
-                                <p class="mono text-xs text-gray-500">Fluent — spoken & written</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-1.5">
-                            <div class="w-2.5 h-2.5 rounded-full bg-primary pulse-neon"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
-                            <div class="w-2.5 h-2.5 rounded-full" style="background: rgba(0,255,65,0.2);"></div>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between p-4 rounded border border-dark-border" style="background: rgba(255,255,255,0.02);">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl">🇵🇭</span>
-                            <div>
-                                <p class="font-bold tracking-wide">Tagalog</p>
-                                <p class="mono text-xs text-gray-500">Native / Fluent</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-1.5">
-                            <div class="w-2.5 h-2.5 rounded-full bg-primary pulse-neon"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ── Certifications Section ── -->
-    <section id="certifications" class="py-28 relative" style="background: #050505;">
-        <div class="neon-divider mb-0"></div>
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-28">
-
-            <div class="text-center mb-16 reveal">
-                <p class="section-label mb-3">// Always Learning</p>
-                <h2 class="font-display font-bold text-4xl md:text-5xl mb-4 tracking-tight">Certifications</h2>
-                <p class="text-gray-500 max-w-xl mx-auto text-base">
-                    Courses and workshops that leveled up my skills.
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="neon-card cert-card rounded-xl p-7 reveal bracket-card glass-hover transition-all duration-300">
-                    <div class="w-11 h-11 rounded flex items-center justify-center mb-5" style="background: rgba(0,255,65,0.08);">
-                        <i data-lucide="award" class="w-5 h-5 text-primary"></i>
-                    </div>
-                    <h3 class="font-display font-bold text-lg mb-1 tracking-wide">Advanced Web Development</h3>
-                    <p class="mono text-xs text-primary mb-3">Certificate of Completion</p>
-                    <p class="text-gray-500 text-sm">Hands-on training in modern web tools and best practices.</p>
-                </div>
-
-                <div class="neon-card cert-card rounded-xl p-7 reveal bracket-card glass-hover transition-all duration-300">
-                    <div class="w-11 h-11 rounded flex items-center justify-center mb-5" style="background: rgba(0,255,65,0.08);">
-                        <i data-lucide="pen-tool" class="w-5 h-5 text-primary"></i>
-                    </div>
-                    <h3 class="font-display font-bold text-lg mb-1 tracking-wide">Graphic Design & Branding</h3>
-                    <p class="mono text-xs text-primary mb-3">Certificate of Participation</p>
-                    <p class="text-gray-500 text-sm">Workshop on making visual brands that clients actually want.</p>
-                </div>
-
-                <div class="neon-card cert-card rounded-xl p-7 reveal bracket-card glass-hover transition-all duration-300">
-                    <div class="w-11 h-11 rounded flex items-center justify-center mb-5" style="background: rgba(0,255,65,0.08);">
-                        <i data-lucide="smartphone" class="w-5 h-5 text-primary"></i>
-                    </div>
-                    <h3 class="font-display font-bold text-lg mb-1 tracking-wide">App Development Trends</h3>
-                    <p class="mono text-xs text-primary mb-3">Seminar Attendee</p>
-                    <p class="text-gray-500 text-sm">Learned the latest tools and ideas shaping mobile app development.</p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ── Contact Section ── -->
-    <section id="contact" class="py-28 relative">
-        <div class="neon-divider mb-0"></div>
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-28">
-            <div class="grid lg:grid-cols-2 gap-16">
-
-                <!-- Contact Info -->
-                <div class="reveal">
-                    <p class="section-label mb-3">// Get In Touch</p>
-                    <h2 class="font-display font-bold text-4xl md:text-5xl mb-5 tracking-tight leading-tight">
-                        Let's Build Something<br><span class="gradient-text">Together</span>
-                    </h2>
-                    <p class="text-gray-400 text-base mb-8 leading-relaxed">
-                        Available for freelance work right now. Need a website, app, or design? 
-                        Let's talk — I deliver quality work on time, every time.
-                    </p>
-
-                    <div class="space-y-5 mb-8">
-                        <div class="flex items-center gap-4">
-                            <div class="w-11 h-11 rounded flex items-center justify-center border border-primary/20" style="background: rgba(0,255,65,0.06);">
-                                <i data-lucide="mail" class="w-4 h-4 text-primary"></i>
-                            </div>
-                            <div>
-                                <p class="mono text-xs text-gray-500 mb-0.5">EMAIL</p>
-                                <a href="militantezeandrei@gmail.com" class="font-semibold hover:text-primary transition-colors text-sm">militantezeandrei@gmail.com</a>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <div class="w-11 h-11 rounded flex items-center justify-center border border-primary/20" style="background: rgba(0,255,65,0.06);">
-                                <i data-lucide="phone" class="w-4 h-4 text-primary"></i>
-                            </div>
-                            <div>
-                                <p class="mono text-xs text-gray-500 mb-0.5">PHONE</p>
-                                <a href="tel:09760590774" class="font-semibold hover:text-primary transition-colors text-sm">0976 059 0774</a>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <div class="w-11 h-11 rounded flex items-center justify-center border border-primary/20" style="background: rgba(0,255,65,0.06);">
-                                <i data-lucide="map-pin" class="w-4 h-4 text-primary"></i>
-                            </div>
-                            <div>
-                                <p class="mono text-xs text-gray-500 mb-0.5">LOCATION</p>
-                                <p class="font-semibold text-sm">Marilao, Bulacan, Philippines</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Social Links -->
-                    <div class="flex gap-3">
-                        <a href="https://github.com/militantezeandrei-ops" target="_blank"
-                            class="w-11 h-11 rounded flex items-center justify-center border border-dark-border hover:border-primary hover:text-primary transition-all duration-300 text-gray-400"
-                            style="background: rgba(255,255,255,0.03);">
-                            <i data-lucide="github" class="w-4 h-4"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/militante-zeandrei-d-231262323/" target="_blank"
-                            class="w-11 h-11 rounded flex items-center justify-center border border-dark-border hover:border-primary hover:text-primary transition-all duration-300 text-gray-400"
-                            style="background: rgba(255,255,255,0.03);">
-                            <i data-lucide="linkedin" class="w-4 h-4"></i>
-                        </a>
-                        <a href="https://www.facebook.com/Zeandreipogi123" target="_blank"
-                            class="w-11 h-11 rounded flex items-center justify-center border border-dark-border hover:border-primary hover:text-primary transition-all duration-300 text-gray-400"
-                            style="background: rgba(255,255,255,0.03);">
-                            <i data-lucide="facebook" class="w-4 h-4"></i>
-                        </a>
-                        <a href="https://x.com/ZDM2002" target="_blank"
-                            class="w-11 h-11 rounded flex items-center justify-center border border-dark-border hover:border-primary hover:text-primary transition-all duration-300 text-gray-400"
-                            style="background: rgba(255,255,255,0.03);">
-                            <i data-lucide="twitter" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Contact Form -->
-                <div class="reveal">
-                    <form id="contact-form" action="https://formspree.io/f/xykdojdv" method="POST"
-                        class="neon-card rounded-xl p-7 space-y-5">
-                        <div class="grid md:grid-cols-2 gap-5">
-                            <div>
-                                <label class="block mono text-xs text-gray-500 mb-2 tracking-widest">NAME</label>
-                                <input type="text" name="name"
-                                    class="w-full px-4 py-3 rounded border border-dark-border text-white text-sm placeholder-gray-600 transition-all"
-                                    style="background: rgba(255,255,255,0.03);"
-                                    placeholder="Your Name" required>
-                            </div>
-                            <div>
-                                <label class="block mono text-xs text-gray-500 mb-2 tracking-widest">EMAIL</label>
-                                <input type="email" name="email"
-                                    class="w-full px-4 py-3 rounded border border-dark-border text-white text-sm placeholder-gray-600 transition-all"
-                                    style="background: rgba(255,255,255,0.03);"
-                                    placeholder="your@email.com" required>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block mono text-xs text-gray-500 mb-2 tracking-widest">PROJECT TYPE</label>
-                            <select name="service"
-                                class="w-full px-4 py-3 rounded border border-dark-border text-white text-sm transition-all"
-                                style="background: #0a0a0a;">
-                                <option value="">Pick a type...</option>
-                                <option value="web">Website</option>
-                                <option value="app">Mobile App</option>
-                                <option value="design">Graphic Design</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block mono text-xs text-gray-500 mb-2 tracking-widest">MESSAGE</label>
-                            <textarea name="message" rows="5"
-                                class="w-full px-4 py-3 rounded border border-dark-border text-white text-sm placeholder-gray-600 transition-all resize-none"
-                                style="background: rgba(255,255,255,0.03);"
-                                placeholder="Tell me what you need built..." required></textarea>
-                        </div>
-                        <button type="submit"
-                            class="btn-solid w-full py-3.5 rounded text-sm flex items-center justify-center gap-2 group">
-                            Send Message
-                            <i data-lucide="send" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
-                        </button>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ── Footer ── -->
-    <footer class="py-7 border-t" style="border-color: #1a1a1a; background: #050505;">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-3">
-                <span class="logo-text text-lg text-white">ZDM<span class="text-primary">_</span></span>
-                <span class="text-gray-600 text-sm">© 2024 Zeandrei D. Militante</span>
-            </div>
-            <div class="flex gap-6 text-sm text-gray-600">
-                <span class="flex items-center gap-2 mono text-xs">
-                    <i data-lucide="code" class="w-3 h-3 text-primary"></i>
+        <!-- ── Status Bar ── -->
+        <div class="status-bar">
+            <div style="display:flex;align-items:center;gap:12px;">
+                <span style="font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:#333;display:flex;align-items:center;gap:5px;">
+                    <i data-lucide="code" style="width:10px;height:10px;color:#2a2a2a;"></i>
                     Built with passion in Bulacan
                 </span>
-                <span class="flex items-center gap-2 mono text-xs">
-                    <i data-lucide="zap" class="w-3 h-3 text-primary"></i>
+                <span style="font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:#333;display:flex;align-items:center;gap:5px;">
+                    <i data-lucide="zap" style="width:10px;height:10px;color:#2a2a2a;"></i>
                     Always improving
                 </span>
             </div>
-        </div>
-    </footer>
+            <div style="display:flex;align-items:center;gap:10px;">
+                <span style="font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:#2a2a2a;" id="active-panel-label">home</span>
+                <span style="font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:#333;">© 2024 Zeandrei D. Militante</span>
+            </div>
+        </div><!-- /status-bar -->
 
-    <script src="js/script.js"></script>
+        <!-- ── Mobile Bottom Nav ── -->
+        <nav class="mobile-bottom-nav">
+            <a class="nav-item-mobile active" data-panel="home" onclick="switchPanel('home', this)">
+                <i data-lucide="home"></i>
+                <span>Home</span>
+            </a>
+            <a class="nav-item-mobile" data-panel="about" onclick="switchPanel('about', this)">
+                <i data-lucide="user"></i>
+                <span>About</span>
+            </a>
+            <a class="nav-item-mobile" data-panel="projects" onclick="switchPanel('projects', this)">
+                <i data-lucide="folder-code"></i>
+                <span>Projects</span>
+            </a>
+            <a class="nav-item-mobile" data-panel="skills" onclick="switchPanel('skills', this)">
+                <i data-lucide="cpu"></i>
+                <span>Skills</span>
+            </a>
+            <a class="nav-item-mobile" data-panel="certs" onclick="switchPanel('certs', this)">
+                <i data-lucide="award"></i>
+                <span>Certs</span>
+            </a>
+            <a class="nav-item-mobile" data-panel="contact" onclick="switchPanel('contact', this)">
+                <i data-lucide="send"></i>
+                <span>Contact</span>
+            </a>
+        </nav>
+
+    </div><!-- /os-shell -->
+
+    <script>
+        // ── Lucide icons
+        lucide.createIcons();
+
+        // ── Clock
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').textContent =
+                now.toLocaleTimeString('en-PH', { hour: '2-digit', minute: '2-digit', hour12: false });
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // ── Cursor glow
+        const glow = document.getElementById('cursor-glow');
+        document.addEventListener('mousemove', e => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
+
+        // ── Typewriter
+        const typeTarget = document.getElementById('typewriter');
+        const sideType = document.getElementById('sidebar-type');
+        const words = ['Developer', 'Designer', 'Builder', 'Freelancer'];
+        let wi = 0, ci = 0, del = false;
+
+        function type() {
+            const cur = words[wi];
+            if (!del) {
+                const t = cur.substring(0, ci + 1);
+                typeTarget.textContent = t;
+                sideType.textContent = t;
+                ci++;
+                if (ci === cur.length) { del = true; setTimeout(type, 1800); return; }
+            } else {
+                const t = cur.substring(0, ci - 1);
+                typeTarget.textContent = t;
+                sideType.textContent = t;
+                ci--;
+                if (ci === 0) { del = false; wi = (wi + 1) % words.length; }
+            }
+            setTimeout(type, del ? 55 : 95);
+        }
+        type();
+
+        // ── Panel switching
+        function switchPanel(id, navEl) {
+            // Hide all panels
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.querySelectorAll('.nav-item-mobile').forEach(n => n.classList.remove('active'));
+
+            // Show target
+            document.getElementById('panel-' + id).classList.add('active');
+            document.getElementById('active-panel-label').textContent = id;
+
+            // Activate nav
+            if (navEl) {
+                navEl.classList.add('active');
+            } else {
+                const desktopMatch = document.querySelector('.sidebar [data-panel="' + id + '"]');
+                const mobileMatch = document.querySelector('.mobile-bottom-nav [data-panel="' + id + '"]');
+                if (desktopMatch) desktopMatch.classList.add('active');
+                if (mobileMatch) mobileMatch.classList.add('active');
+            }
+
+            // Sync other nav items (mobile vs desktop)
+            document.querySelectorAll('[data-panel="' + id + '"]').forEach(el => el.classList.add('active'));
+
+            // Animate skill bars when skills panel opens
+            if (id === 'skills') {
+                // No bars — description-only layout
+            } else {
+                // nothing to reset
+            }
+
+            // Close mobile sidebar
+            closeSidebar();
+        }
+
+        // ── Mobile sidebar
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            sidebar.classList.add('open');
+            overlay.classList.add('open');
+        });
+
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+        }
+
+        // ── Contact form
+        const form = document.getElementById('contact-form');
+        form.addEventListener('submit', async e => {
+            e.preventDefault();
+            const btn = form.querySelector('button[type="submit"]');
+            const orig = btn.innerHTML;
+            btn.innerHTML = 'Sending...';
+            btn.disabled = true;
+
+            try {
+                const res = await fetch('https://formspree.io/f/xykdojdv', {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (res.ok) {
+                    btn.innerHTML = '✓ Message Sent!';
+                    btn.style.background = 'var(--neon)';
+                    btn.style.color = '#000';
+                    form.reset();
+                    setTimeout(() => {
+                        btn.innerHTML = orig;
+                        btn.style.background = '';
+                        btn.style.color = '';
+                        lucide.createIcons();
+                    }, 4000);
+                } else {
+                    form.submit();
+                }
+            } catch { form.submit(); }
+            finally { btn.disabled = false; }
+        });
+    </script>
 </body>
 </html>
