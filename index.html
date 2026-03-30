@@ -339,7 +339,7 @@
         }
 
         .project-modal {
-            width: min(560px, 100%);
+            width: min(780px, 100%);
             background: #0b0b0b;
             border: 1px solid rgba(0, 255, 65, 0.25);
             border-radius: 12px;
@@ -392,6 +392,152 @@
             font-size: 0.9rem;
             line-height: 1.65;
             color: #a6a6a6;
+            margin-bottom: 12px;
+        }
+
+        .project-flow-wrap {
+            margin-top: 8px;
+        }
+
+        .project-flow-viewport {
+            border: 1px solid #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #080808;
+        }
+
+        .project-flow-track {
+            display: flex;
+            transition: transform 0.35s ease;
+            will-change: transform;
+        }
+
+        .project-flow-slide {
+            min-width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            padding: 14px;
+        }
+
+        .project-flow-media {
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #151515;
+            background: #050505;
+            min-height: 170px;
+        }
+
+        .project-flow-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .project-flow-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .project-flow-tag {
+            width: fit-content;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--neon);
+            border: 1px solid rgba(0, 255, 65, 0.35);
+            padding: 2px 8px;
+            border-radius: 999px;
+        }
+
+        .project-flow-title {
+            font-family: 'Rajdhani', sans-serif;
+            color: #fff;
+            font-size: 1.02rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .project-flow-text {
+            font-size: 0.82rem;
+            line-height: 1.65;
+            color: #9d9d9d;
+        }
+
+        .project-flow-foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .project-flow-nav-btn {
+            width: 34px;
+            height: 34px;
+            border: 1px solid #1f1f1f;
+            border-radius: 8px;
+            background: #101010;
+            color: #8a8a8a;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .project-flow-nav-btn:hover:not(:disabled) {
+            color: var(--neon);
+            border-color: rgba(0, 255, 65, 0.35);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.14);
+        }
+
+        .project-flow-nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .project-flow-status {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            color: #666;
+            min-width: 72px;
+            text-align: center;
+        }
+
+        .project-flow-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            flex: 1;
+        }
+
+        .project-flow-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            border: 1px solid #2c2c2c;
+            background: #131313;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .project-flow-dot.active {
+            background: var(--neon);
+            border-color: rgba(0, 255, 65, 0.8);
+            box-shadow: 0 0 8px rgba(0, 255, 65, 0.25);
+        }
+
+        .project-flow-empty {
+            border: 1px dashed #1f1f1f;
+            border-radius: 8px;
+            color: #666;
+            font-size: 0.78rem;
+            padding: 12px;
+            text-align: center;
         }
 
         /* ── Mobile sidebar toggle ── */
@@ -420,6 +566,18 @@
             .top-bar {
                 height: 52px;
                 min-height: 52px;
+            }
+
+            .project-modal {
+                width: min(98vw, 100%);
+            }
+
+            .project-flow-slide {
+                grid-template-columns: 1fr;
+            }
+
+            .project-flow-media {
+                min-height: 155px;
             }
         }
 
@@ -994,7 +1152,7 @@
                             data-project-description="Tracks waste-to-water refill machines in real time. Users earn points for dropping off waste and redeem points to refill drinking water."
                         >
                             <div class="project-img-wrap" style="aspect-ratio: 16/9; flex-shrink:0; overflow: hidden; position: relative;">
-                                <img src="assets/projects/ecodefill_admin.png" alt="EcoDefill" style="width:100%; height:100%; object-fit:cover; opacity:0.55;">
+                                <img src="assets/projects/ecodefilldashboard.png" alt="EcoDefill" style="width:100%; height:100%; object-fit:cover; opacity:0.55;">
                                 <div class="project-overlay">
                                     <div>
                                         <div style="display:flex;gap:5px;margin-bottom:5px;">
@@ -1376,6 +1534,21 @@
                 </div>
                 <div class="project-modal-body">
                     <p id="project-modal-description" class="project-modal-desc"></p>
+                    <div id="project-flow-wrap" class="project-flow-wrap">
+                        <div class="project-flow-viewport">
+                            <div id="project-flow-track" class="project-flow-track"></div>
+                        </div>
+                        <div class="project-flow-foot">
+                            <button id="project-flow-prev" class="project-flow-nav-btn" type="button" aria-label="Previous step">
+                                <i data-lucide="chevron-left" style="width:14px;height:14px;"></i>
+                            </button>
+                            <p id="project-flow-status" class="project-flow-status">Step 1/1</p>
+                            <div id="project-flow-dots" class="project-flow-dots"></div>
+                            <button id="project-flow-next" class="project-flow-nav-btn" type="button" aria-label="Next step">
+                                <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1466,6 +1639,151 @@
         const projectModalOverlay = document.getElementById('project-modal-overlay');
         const projectModalTitle = document.getElementById('project-modal-title');
         const projectModalDescription = document.getElementById('project-modal-description');
+        const projectFlowWrap = document.getElementById('project-flow-wrap');
+        const projectFlowTrack = document.getElementById('project-flow-track');
+        const projectFlowDots = document.getElementById('project-flow-dots');
+        const projectFlowStatus = document.getElementById('project-flow-status');
+        const projectFlowPrev = document.getElementById('project-flow-prev');
+        const projectFlowNext = document.getElementById('project-flow-next');
+
+        const projectFlowGuides = {
+            Edebt: [
+                {
+                    tag: 'Mobile Input',
+                    title: 'Step 1: Scan handwritten debt slip in mobile app',
+                    text: 'The collector captures the handwritten order or debt note directly in the app so no one has to encode entries manually.',
+                    image: 'assets/projects/edebt_handwritten_slip.png'
+                },
+                {
+                    tag: 'Text Extraction',
+                    title: 'Step 2: Extract customer details and debt values',
+                    text: 'The system reads handwritten text, then maps the name, total amount, items, and due date into editable fields before submit.',
+                    image: 'assets/projects/edebt_admin.png'
+                },
+                {
+                    tag: 'Organize + Save',
+                    title: 'Step 3: Validate and save organized debt records',
+                    text: 'After review, the app stores each debt in a structured ledger grouped by customer and payment status for quick retrieval.',
+                    image: 'assets/projects/edebt_admin1.png'
+                },
+                {
+                    tag: 'Admin Monitoring',
+                    title: 'Step 4: Admin monitors user activity and repayments',
+                    text: 'Web admins track who created or updated records, monitor repayment progress, and identify overdue accounts in one dashboard.',
+                    image: 'assets/projects/edebt_admin1.png'
+                }
+            ],
+            EcoDefill: [
+                {
+                    tag: 'Mobile UI',
+                    title: 'Step 1: Use the mobile interface',
+                    text: 'This mobile screen shows the core user journey for scanning, points, and refill interactions in one flow.',
+                    image: 'assets/projects/EcoDefillMobile.jpg'
+                },
+                {
+                    tag: 'Dashboard',
+                    title: 'Step 2: View machine status and refill metrics',
+                    text: 'Admins can see station health, refill activity, and daily usage from the EcoDefill dashboard.',
+                    image: 'assets/projects/ecodefilldashboard.png'
+                },
+                {
+                    tag: 'Users',
+                    title: 'Step 3: Manage users and reward points',
+                    text: 'Track user accounts, monitor point balances, and validate reward eligibility in one place.',
+                    image: 'assets/projects/ecodefillusers.png'
+                },
+                {
+                    tag: 'Transactions',
+                    title: 'Step 4: Review refill and redemption logs',
+                    text: 'Every refill and point redemption is recorded so admins can audit activity and resolve disputes quickly.',
+                    image: 'assets/projects/ecodefillTransactionLog.png'
+                },
+                {
+                    tag: 'Reports',
+                    title: 'Step 5: Analyze recycling impact and trends',
+                    text: 'Generate performance reports to monitor waste converted, user engagement, and machine efficiency.',
+                    image: 'assets/projects/ecodefillReports.png'
+                }
+            ],
+            Marmet: [
+                {
+                    tag: 'Quick Guide',
+                    title: 'Order, stock, and sales workflow',
+                    text: 'Customers order live, staff fulfill transactions, and admins manage inventory plus sales insights from the web dashboard.',
+                    image: 'assets/projects/marmet_showcase.png'
+                }
+            ]
+        };
+
+        let projectSlides = [];
+        let projectSlideIndex = 0;
+
+        function escapeHtml(value) {
+            return String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function getProjectSlides(title, description) {
+            const guide = projectFlowGuides[title];
+            if (guide && guide.length) return guide;
+            return [{
+                tag: 'Overview',
+                title: 'Project workflow snapshot',
+                text: description || 'No description available.',
+                image: ''
+            }];
+        }
+
+        function renderProjectSlides(title, description) {
+            projectSlides = getProjectSlides(title, description);
+            projectSlideIndex = 0;
+
+            projectFlowTrack.innerHTML = projectSlides.map(slide => `
+                <article class="project-flow-slide">
+                    ${slide.image ? `
+                        <div class="project-flow-media">
+                            <img src="${escapeHtml(slide.image)}" alt="${escapeHtml(slide.title)}">
+                        </div>
+                    ` : '<div class="project-flow-empty">No preview image available.</div>'}
+                    <div class="project-flow-content">
+                        <span class="project-flow-tag">${escapeHtml(slide.tag || 'Step')}</span>
+                        <p class="project-flow-title">${escapeHtml(slide.title || 'Step')}</p>
+                        <p class="project-flow-text">${escapeHtml(slide.text || '')}</p>
+                    </div>
+                </article>
+            `).join('');
+
+            projectFlowDots.innerHTML = projectSlides.map((_, index) => `
+                <button class="project-flow-dot" type="button" data-slide-index="${index}" aria-label="Go to step ${index + 1}"></button>
+            `).join('');
+
+            updateProjectSlideUI();
+            projectFlowWrap.style.display = 'block';
+        }
+
+        function updateProjectSlideUI() {
+            const count = projectSlides.length || 1;
+            projectFlowTrack.style.transform = `translateX(-${projectSlideIndex * 100}%)`;
+            projectFlowStatus.textContent = `Step ${projectSlideIndex + 1}/${count}`;
+
+            projectFlowDots.querySelectorAll('.project-flow-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === projectSlideIndex);
+            });
+
+            projectFlowPrev.disabled = projectSlideIndex === 0;
+            projectFlowNext.disabled = projectSlideIndex === count - 1;
+        }
+
+        function goToProjectSlide(index) {
+            if (!projectSlides.length) return;
+            const max = projectSlides.length - 1;
+            projectSlideIndex = Math.min(Math.max(index, 0), max);
+            updateProjectSlideUI();
+        }
 
         function openProjectModal(cardEl) {
             const title = cardEl.getAttribute('data-project-title') || 'Project';
@@ -1473,6 +1791,7 @@
 
             projectModalTitle.textContent = title;
             projectModalDescription.textContent = description;
+            renderProjectSlides(title, description);
             projectModalOverlay.classList.add('open');
             document.body.style.overflow = 'hidden';
             lucide.createIcons();
@@ -1489,6 +1808,14 @@
                 openProjectModal(cardEl);
             }
         }
+
+        projectFlowPrev.addEventListener('click', () => goToProjectSlide(projectSlideIndex - 1));
+        projectFlowNext.addEventListener('click', () => goToProjectSlide(projectSlideIndex + 1));
+        projectFlowDots.addEventListener('click', event => {
+            const dot = event.target.closest('[data-slide-index]');
+            if (!dot) return;
+            goToProjectSlide(Number(dot.getAttribute('data-slide-index')));
+        });
 
         // ── Mobile sidebar
         const sidebar = document.getElementById('sidebar');
@@ -1507,6 +1834,12 @@
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape' && projectModalOverlay.classList.contains('open')) {
                 closeProjectModal();
+            }
+            if (e.key === 'ArrowLeft' && projectModalOverlay.classList.contains('open')) {
+                goToProjectSlide(projectSlideIndex - 1);
+            }
+            if (e.key === 'ArrowRight' && projectModalOverlay.classList.contains('open')) {
+                goToProjectSlide(projectSlideIndex + 1);
             }
         });
 
