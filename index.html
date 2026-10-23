@@ -1,0 +1,2026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZDM_ | Zeandrei D. Militante</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00FF41',
+                        'dark': '#0a0a0a',
+                        'dark-card': '#0f0f0f',
+                        'dark-border': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        display: ['Rajdhani', 'sans-serif'],
+                        mono: ['Share Tech Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+        :root {
+            --neon: #00FF41;
+            --neon-dim: #00cc33;
+            --neon-glow: rgba(0, 255, 65, 0.4);
+            --neon-soft: rgba(0, 255, 65, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+            color: #e0e0e0;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        ::selection { background: var(--neon); color: #000; }
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--neon); border-radius: 2px; }
+
+        /* ── Layout Shell ── */
+        .os-shell {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* ── Top Bar ── */
+        .top-bar {
+            height: 52px;
+            min-height: 52px;
+            background: #050505;
+            border-bottom: 1px solid #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 22px;
+            z-index: 100;
+            flex-shrink: 0;
+        }
+
+        /* ── Main Area ── */
+        .main-area {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            width: 280px;
+            min-width: 280px;
+            background: #050505;
+            border-right: 1px solid #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        /* ── Content Panel ── */
+        .content-panel {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            background: #000;
+        }
+
+        /* ── Grid BG ── */
+        .grid-bg {
+            background-image:
+                linear-gradient(rgba(0,255,65,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,65,0.025) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        /* ── Scanlines ── */
+        .scanlines::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,65,0.012) 2px, rgba(0,255,65,0.012) 4px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ── Content Panel & Slider ── */
+        .content-panel {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            background: #000;
+        }
+
+        .panels-slider {
+            display: flex;
+            height: 100%;
+            width: 600%;
+            transform: translateX(0%);
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform;
+        }
+
+        /* ── Panel ── */
+        .panel {
+            width: 16.666667%;
+            height: 100%;
+            flex-shrink: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 24px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            opacity: 0.25;
+            transform: scale(0.985);
+            transition: opacity 0.45s ease, transform 0.45s ease;
+        }
+
+        .panel.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ── Nav Items ── */
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 20px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.88rem;
+            letter-spacing: 0.08em;
+            color: #777;
+            cursor: pointer;
+            transition: all 0.25s;
+            border-left: 2px solid transparent;
+            text-decoration: none;
+        }
+
+        .nav-item:hover { color: #fff; background: rgba(255,255,255,0.03); }
+
+        .nav-item.active {
+            color: #fff;
+            border-left-color: var(--neon);
+            background: rgba(0,255,65,0.06);
+            text-shadow: 0 0 8px rgba(0,255,65,0.4);
+        }
+
+        .nav-item i {
+            transition: transform 0.25s ease, filter 0.25s ease;
+        }
+
+        .nav-item:hover i {
+            transform: scale(1.15);
+            filter: drop-shadow(0 0 8px currentColor);
+        }
+
+        .nav-item.active i {
+            transform: scale(1.12);
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+
+        .nav-item-mobile i {
+            transition: transform 0.25s ease, filter 0.25s ease;
+        }
+
+        .nav-item-mobile:hover i,
+        .nav-item-mobile.active i {
+            transform: scale(1.18);
+            filter: drop-shadow(0 0 8px currentColor);
+        }
+
+        /* ── Neon Text ── */
+        .neon-text {
+            color: var(--neon);
+            text-shadow: 0 0 7px var(--neon), 0 0 20px var(--neon);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00FF41 0%, #00cc33 50%, #39ff14 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ── Cards ── */
+        .neon-card {
+            border: 1px solid #1a1a1a;
+            background: #0f0f0f;
+            transition: all 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neon-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .neon-card:hover::before { opacity: 1; }
+
+        .neon-card:hover {
+            border-color: rgba(0,255,65,0.35);
+            box-shadow: 0 0 18px rgba(0,255,65,0.07);
+            transform: translateY(-3px);
+        }
+
+        /* ── Tech Badge ── */
+        .tech-badge {
+            background: rgba(0,255,65,0.06);
+            border: 1px solid rgba(0,255,65,0.22);
+            color: var(--neon);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            transition: all 0.2s;
+            padding: 3px 10px;
+            border-radius: 3px;
+        }
+
+        .tech-badge:hover {
+            background: rgba(0,255,65,0.14);
+            box-shadow: 0 0 10px var(--neon-glow);
+        }
+
+        /* ── Buttons ── */
+        .btn-neon {
+            background: transparent;
+            color: var(--neon);
+            border: 1px solid var(--neon);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.25s;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--neon);
+            transform: translateX(-100%);
+            transition: transform 0.25s;
+            z-index: -1;
+        }
+
+        .btn-neon:hover::before { transform: translateX(0); }
+        .btn-neon:hover { color: #000; box-shadow: 0 0 18px var(--neon-glow); }
+
+        .btn-solid {
+            background: var(--neon);
+            color: #000;
+            border: 1px solid var(--neon);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.25s;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 0 12px rgba(0,255,65,0.3);
+        }
+
+        .btn-solid:hover {
+            background: #000;
+            color: var(--neon);
+            box-shadow: 0 0 22px var(--neon-glow);
+        }
+
+        /* ── Cert card ── */
+        .cert-card { border-left: 2px solid var(--neon); }
+
+        /* ── Section label ── */
+        .section-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--neon);
+            text-transform: uppercase;
+        }
+
+        /* ── Status dot ── */
+        @keyframes neon-blink {
+            0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--neon); }
+            50% { opacity: 0.4; box-shadow: none; }
+        }
+
+        .status-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--neon);
+            animation: neon-blink 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        /* ── Typewriter ── */
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .blink { animation: blink 1s step-end infinite; }
+
+        /* ── Cursor glow ── */
+        .cursor-glow {
+            width: 280px; height: 280px;
+            background: radial-gradient(circle, rgba(0,255,65,0.07) 0%, rgba(0,255,65,0.02) 40%, transparent 70%);
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+        }
+
+        /* ── Project image hover ── */
+        .project-img-wrap { position: relative; overflow: hidden; }
+        .project-img-wrap img { transition: transform 0.5s; }
+        .project-img-wrap:hover img { transform: scale(1.06); }
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: flex-end;
+            padding: 14px;
+        }
+        .project-img-wrap:hover .project-overlay { opacity: 1; }
+        .project-card {
+            cursor: pointer;
+        }
+
+        .project-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .project-modal-overlay.open {
+            display: flex;
+        }
+
+        .project-modal {
+            width: min(780px, 100%);
+            max-height: 88vh;
+            max-height: 88dvh;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            background: #0d0d0d;
+            border: 1px solid rgba(0, 255, 65, 0.35);
+            border-radius: 14px;
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.85), 0 0 30px rgba(0, 255, 65, 0.12);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-modal-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-bottom: 1px solid #1f1f1f;
+            background: #111;
+            flex-shrink: 0;
+            position: sticky;
+            top: 0;
+            z-index: 30;
+        }
+
+        .project-modal-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.03em;
+        }
+
+        .project-modal-close {
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
+            min-height: 38px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: #1a1a1a;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            touch-action: manipulation;
+            padding: 0;
+            z-index: 50;
+        }
+
+        .project-modal-close:hover,
+        .project-modal-close:active {
+            color: var(--neon);
+            border-color: var(--neon);
+            background: rgba(0, 255, 65, 0.15);
+            box-shadow: 0 0 12px rgba(0, 255, 65, 0.35);
+        }
+
+        .project-modal-body {
+            padding: 16px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .project-modal-desc {
+            font-size: 0.88rem;
+            line-height: 1.65;
+            color: #cbd5e1;
+            margin-bottom: 12px;
+        }
+
+        .project-flow-wrap {
+            margin-top: 8px;
+        }
+
+        .project-flow-viewport {
+            border: 1px solid #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #080808;
+        }
+
+        .project-flow-track {
+            display: flex;
+            transition: transform 0.35s ease;
+            will-change: transform;
+        }
+
+        .project-flow-slide {
+            min-width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            padding: 14px;
+        }
+
+        .project-flow-media {
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #222;
+            background: #050505;
+            height: 220px;
+            max-height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-flow-media img {
+            width: 100%;
+            height: 100%;
+            max-height: 220px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .project-flow-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .project-flow-tag {
+            width: fit-content;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--neon);
+            border: 1px solid rgba(0, 255, 65, 0.35);
+            padding: 2px 8px;
+            border-radius: 999px;
+        }
+
+        .project-flow-title {
+            font-family: 'Rajdhani', sans-serif;
+            color: #fff;
+            font-size: 1.02rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .project-flow-text {
+            font-size: 0.82rem;
+            line-height: 1.65;
+            color: #9d9d9d;
+        }
+
+        .project-flow-foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .project-flow-nav-btn {
+            width: 34px;
+            height: 34px;
+            border: 1px solid #1f1f1f;
+            border-radius: 8px;
+            background: #101010;
+            color: #8a8a8a;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .project-flow-nav-btn:hover:not(:disabled) {
+            color: var(--neon);
+            border-color: rgba(0, 255, 65, 0.35);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.14);
+        }
+
+        .project-flow-nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .project-flow-status {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.72rem;
+            color: #cbd5e1;
+            min-width: 72px;
+            text-align: center;
+        }
+
+        .project-flow-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            flex: 1;
+        }
+
+        .project-flow-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            border: 1px solid #2c2c2c;
+            background: #131313;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .project-flow-dot.active {
+            background: var(--neon);
+            border-color: rgba(0, 255, 65, 0.8);
+            box-shadow: 0 0 8px rgba(0, 255, 65, 0.25);
+        }
+
+        .project-flow-empty {
+            border: 1px dashed #1f1f1f;
+            border-radius: 8px;
+            color: #cbd5e1;
+            font-size: 0.78rem;
+            padding: 12px;
+            text-align: center;
+        }
+
+        /* ── Mobile sidebar toggle ── */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 200;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0; left: 0; bottom: 0;
+                z-index: 300;
+                transform: translateX(-100%);
+                transition: transform 0.25s;
+                width: 280px;
+            }
+
+            .sidebar.open { transform: translateX(0); }
+            .sidebar-overlay.open { display: block; }
+            .mobile-menu-btn { display: flex !important; }
+
+            .top-bar {
+                height: 52px;
+                min-height: 52px;
+            }
+
+            .project-modal {
+                width: min(98vw, 100%);
+            }
+
+            .project-flow-slide {
+                grid-template-columns: 1fr;
+            }
+
+            .project-flow-media {
+                min-height: 155px;
+            }
+        }
+
+        .mobile-menu-btn { display: none; }
+
+        /* ── Bottom status bar ── */
+        .status-bar {
+            height: 26px;
+            min-height: 26px;
+            background: #050505;
+            border-top: 1px solid #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 14px;
+            flex-shrink: 0;
+        }
+
+        /* ── Glass ── */
+        .glass {
+            background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid #1a1a1a;
+        }
+
+        /* ── Float anim ── */
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        /* ── Pulse neon ── */
+        @keyframes pulse-neon {
+            0%, 100% { box-shadow: 0 0 5px rgba(0,255,65,0.4); }
+            50% { box-shadow: 0 0 14px rgba(0,255,65,0.7), 0 0 28px rgba(0,255,65,0.2); }
+        }
+        .pulse-neon { animation: pulse-neon 2.5s ease-in-out infinite; }
+
+        /* ── Bracket corners ── */
+        .bracket::before, .bracket::after {
+            content: '';
+            position: absolute;
+            width: 10px; height: 10px;
+            border-color: var(--neon);
+            border-style: solid;
+            opacity: 0.5;
+        }
+        .bracket::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+        .bracket::after  { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+
+        /* ── Sidebar profile section ── */
+        .profile-img-ring {
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,255,65,0.3);
+            overflow: hidden;
+            box-shadow: 0 0 18px rgba(0,255,65,0.15);
+            flex-shrink: 0;
+        }
+
+        /* ── Divider ── */
+        .neon-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon), transparent);
+            opacity: 0.2;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--neon) !important;
+            box-shadow: 0 0 0 1px var(--neon), 0 0 10px rgba(0,255,65,0.2) !important;
+        }
+
+        /* ── Projects grid responsive ── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            align-content: start;
+        }
+
+        /* ── Skills grid responsive ── */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            align-content: start;
+        }
+
+        /* ── Certifications grid responsive ── */
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            flex-shrink: 0;
+        }
+
+        /* ── About grid responsive ── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        /* ── Contact grid responsive ── */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 18px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.25fr;
+            gap: 22px;
+            align-items: flex-start;
+        }
+
+        /* ── Form row ── */
+        .form-row-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (max-width: 900px) {
+            .projects-grid { grid-template-columns: 1fr 1fr; }
+            .skills-grid { grid-template-columns: 1fr 1fr; }
+            .certs-grid { grid-template-columns: 1fr 1fr; }
+            .about-grid { grid-template-columns: 1fr; overflow-y: auto; }
+            .contact-grid { grid-template-columns: 1fr; gap: 20px; }
+            .form-card-container { display: flex; justify-content: center; width: 100%; }
+        }
+
+        .mobile-bottom-nav { display: none; }
+        .nav-item-mobile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.65rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .nav-item-mobile i { width: 22px; height: 22px; }
+        .nav-item-mobile.active {
+            color: var(--neon);
+            text-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .mobile-bottom-nav {
+                display: flex;
+                position: relative;
+                height: 70px;
+                background: rgba(8, 8, 8, 0.95);
+                backdrop-filter: blur(12px);
+                border-top: 1px solid rgba(0, 255, 65, 0.15);
+                z-index: 1000;
+                justify-content: space-around;
+                align-items: center;
+                padding: 0 10px;
+                box-shadow: 0 -5px 25px rgba(0, 255, 65, 0.05);
+                flex-shrink: 0;
+            }
+            .os-shell {
+                height: 100vh;
+                height: 100dvh;
+            }
+            .main-area { flex: 1; height: auto; min-height: 0; }
+            .status-bar { display: none; }
+            .top-bar { padding: 0 16px; position: sticky; top: 0; z-index: 500; }
+            .mobile-menu-btn { display: none !important; }
+            .panel { padding: 16px 14px 40px !important; }
+            .nav-item-mobile { flex: 1; min-width: 0; }
+        }
+
+        .contact-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+            background: rgba(15, 15, 15, 0.7);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .contact-input:focus {
+            outline: none;
+            border-color: var(--neon);
+            background: rgba(0, 255, 65, 0.05);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1), inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .contact-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            color: #cbd5e1;
+            letter-spacing: 0.15em;
+            display: block;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .form-group:focus-within .contact-label {
+            color: var(--neon);
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.4);
+        }
+        .nav-item-mobile span { font-size: 0.65rem; font-weight: 500; }
+        .nav-item-mobile i { margin-bottom: 2px; }
+
+        @media (max-width: 600px) {
+            .projects-grid { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .certs-grid { grid-template-columns: 1fr; }
+            .form-row-grid { grid-template-columns: 1fr; }
+            .panel { padding: 16px 12px 45px !important; }
+            .home-name { font-size: 2.8rem !important; }
+            .nav-item-mobile span { font-size: 0.6rem; }
+            .project-modal { width: 100%; max-height: 92dvh; margin: auto 0; }
+            .project-flow-media { height: 170px; max-height: 170px; min-height: 130px; }
+            .project-flow-media img { max-height: 170px; object-fit: contain; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cursor glow -->
+    <div id="cursor-glow" class="cursor-glow hidden md:block"></div>
+
+    <div class="os-shell">
+
+        <!-- ── Top Bar ── -->
+        <div class="top-bar">
+            <div class="flex items-center gap-4">
+                <!-- Mobile hamburger -->
+                <button id="mobile-menu-btn" class="mobile-menu-btn items-center justify-center w-8 h-8 text-slate-300 hover:text-primary transition-colors mr-1" style="color:#cbd5e1;">
+                    <i data-lucide="menu" style="width:18px;height:18px;"></i>
+                </button>
+                <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.2rem;letter-spacing:0.15em;color:#fff;">ZDM<span class="neon-text">_</span></span>
+                <span style="font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:#94a3b8;letter-spacing:0.12em;font-weight:600;">PORTFOLIO</span>
+            </div>
+            <div class="flex items-center gap-5">
+                <span class="flex items-center gap-2" style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#cbd5e1;font-weight:500;">
+                    <span class="status-dot"></span>
+                    OPEN FOR WORK
+                </span>
+                <span style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#94a3b8;" id="clock">--:--</span>
+            </div>
+        </div>
+
+        <!-- ── Main Area ── -->
+        <div class="main-area">
+
+            <!-- ── Sidebar ── -->
+            <div class="sidebar" id="sidebar">
+                <!-- Profile -->
+                <div style="padding:22px 20px 16px;border-bottom:1px solid #1a1a1a;">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="profile-img-ring" style="width:88px;height:88px;">
+                            <img src="assets/profile.jpg" alt="Zeandrei" style="width:100%;height:100%;object-fit:cover;">
+                        </div>
+                        <div>
+                            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem;color:#fff;line-height:1.1;">ZEANDREI</p>
+                            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem;color:#fff;line-height:1.1;">MILITANTE</p>
+                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:#cbd5e1;margin-top:5px;"><span id="sidebar-type" style="color:var(--neon);font-weight:600;">Developer</span></p>
+                        </div>
+                    </div>
+                    <div style="font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:#cbd5e1;line-height:1.9;">
+                        <div>📍 <span style="color:#ffffff;font-weight:600;">Marilao, Bulacan</span></div>
+                        <div>🎓 <span style="color:#ffffff;font-weight:600;">PDM — 4th Year IT</span></div>
+                        <div style="color:var(--neon);font-weight:600;">✓ Freelance: Since 2024</div>
+                    </div>
+                </div>
+
+                <!-- Nav -->
+                <div style="padding:12px 0;flex:1;">
+                    <p style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:0.15em;color:#94a3b8;padding:8px 20px 6px;text-transform:uppercase;font-weight:600;">Navigation</p>
+                    <a class="nav-item active" data-panel="home" onclick="switchPanel('home',this)">
+                        <i data-lucide="home" style="width:17px;height:17px;flex-shrink:0;color:#00FF41;"></i>
+                        Home
+                    </a>
+                    <a class="nav-item" data-panel="about" onclick="switchPanel('about',this)">
+                        <i data-lucide="user" style="width:17px;height:17px;flex-shrink:0;color:#38bdf8;"></i>
+                        About
+                    </a>
+                    <a class="nav-item" data-panel="projects" onclick="switchPanel('projects',this)">
+                        <i data-lucide="folder-code" style="width:17px;height:17px;flex-shrink:0;color:#f59e0b;"></i>
+                        Projects
+                    </a>
+                    <a class="nav-item" data-panel="skills" onclick="switchPanel('skills',this)">
+                        <i data-lucide="cpu" style="width:17px;height:17px;flex-shrink:0;color:#c084fc;"></i>
+                        Skills
+                    </a>
+                    <a class="nav-item" data-panel="certs" onclick="switchPanel('certs',this)">
+                        <i data-lucide="award" style="width:17px;height:17px;flex-shrink:0;color:#fb7185;"></i>
+                        Certifications
+                    </a>
+                    <a class="nav-item" data-panel="contact" onclick="switchPanel('contact',this)">
+                        <i data-lucide="send" style="width:17px;height:17px;flex-shrink:0;color:#2dd4bf;"></i>
+                        Contact
+                    </a>
+                </div>
+
+                <!-- Sidebar tech tags -->
+                <div style="padding:14px 20px;border-top:1px solid #1a1a1a;">
+                    <p style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:0.12em;color:#94a3b8;margin-bottom:10px;text-transform:uppercase;font-weight:600;">Stack</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:5px;">
+                        <span class="tech-badge">PHP</span>
+                        <span class="tech-badge">MySQL</span>
+                        <span class="tech-badge">JS</span>
+                        <span class="tech-badge">CSS</span>
+                        <span class="tech-badge">UI/UX</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile overlay -->
+            <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
+            <!-- ── Content Panel ── -->
+            <div class="content-panel grid-bg scanlines">
+
+                <!-- ── Sliding Track ── -->
+                <div class="panels-slider" id="panels-slider">
+
+                <!-- ════ HOME PANEL ════ -->
+                <div class="panel active" id="panel-home">
+                    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;max-width:680px;margin:0 auto;width:100%;">
+
+                        <!-- Status badge -->
+                        <div class="flex items-center gap-3 mb-6" style="background:rgba(0,255,65,0.05);border:1px solid rgba(0,255,65,0.2);padding:8px 18px;border-radius:4px;">
+                            <span class="status-dot"></span>
+                            <span style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.18em;color:#cbd5e1;font-weight:600;">OPEN FOR FREELANCE WORK</span>
+                        </div>
+
+                        <!-- Name -->
+                        <h1 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(2.8rem,7vw,5.5rem);line-height:0.95;letter-spacing:-0.01em;margin-bottom:16px;">
+                            ZEANDREI<br>
+                            <span class="gradient-text">MILITANTE</span>
+                        </h1>
+
+                        <!-- Typewriter -->
+                        <div class="flex items-center justify-center gap-2 mb-4">
+                            <span style="font-family:'Rajdhani',sans-serif;font-weight:600;color:#cbd5e1;font-size:1.05rem;letter-spacing:0.06em;text-transform:uppercase;">Specialization:</span>
+                            <span style="font-family:'Share Tech Mono',monospace;color:var(--neon);font-size:1.05rem;" id="typewriter">Developer</span>
+                            <span class="neon-text blink" style="font-family:'Share Tech Mono',monospace;font-size:1.05rem;">|</span>
+                        </div>
+
+                        <p style="color:#cbd5e1;font-size:0.95rem;max-width:440px;line-height:1.75;margin-bottom:28px;">
+                            IT student &amp; Freelance Web/App Developer from <span style="color:#ffffff;font-weight:600;">Marilao, Bulacan</span>.
+                            Clean code. Sharp designs. Delivered on time.
+                        </p>
+
+                        <!-- Tech badges -->
+                        <div class="flex flex-wrap justify-center gap-2 mb-8">
+                            <span class="tech-badge">PHP</span>
+                            <span class="tech-badge">MySQL</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">UI/UX</span>
+                            <span class="tech-badge">Graphic Design</span>
+                        </div>
+
+                        <!-- CTAs -->
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <a onclick="switchPanel('projects',null)" class="btn-solid flex items-center gap-2 px-6 py-2.5 rounded text-sm cursor-pointer">
+                                View Projects
+                                <i data-lucide="arrow-right" style="width:14px;height:14px;color:#000;"></i>
+                            </a>
+                            <a href="https://github.com/militantezeandrei-ops" target="_blank" class="btn-neon flex items-center gap-2 px-6 py-2.5 rounded text-sm">
+                                <i data-lucide="github" style="width:14px;height:14px;color:#e2e8f0;"></i>
+                                GitHub
+                            </a>
+                            <a onclick="switchPanel('contact',null)" class="btn-neon flex items-center gap-2 px-6 py-2.5 rounded text-sm cursor-pointer">
+                                <i data-lucide="send" style="width:14px;height:14px;color:#2dd4bf;"></i>
+                                Contact
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Stats bar at bottom of home -->
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #1a1a1a;flex-shrink:0;">
+                        <div style="padding:14px 18px;border-right:1px solid #1a1a1a;text-align:center;">
+                            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;color:var(--neon);line-height:1;">3+</p>
+                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;letter-spacing:0.1em;margin-top:3px;font-weight:600;">PROJECTS</p>
+                        </div>
+                        <div style="padding:14px 18px;border-right:1px solid #1a1a1a;text-align:center;">
+                            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;color:var(--neon);line-height:1;">2024</p>
+                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;letter-spacing:0.1em;margin-top:3px;font-weight:600;">FREELANCE SINCE</p>
+                        </div>
+                        <div style="padding:14px 18px;text-align:center;">
+                            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;color:var(--neon);line-height:1;">2027</p>
+                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;letter-spacing:0.1em;margin-top:3px;font-weight:600;">GRADUATING</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ════ ABOUT PANEL ════ -->
+                <div class="panel" id="panel-about">
+                    <p class="section-label mb-1">About Me</p>
+                    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.4rem);margin-bottom:18px;">Building Real Solutions with <span class="gradient-text">Precision</span></h2>
+
+                    <div class="about-grid">
+
+                        <!-- Left: Bio + photo -->
+                        <div style="display:flex;flex-direction:column;gap:14px;overflow-y:auto;min-height:0;">
+                            <!-- Photo + floating stats -->
+                            <div class="neon-card rounded-xl p-5" style="position:relative;flex-shrink:0;">
+                                <div style="display:flex;align-items:center;gap:14px;">
+                                    <div style="width:80px;height:80px;border-radius:50%;border:1px solid rgba(0,255,65,0.3);overflow:hidden;box-shadow:0 0 18px rgba(0,255,65,0.15);flex-shrink:0;">
+                                        <img src="assets/profile.jpg" alt="Zeandrei" style="width:100%;height:100%;object-fit:cover;">
+                                    </div>
+                                    <div>
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.2rem;color:#fff;">Zeandrei D. Militante</p>
+                                        <p style="font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:var(--neon);font-weight:600;">Web &amp; App Developer</p>
+                                        <p style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:#cbd5e1;margin-top:4px;font-weight:500;">📍 Marilao, Bulacan, PH</p>
+                                    </div>
+                                </div>
+                                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px;border-top:1px solid #1a1a1a;padding-top:14px;">
+                                    <div style="text-align:center;">
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.3rem;color:var(--neon);">3+</p>
+                                        <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;font-weight:600;">PROJECTS</p>
+                                    </div>
+                                    <div style="text-align:center;border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;">
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.3rem;color:var(--neon);">4th</p>
+                                        <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;font-weight:600;">YEAR IT</p>
+                                    </div>
+                                    <div style="text-align:center;">
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.3rem;color:var(--neon);">2+</p>
+                                        <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;font-weight:600;">LANG</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bio text -->
+                            <div class="neon-card rounded-xl p-5" style="flex-shrink:0;">
+                                <p class="section-label mb-3">Biography</p>
+                                <div style="color:#cbd5e1;font-size:0.88rem;line-height:1.75;display:flex;flex-direction:column;gap:10px;">
+                                    <p>I'm an IT student at <strong style="color:#ffffff;">Pambayang Dalubhasaan ng Marilao</strong> (graduating 2027), currently in my 4th year — studying web development, databases, and software design.</p>
+                                    <p>Since June 2024, I've been doing <strong style="color:#ffffff;">freelance web and app projects</strong> for real clients. I build both the back-end logic and the front-end — from scratch.</p>
+                                    <p>I always finish work <strong style="color:#ffffff;">before the deadline</strong> and communicate clearly in English and Tagalog.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: traits + languages -->
+                        <div style="display:flex;flex-direction:column;gap:14px;overflow-y:auto;min-height:0;">
+                            <!-- 2 trait cards -->
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex-shrink:0;">
+                                <div class="neon-card rounded-xl p-4 bracket" style="position:relative;">
+                                    <i data-lucide="clock" style="width:22px;height:22px;color:#f59e0b;margin-bottom:8px;"></i>
+                                    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;margin-bottom:4px;">Early Delivery</p>
+                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.5;">Done before deadline, every time.</p>
+                                </div>
+                                <div class="neon-card rounded-xl p-4 bracket" style="position:relative;">
+                                    <i data-lucide="layers" style="width:22px;height:22px;color:#c084fc;margin-bottom:8px;"></i>
+                                    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;margin-bottom:4px;">Design + Code</p>
+                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.5;">Good-looking and fully working.</p>
+                                </div>
+                                <div class="neon-card rounded-xl p-4 bracket" style="position:relative;">
+                                    <i data-lucide="git-branch" style="width:22px;height:22px;color:#38bdf8;margin-bottom:8px;"></i>
+                                    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;margin-bottom:4px;">Full-Stack</p>
+                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.5;">Front + back from scratch.</p>
+                                </div>
+                                <div class="neon-card rounded-xl p-4 bracket" style="position:relative;">
+                                    <i data-lucide="users" style="width:22px;height:22px;color:#fb7185;margin-bottom:8px;"></i>
+                                    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;margin-bottom:4px;">Client-Focused</p>
+                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.5;">Clear comms, smooth process.</p>
+                                </div>
+                            </div>
+
+                            <!-- Languages -->
+                            <div class="neon-card rounded-xl p-5" style="flex-shrink:0;">
+                                <p class="section-label mb-3">Languages Spoken</p>
+                                <div style="display:flex;flex-direction:column;gap:10px;">
+                                    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border:1px solid rgba(255,255,255,0.08);border-radius:8px;background:rgba(255,255,255,0.02);">
+                                        <div style="display:flex;align-items:center;gap:10px;">
+                                            <span style="font-size:1.3rem;">🇺🇸</span>
+                                            <div>
+                                                <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;">English</p>
+                                                <p style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:#cbd5e1;">Spoken &amp; written proficiency</p>
+                                            </div>
+                                        </div>
+                                        <span class="tech-badge" style="font-size:0.65rem;padding:3px 10px;">Fluent</span>
+                                    </div>
+                                    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border:1px solid rgba(255,255,255,0.08);border-radius:8px;background:rgba(255,255,255,0.02);">
+                                        <div style="display:flex;align-items:center;gap:10px;">
+                                            <span style="font-size:1.3rem;">🇵🇭</span>
+                                            <div>
+                                                <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;">Tagalog</p>
+                                                <p style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:#cbd5e1;">Native / First language</p>
+                                            </div>
+                                        </div>
+                                        <span class="tech-badge" style="font-size:0.65rem;padding:3px 10px;">Native</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                         
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ════ PROJECTS PANEL ════ -->
+                <div class="panel" id="panel-projects">
+                    <p class="section-label mb-1">Featured Projects</p>
+                    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:4px;">Featured <span class="gradient-text">Projects</span></h2>
+                    <p style="font-size:0.85rem;color:#cbd5e1;margin-bottom:18px;">Real apps built from scratch. Source code on GitHub.</p>
+
+                    <div class="projects-grid" style="flex:1;min-height:0;overflow-y:auto;">
+
+                        <!-- Edebt -->
+                        <div
+                            class="neon-card rounded-xl overflow-hidden project-card"
+                            style="display:flex;flex-direction:column;"
+                            role="button"
+                            tabindex="0"
+                            onclick="openProjectModal(this)"
+                            onkeydown="onProjectCardKeydown(event, this)"
+                            data-project-title="Edebt"
+                            data-project-description="Web dashboard for admins to track debts. Paired with a mobile app that reads handwritten order slips and auto-saves data."
+                        >
+                            <div class="project-img-wrap" style="aspect-ratio: 16/9; flex-shrink:0; overflow: hidden; position: relative;">
+                                <img src="assets/projects/edebt_admin1.png" alt="Edebt" style="width:100%; height:100%; object-fit:cover; opacity:0.65;">
+                                <div class="project-overlay">
+                                    <div>
+                                        <div style="display:flex;gap:5px;margin-bottom:5px;">
+                                            <span class="tech-badge" style="font-size:0.6rem;padding:2px 7px;">JavaScript</span>
+                                            <span class="tech-badge" style="font-size:0.6rem;padding:2px 7px;">Web App</span>
+                                        </div>
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;">Edebt</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="padding:14px;flex:1;display:flex;flex-direction:column;">
+                                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                                    <div>
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;">Edebt</p>
+                                        <p style="font-size:0.75rem;color:#94a3b8;font-weight:500;">Debt tracker with mobile scanning</p>
+                                    </div>
+                                    <a href="https://github.com/militantezeandrei-ops/Edebt" target="_blank" style="color:#94a3b8;transition:color 0.2s;padding:4px;" class="hover:text-primary" onclick="event.stopPropagation();">
+                                        <i data-lucide="external-link" style="width:14px;height:14px;color:#38bdf8;"></i>
+                                    </a>
+                                </div>
+                                <p style="font-size:0.82rem;color:#cbd5e1;line-height:1.6;flex:1;">Web dashboard for admins to track debts. Paired with a mobile app that reads handwritten order slips and auto-saves data.</p>
+                                <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;">
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;padding:2px 8px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);border-radius:4px;color:#cbd5e1;">JavaScript</span>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;padding:2px 8px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);border-radius:4px;color:#cbd5e1;">HTML/CSS</span>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;padding:2px 8px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);border-radius:4px;color:#cbd5e1;">LocalStorage</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- EcoDefill -->
+                        <div
+                            class="neon-card rounded-xl overflow-hidden project-card"
+                            style="display:flex;flex-direction:column;"
+                            role="button"
+                            tabindex="0"
+                            onclick="openProjectModal(this)"
+                            onkeydown="onProjectCardKeydown(event, this)"
+                            data-project-title="EcoDefill"
+                            data-project-description="Tracks waste-to-water refill machines in real time. Users earn points for dropping off waste and redeem points to refill drinking water."
+                        >
+                            <div class="project-img-wrap" style="aspect-ratio: 16/9; flex-shrink:0; overflow: hidden; position: relative;">
+                                <img src="assets/projects/ecodefilldashboard.png" alt="EcoDefill" style="width:100%; height:100%; object-fit:cover; opacity:0.65;">
+                                <div class="project-overlay">
+                                    <div>
+                                        <div style="display:flex;gap:5px;margin-bottom:5px;">
+                                            <span class="tech-badge" style="font-size:0.6rem;padding:2px 7px;">TypeScript</span>
+                                            <span class="tech-badge" style="font-size:0.6rem;padding:2px 7px;">IoT</span>
+                                        </div>
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;">EcoDefill</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="padding:14px;flex:1;display:flex;flex-direction:column;">
+                                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                                    <div>
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;">EcoDefill</p>
+                                        <p style="font-size:0.75rem;color:#94a3b8;font-weight:500;">Eco-friendly refill machine + IoT</p>
+                                    </div>
+                                    <a href="https://github.com/militantezeandrei-ops/EcoDefill" target="_blank" style="color:#94a3b8;transition:color 0.2s;padding:4px;" class="hover:text-primary" onclick="event.stopPropagation();">
+                                        <i data-lucide="external-link" style="width:14px;height:14px;color:#38bdf8;"></i>
+                                    </a>
+                                </div>
+                                <p style="font-size:0.82rem;color:#cbd5e1;line-height:1.6;flex:1;">Tracks waste-to-water refill machines in real time. Users earn points for dropping off waste and redeem points to refill drinking water.</p>
+                                <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;">
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;padding:2px 8px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);border-radius:4px;color:#cbd5e1;">TypeScript</span>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;padding:2px 8px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);border-radius:4px;color:#cbd5e1;">Node.js</span>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;padding:2px 8px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);border-radius:4px;color:#cbd5e1;">IoT</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Marmet -->
+                        <div
+                            class="neon-card rounded-xl overflow-hidden project-card"
+                            style="display:flex;flex-direction:column;"
+                            role="button"
+                            tabindex="0"
+                            onclick="openProjectModal(this)"
+                            onkeydown="onProjectCardKeydown(event, this)"
+                            data-project-title="Marmet"
+                            data-project-description="Full e-commerce site where customers order live. Staff confirm orders, admins track stock, and the system shows sales charts and demand trends."
+                        >
+                            <div class="project-img-wrap" style="aspect-ratio: 16/9; flex-shrink:0; overflow: hidden; position: relative;">
+                                <img src="assets/projects/marmet_showcase.png" alt="Marmet" style="width:100%; height:100%; object-fit:cover; opacity:0.65;">
+                                <div class="project-overlay">
+                                    <div>
+                                        <div style="display:flex;gap:5px;margin-bottom:5px;">
+                                            <span class="tech-badge" style="font-size:0.6rem;padding:2px 7px;">PHP</span>
+                                            <span class="tech-badge" style="font-size:0.6rem;padding:2px 7px;">MySQL</span>
+                                        </div>
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;">Marmet</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="padding:14px;flex:1;display:flex;flex-direction:column;">
+                                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                                    <div>
+                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;">Marmet</p>
+                                        <p style="font-size:0.75rem;color:#94a3b8;font-weight:500;">E-commerce with full admin control</p>
+                                    </div>
+                                    <a href="https://github.com/militantezeandrei-ops/Marmet" target="_blank" style="color:#94a3b8;transition:color 0.2s;padding:4px;" class="hover:text-primary" onclick="event.stopPropagation();">
+                                        <i data-lucide="external-link" style="width:14px;height:14px;color:#38bdf8;"></i>
+                                    </a>
+                                </div>
+                                <p style="font-size:0.82rem;color:#cbd5e1;line-height:1.6;flex:1;">Full e-commerce site where customers order live. Staff confirm orders, admins track stock, and the system shows sales charts and demand trends.</p>
+                                <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;">
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;padding:2px 8px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);border-radius:4px;color:#cbd5e1;">PHP</span>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;padding:2px 8px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);border-radius:4px;color:#cbd5e1;">MySQL</span>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;padding:2px 8px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);border-radius:4px;color:#cbd5e1;">Bootstrap</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div style="padding-top:14px;flex-shrink:0;display:flex;flex-wrap:wrap;gap:10px;">
+                        <a href="https://github.com/militantezeandrei-ops" target="_blank" class="btn-neon flex items-center gap-2 px-5 py-2.5 rounded text-xs w-fit">
+                            <i data-lucide="github" style="width:13px;height:13px;color:#f3f4f6;"></i>
+                            See All Repos on GitHub
+                        </a>
+                        <a href="https://github.com/militantezeandrei-ops/militantezeandrei-ops.github.io" target="_blank" rel="noopener" class="btn-neon flex items-center gap-2 px-5 py-2.5 rounded text-xs w-fit">
+                            <i data-lucide="code-2" style="width:13px;height:13px;color:#38bdf8;"></i>
+                            View This Portfolio's Source
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ════ SKILLS PANEL ════ -->
+                <div class="panel" id="panel-skills">
+                    <p class="section-label mb-1">Skills &amp; Expertise</p>
+                    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:4px;">Expertise <span class="gradient-text">Stack</span></h2>
+                    <p style="font-size:0.85rem;color:#cbd5e1;margin-bottom:18px;">What I know and how well I know it — no fluff.</p>
+
+                    <div class="skills-grid" style="flex:1;min-height:0;overflow-y:auto;">
+
+                        <!-- Coding & Web -->
+                        <div class="neon-card rounded-xl p-5">
+                            <div style="width:38px;height:38px;border-radius:8px;background:rgba(0,255,65,0.12);border:1px solid rgba(0,255,65,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                                <i data-lucide="code-2" style="width:18px;height:18px;color:#00FF41;"></i>
+                            </div>
+                            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:16px;color:#fff;">Coding &amp; Web</h3>
+                            <div style="display:flex;flex-direction:column;gap:14px;">
+                                <div class="group">
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">PHP</span>
+                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Custom back-end logic, robust APIs, and secure server-side systems.</p>
+                                </div>
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">JavaScript</span>
+                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Dynamic web interactions, DOM manipulation, and modern ES6 features.</p>
+                                </div>
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">MySQL</span>
+                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Database schema architecture, optimized complex queries, and data management.</p>
+                                </div>
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">HTML / CSS</span>
+                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Responsive layouts, modern styling interfaces, and clean structural design.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Design & Tools -->
+                        <div class="neon-card rounded-xl p-5">
+                            <div style="width:38px;height:38px;border-radius:8px;background:rgba(236,72,153,0.12);border:1px solid rgba(236,72,153,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                                <i data-lucide="palette" style="width:18px;height:18px;color:#ec4899;"></i>
+                            </div>
+                            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:16px;color:#fff;">Design &amp; Tools</h3>
+                            <div style="display:flex;flex-direction:column;gap:14px;">
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">Graphic Design</span>
+                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Visual asset creation, brand identity, and engaging marketing materials.</p>
+                                </div>
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">UI/UX Design</span>
+                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">User-centric interfaces, clear navigation, and intuitive digital experiences.</p>
+                                </div>
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">MS Office</span>
+                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Advanced document formatting, systematic data organization, and reporting.</p>
+                                </div>
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">Presentations</span>
+                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Compelling professional pitch decks, visual storytelling, and slide design.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- People Skills -->
+                        <div class="neon-card rounded-xl p-5">
+                            <div style="width:38px;height:38px;border-radius:8px;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                                <i data-lucide="users" style="width:18px;height:18px;color:#f59e0b;"></i>
+                            </div>
+                            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:16px;color:#fff;">People Skills</h3>
+                            <div style="display:flex;flex-direction:column;gap:14px;">
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">Time Management</span>
+                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Consistent early deliveries, strict punctuality, and task prioritization.</p>
+                                </div>
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">Troubleshooting</span>
+                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Efficiently identifying, debugging, and resolving complex technical issues.</p>
+                                </div>
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">English / Tagalog</span>
+                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Clear and professional communication with local and international clients.</p>
+                                </div>
+                                <div>
+                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">Client Relations</span>
+                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Managing client expectations, requirements gathering, and progress tracking.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ════ CERTS PANEL ════ -->
+                <div class="panel" id="panel-certs">
+                    <p class="section-label mb-1">Certifications &amp; Training</p>
+                    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:4px;">Always <span class="gradient-text">Learning</span></h2>
+                    <p style="font-size:0.85rem;color:#cbd5e1;margin-bottom:22px;">Courses and workshops that leveled up my skills.</p>
+
+                    <div class="certs-grid">
+
+                        <div class="neon-card cert-card rounded-xl p-6 bracket" style="position:relative;">
+                            <div style="width:38px;height:38px;border-radius:8px;background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                                <i data-lucide="award" style="width:18px;height:18px;color:#38bdf8;"></i>
+                            </div>
+                            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;margin-bottom:4px;">Advanced Web Development</h3>
+                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--neon);margin-bottom:8px;font-weight:600;">Certificate of Completion</p>
+                            <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.6;">Hands-on training in modern web tools and best practices.</p>
+                        </div>
+
+                        <div class="neon-card cert-card rounded-xl p-6 bracket" style="position:relative;">
+                            <div style="width:38px;height:38px;border-radius:8px;background:rgba(236,72,153,0.12);border:1px solid rgba(236,72,153,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                                <i data-lucide="pen-tool" style="width:18px;height:18px;color:#ec4899;"></i>
+                            </div>
+                            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;margin-bottom:4px;">Graphic Design &amp; Branding</h3>
+                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--neon);margin-bottom:8px;font-weight:600;">Certificate of Participation</p>
+                            <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.6;">Workshop on making visual brands that clients actually want.</p>
+                        </div>
+
+                        <div class="neon-card cert-card rounded-xl p-6 bracket" style="position:relative;">
+                            <div style="width:38px;height:38px;border-radius:8px;background:rgba(192,132,252,0.12);border:1px solid rgba(192,132,252,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+                                <i data-lucide="smartphone" style="width:18px;height:18px;color:#c084fc;"></i>
+                            </div>
+                            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;margin-bottom:4px;">App Development Trends</h3>
+                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--neon);margin-bottom:8px;font-weight:600;">Seminar Attendee</p>
+                            <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.6;">Latest tools and ideas shaping mobile app development.</p>
+                        </div>
+                    </div>
+
+                    <!-- Timeline -->
+                    <div class="neon-card rounded-xl p-5 mt-4" style="flex:1;min-height:0;overflow-y:auto;">
+                        <p class="section-label mb-3">Milestones &amp; Journey</p>
+                        <div style="font-family:'Share Tech Mono',monospace;font-size:0.75rem;line-height:2.1;color:#cbd5e1;">
+                            <p><span style="color:var(--neon);font-weight:600;">[2024]</span> Started freelance development career</p>
+                            <p><span style="color:var(--neon);font-weight:600;">[2024]</span> Completed Advanced Web Development cert</p>
+                            <p><span style="color:var(--neon);font-weight:600;">[2024]</span> Completed Graphic Design &amp; Branding workshop</p>
+                            <p><span style="color:var(--neon);font-weight:600;">[2023]</span> Attended App Development Trends seminar</p>
+                            <p><span style="color:var(--neon);font-weight:600;">[2023]</span> Enrolled at Pambayang Dalubhasaan ng Marilao</p>
+                            <p><span style="color:var(--neon);font-weight:600;">[2023]</span> Started learning PHP &amp; MySQL</p>
+                            <p><span style="color:var(--neon);font-weight:bold;">[Present]</span> Always learning, improving, and taking on new projects</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ════ CONTACT PANEL ════ -->
+                <div class="panel" id="panel-contact">
+                    <p class="section-label mb-1">Get In Touch</p>
+                    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:4px;">Let's Build Something <span class="gradient-text">Together</span></h2>
+                    <p style="font-size:0.85rem;color:#cbd5e1;margin-bottom:18px;">Available for freelance work right now.</p>
+
+                    <div class="contact-grid" style="flex:1; min-height:0; overflow-y:auto; padding-bottom: 30px;">
+
+                        <!-- Contact Info -->
+                        <div style="display:flex;flex-direction:column;gap:12px;">
+                            <div class="neon-card rounded-xl p-5" style="flex-shrink:0;">
+                                <p class="section-label mb-4">Contact Information</p>
+                                <div style="display:flex;flex-direction:column;gap:14px;">
+                                    <div style="display:flex;align-items:center;gap:12px;">
+                                        <div style="width:38px;height:38px;border-radius:8px;background:rgba(244,63,94,0.12);border:1px solid rgba(244,63,94,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                            <i data-lucide="mail" style="width:16px;height:16px;color:#f43f5e;"></i>
+                                        </div>
+                                        <div>
+                                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;margin-bottom:2px;font-weight:600;">EMAIL</p>
+                                            <a href="mailto:militantezeandrei@gmail.com" style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:0.88rem;color:#ffffff;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#f43f5e'" onmouseout="this.style.color='#ffffff'">militantezeandrei@gmail.com</a>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex;align-items:center;gap:12px;">
+                                        <div style="width:38px;height:38px;border-radius:8px;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                            <i data-lucide="phone" style="width:16px;height:16px;color:#10b981;"></i>
+                                        </div>
+                                        <div>
+                                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;margin-bottom:2px;font-weight:600;">PHONE</p>
+                                            <a href="tel:09760590774" style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:0.88rem;color:#ffffff;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#ffffff'">0976 059 0774</a>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex;align-items:center;gap:12px;">
+                                        <div style="width:38px;height:38px;border-radius:8px;background:rgba(14,165,233,0.12);border:1px solid rgba(14,165,233,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                            <i data-lucide="map-pin" style="width:16px;height:16px;color:#0ea5e9;"></i>
+                                        </div>
+                                        <div>
+                                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;margin-bottom:2px;font-weight:600;">LOCATION</p>
+                                            <p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:0.88rem;color:#ffffff;">Marilao, Bulacan, Philippines</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Social -->
+                            <div class="neon-card rounded-xl p-5" style="flex-shrink:0;">
+                                <p class="section-label mb-3">Social Profiles</p>
+                                <div style="display:flex;flex-direction:column;gap:8px;">
+                                    <a href="https://github.com/militantezeandrei-ops" target="_blank" class="btn-neon flex items-center gap-3 px-4 py-2.5 rounded text-xs">
+                                        <i data-lucide="github" style="width:14px;height:14px;color:#f3f4f6;"></i> GitHub — militantezeandrei-ops
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/militante-zeandrei-d-231262323/" target="_blank" class="btn-neon flex items-center gap-3 px-4 py-2.5 rounded text-xs">
+                                        <i data-lucide="linkedin" style="width:14px;height:14px;color:#0a66c2;"></i> LinkedIn Profile
+                                    </a>
+                                    <a href="https://www.facebook.com/Zeandreipogi123" target="_blank" class="btn-neon flex items-center gap-3 px-4 py-2.5 rounded text-xs">
+                                        <i data-lucide="facebook" style="width:14px;height:14px;color:#1877f2;"></i> Facebook
+                                    </a>
+                                    <a href="https://x.com/ZDM2002" target="_blank" class="btn-neon flex items-center gap-3 px-4 py-2.5 rounded text-xs">
+                                        <i data-lucide="twitter" style="width:14px;height:14px;color:#38bdf8;"></i> X / Twitter — @ZDM2002
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Form -->
+                        <div class="form-card-container">
+                            <div class="neon-card rounded-xl p-6" style="flex-shrink:0; align-self:start; width: 100%; max-width: 550px;">
+                                <p class="section-label mb-4">Send a Message</p>
+                                <form id="contact-form" action="https://formspree.io/f/xykdojdv" method="POST" style="display:flex;flex-direction:column;gap:20px;">
+                                    <!-- Honeypot: hidden from humans, bots fill it in -->
+                                    <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+                                        <label>Leave this empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+                                    </div>
+                                    <div class="form-row-grid" style="gap:15px;">
+                                        <div class="form-group">
+                                            <label class="contact-label">Your Name</label>
+                                            <input type="text" name="name" placeholder="John Doe" required class="contact-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="contact-label">Email Address</label>
+                                            <input type="email" name="email" placeholder="john@example.com" required class="contact-input">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="contact-label">Service Needed</label>
+                                        <select name="service" class="contact-input" style="background:#0a0a0a;">
+                                            <option value="">Select service...</option>
+                                            <option value="web">Full-Stack Development</option>
+                                            <option value="app">Mobile Application</option>
+                                            <option value="design">UI/UX &amp; Graphic Design</option>
+                                            <option value="other">Consultation / Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="contact-label">Project Details</label>
+                                        <textarea name="message" rows="5" placeholder="Tell me about your project, ideas, or timeline..." required class="contact-input" style="resize:none;"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn-solid flex items-center justify-center gap-3 py-3.5 px-6 rounded-lg text-sm font-bold tracking-widest uppercase transition-all hover:scale-[1.02] active:scale-[0.98]" style="width:100%; font-family:'Share Tech Mono', monospace;">
+                                        Send Message
+                                        <i data-lucide="send" style="width:16px;height:16px;color:#000;"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                </div><!-- /panels-slider -->
+            </div><!-- /content-panel -->
+        </div><!-- /main-area -->
+
+        <!-- ── Status Bar ── -->
+        <div class="status-bar">
+            <div style="display:flex;align-items:center;gap:12px;">
+                <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;display:flex;align-items:center;gap:5px;">
+                    <i data-lucide="code" style="width:10px;height:10px;color:#00FF41;"></i>
+                    Built with passion in Bulacan
+                </span>
+                <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;display:flex;align-items:center;gap:5px;">
+                    <i data-lucide="zap" style="width:10px;height:10px;color:#f59e0b;"></i>
+                    Always improving
+                </span>
+                <a href="https://github.com/militantezeandrei-ops/militantezeandrei-ops.github.io" target="_blank" rel="noopener" style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#cbd5e1;display:flex;align-items:center;gap:5px;text-decoration:none;">
+                    <i data-lucide="github" style="width:10px;height:10px;color:#38bdf8;"></i>
+                    Source code
+                </a>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+                <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;" id="active-panel-label">Home</span>
+                <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#cbd5e1;">© 2024 Zeandrei D. Militante</span>
+            </div>
+        </div><!-- /status-bar -->
+
+        <!-- ── Mobile Bottom Nav ── -->
+        <nav class="mobile-bottom-nav">
+            <a class="nav-item-mobile active" data-panel="home" onclick="switchPanel('home', this)">
+                <i data-lucide="home" style="color:#00FF41;"></i>
+                <span>Home</span>
+            </a>
+            <a class="nav-item-mobile" data-panel="about" onclick="switchPanel('about', this)">
+                <i data-lucide="user" style="color:#38bdf8;"></i>
+                <span>About</span>
+            </a>
+            <a class="nav-item-mobile" data-panel="projects" onclick="switchPanel('projects', this)">
+                <i data-lucide="folder-code" style="color:#f59e0b;"></i>
+                <span>Projects</span>
+            </a>
+            <a class="nav-item-mobile" data-panel="skills" onclick="switchPanel('skills', this)">
+                <i data-lucide="cpu" style="color:#c084fc;"></i>
+                <span>Skills</span>
+            </a>
+            <a class="nav-item-mobile" data-panel="certs" onclick="switchPanel('certs', this)">
+                <i data-lucide="award" style="color:#fb7185;"></i>
+                <span>Certs</span>
+            </a>
+            <a class="nav-item-mobile" data-panel="contact" onclick="switchPanel('contact', this)">
+                <i data-lucide="send" style="color:#2dd4bf;"></i>
+                <span>Contact</span>
+            </a>
+        </nav>
+
+        <div id="project-modal-overlay" class="project-modal-overlay" onclick="closeProjectModal(event)">
+            <div class="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" onclick="event.stopPropagation();">
+                <div class="project-modal-head">
+                    <p id="project-modal-title" class="project-modal-title">Project Details</p>
+                    <button class="project-modal-close" type="button" aria-label="Close modal" onclick="closeProjectModal()">
+                        <i data-lucide="x" style="width:18px;height:18px;"></i>
+                    </button>
+                </div>
+                <div class="project-modal-body">
+                    <p id="project-modal-description" class="project-modal-desc"></p>
+                    <div id="project-flow-wrap" class="project-flow-wrap">
+                        <div class="project-flow-viewport">
+                            <div id="project-flow-track" class="project-flow-track"></div>
+                        </div>
+                        <div class="project-flow-foot">
+                            <button id="project-flow-prev" class="project-flow-nav-btn" type="button" aria-label="Previous step">
+                                <i data-lucide="chevron-left" style="width:14px;height:14px;"></i>
+                            </button>
+                            <p id="project-flow-status" class="project-flow-status">Step 1/1</p>
+                            <div id="project-flow-dots" class="project-flow-dots"></div>
+                            <button id="project-flow-next" class="project-flow-nav-btn" type="button" aria-label="Next step">
+                                <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /os-shell -->
+
+    <script>
+        // ── Lucide icons
+        lucide.createIcons();
+
+        // ── Clock
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').textContent =
+                now.toLocaleTimeString('en-PH', { hour: '2-digit', minute: '2-digit', hour12: false });
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // ── Cursor glow
+        const glow = document.getElementById('cursor-glow');
+        document.addEventListener('mousemove', e => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
+
+        // ── Typewriter
+        const typeTarget = document.getElementById('typewriter');
+        const sideType = document.getElementById('sidebar-type');
+        const words = ['Developer', 'Designer', 'Builder', 'Freelancer'];
+        let wi = 0, ci = 0, del = false;
+
+        function type() {
+            const cur = words[wi];
+            if (!del) {
+                const t = cur.substring(0, ci + 1);
+                typeTarget.textContent = t;
+                sideType.textContent = t;
+                ci++;
+                if (ci === cur.length) { del = true; setTimeout(type, 1800); return; }
+            } else {
+                const t = cur.substring(0, ci - 1);
+                typeTarget.textContent = t;
+                sideType.textContent = t;
+                ci--;
+                if (ci === 0) { del = false; wi = (wi + 1) % words.length; }
+            }
+            setTimeout(type, del ? 55 : 95);
+        }
+        type();
+
+        // ── Panel switching with smooth sliding
+        const panelOrder = ['home', 'about', 'projects', 'skills', 'certs', 'contact'];
+
+        function switchPanel(id, navEl) {
+            const panelIndex = panelOrder.indexOf(id);
+            const slider = document.getElementById('panels-slider');
+            if (slider && panelIndex !== -1) {
+                slider.style.transform = `translateX(-${panelIndex * (100 / panelOrder.length)}%)`;
+            }
+
+            // Update panel active states
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.querySelectorAll('.nav-item-mobile').forEach(n => n.classList.remove('active'));
+
+            // Show target
+            const target = document.getElementById('panel-' + id);
+            if (target) {
+                target.classList.add('active');
+            }
+
+            const label = document.getElementById('active-panel-label');
+            if (label) {
+                label.textContent = id.charAt(0).toUpperCase() + id.slice(1);
+            }
+
+            // Activate nav
+            if (navEl) {
+                navEl.classList.add('active');
+            } else {
+                const desktopMatch = document.querySelector('.sidebar [data-panel="' + id + '"]');
+                const mobileMatch = document.querySelector('.mobile-bottom-nav [data-panel="' + id + '"]');
+                if (desktopMatch) desktopMatch.classList.add('active');
+                if (mobileMatch) mobileMatch.classList.add('active');
+            }
+
+            // Sync other nav items (mobile vs desktop)
+            document.querySelectorAll('[data-panel="' + id + '"]').forEach(el => el.classList.add('active'));
+
+            // Close mobile sidebar
+            closeSidebar();
+        }
+
+        // ── Project modal
+        const projectModalOverlay = document.getElementById('project-modal-overlay');
+        const projectModalTitle = document.getElementById('project-modal-title');
+        const projectModalDescription = document.getElementById('project-modal-description');
+        const projectFlowWrap = document.getElementById('project-flow-wrap');
+        const projectFlowTrack = document.getElementById('project-flow-track');
+        const projectFlowDots = document.getElementById('project-flow-dots');
+        const projectFlowStatus = document.getElementById('project-flow-status');
+        const projectFlowPrev = document.getElementById('project-flow-prev');
+        const projectFlowNext = document.getElementById('project-flow-next');
+
+        const projectFlowGuides = {
+            Edebt: [
+                {
+                    tag: 'Mobile Input',
+                    title: 'Step 1: Scan handwritten debt slip in mobile app',
+                    text: 'The collector captures the handwritten order or debt note directly in the app so no one has to encode entries manually.',
+                    image: 'assets/projects/edebt_handwritten_slip.png'
+                },
+                {
+                    tag: 'Text Extraction',
+                    title: 'Step 2: Extract customer details and debt values',
+                    text: 'The system reads handwritten text, then maps the name, total amount, items, and due date into editable fields before submit.',
+                    image: 'assets/projects/edebt_admin.png'
+                },
+                {
+                    tag: 'Organize + Save',
+                    title: 'Step 3: Validate and save organized debt records',
+                    text: 'After review, the app stores each debt in a structured ledger grouped by customer and payment status for quick retrieval.',
+                    image: 'assets/projects/edebt_admin1.png'
+                },
+                {
+                    tag: 'Admin Monitoring',
+                    title: 'Step 4: Admin monitors user activity and repayments',
+                    text: 'Web admins track who created or updated records, monitor repayment progress, and identify overdue accounts in one dashboard.',
+                    image: 'assets/projects/edebt_admin1.png'
+                }
+            ],
+            EcoDefill: [
+                {
+                    tag: 'Mobile UI',
+                    title: 'Step 1: Use the mobile interface',
+                    text: 'This mobile screen shows the core user journey for scanning, points, and refill interactions in one flow.',
+                    image: 'assets/projects/EcoDefillMobile.jpg'
+                },
+                {
+                    tag: 'Dashboard',
+                    title: 'Step 2: View machine status and refill metrics',
+                    text: 'Admins can see station health, refill activity, and daily usage from the EcoDefill dashboard.',
+                    image: 'assets/projects/ecodefilldashboard.png'
+                },
+                {
+                    tag: 'Users',
+                    title: 'Step 3: Manage users and reward points',
+                    text: 'Track user accounts, monitor point balances, and validate reward eligibility in one place.',
+                    image: 'assets/projects/ecodefillusers.png'
+                },
+                {
+                    tag: 'Transactions',
+                    title: 'Step 4: Review refill and redemption logs',
+                    text: 'Every refill and point redemption is recorded so admins can audit activity and resolve disputes quickly.',
+                    image: 'assets/projects/ecodefillTransactionLog.png'
+                },
+                {
+                    tag: 'Reports',
+                    title: 'Step 5: Analyze recycling impact and trends',
+                    text: 'Generate performance reports to monitor waste converted, user engagement, and machine efficiency.',
+                    image: 'assets/projects/ecodefillReports.png'
+                }
+            ],
+            Marmet: [
+                {
+                    tag: 'Quick Guide',
+                    title: 'Order, stock, and sales workflow',
+                    text: 'Customers order live, staff fulfill transactions, and admins manage inventory plus sales insights from the web dashboard.',
+                    image: 'assets/projects/marmet_showcase.png'
+                }
+            ]
+        };
+
+        let projectSlides = [];
+        let projectSlideIndex = 0;
+
+        function escapeHtml(value) {
+            return String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function getProjectSlides(title, description) {
+            const guide = projectFlowGuides[title];
+            if (guide && guide.length) return guide;
+            return [{
+                tag: 'Overview',
+                title: 'Project workflow snapshot',
+                text: description || 'No description available.',
+                image: ''
+            }];
+        }
+
+        function renderProjectSlides(title, description) {
+            projectSlides = getProjectSlides(title, description);
+            projectSlideIndex = 0;
+
+            projectFlowTrack.innerHTML = projectSlides.map(slide => `
+                <article class="project-flow-slide">
+                    ${slide.image ? `
+                        <div class="project-flow-media">
+                            <img src="${escapeHtml(slide.image)}" alt="${escapeHtml(slide.title)}">
+                        </div>
+                    ` : '<div class="project-flow-empty">No preview image available.</div>'}
+                    <div class="project-flow-content">
+                        <span class="project-flow-tag">${escapeHtml(slide.tag || 'Step')}</span>
+                        <p class="project-flow-title">${escapeHtml(slide.title || 'Step')}</p>
+                        <p class="project-flow-text">${escapeHtml(slide.text || '')}</p>
+                    </div>
+                </article>
+            `).join('');
+
+            projectFlowDots.innerHTML = projectSlides.map((_, index) => `
+                <button class="project-flow-dot" type="button" data-slide-index="${index}" aria-label="Go to step ${index + 1}"></button>
+            `).join('');
+
+            updateProjectSlideUI();
+            projectFlowWrap.style.display = 'block';
+        }
+
+        function updateProjectSlideUI() {
+            const count = projectSlides.length || 1;
+            projectFlowTrack.style.transform = `translateX(-${projectSlideIndex * 100}%)`;
+            projectFlowStatus.textContent = `Step ${projectSlideIndex + 1}/${count}`;
+
+            projectFlowDots.querySelectorAll('.project-flow-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === projectSlideIndex);
+            });
+
+            projectFlowPrev.disabled = projectSlideIndex === 0;
+            projectFlowNext.disabled = projectSlideIndex === count - 1;
+        }
+
+        function goToProjectSlide(index) {
+            if (!projectSlides.length) return;
+            const max = projectSlides.length - 1;
+            projectSlideIndex = Math.min(Math.max(index, 0), max);
+            updateProjectSlideUI();
+        }
+
+        function openProjectModal(cardEl) {
+            const title = cardEl.getAttribute('data-project-title') || 'Project';
+            const description = cardEl.getAttribute('data-project-description') || 'No description available.';
+
+            projectModalTitle.textContent = title;
+            projectModalDescription.textContent = description;
+            renderProjectSlides(title, description);
+            projectModalOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function closeProjectModal(event) {
+            if (event && event.target && event.target !== projectModalOverlay && !event.target.closest('.project-modal-close')) {
+                return;
+            }
+            projectModalOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function onProjectCardKeydown(event, cardEl) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                openProjectModal(cardEl);
+            }
+        }
+
+        projectFlowPrev.addEventListener('click', () => goToProjectSlide(projectSlideIndex - 1));
+        projectFlowNext.addEventListener('click', () => goToProjectSlide(projectSlideIndex + 1));
+        projectFlowDots.addEventListener('click', event => {
+            const dot = event.target.closest('[data-slide-index]');
+            if (!dot) return;
+            goToProjectSlide(Number(dot.getAttribute('data-slide-index')));
+        });
+
+        // ── Mobile sidebar
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            sidebar.classList.add('open');
+            overlay.classList.add('open');
+        });
+
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && projectModalOverlay.classList.contains('open')) {
+                closeProjectModal();
+            }
+            if (e.key === 'ArrowLeft' && projectModalOverlay.classList.contains('open')) {
+                goToProjectSlide(projectSlideIndex - 1);
+            }
+            if (e.key === 'ArrowRight' && projectModalOverlay.classList.contains('open')) {
+                goToProjectSlide(projectSlideIndex + 1);
+            }
+        });
+
+        // ── Contact form (with anti-spam + rate limiting)
+        const form = document.getElementById('contact-form');
+        const formLoadedAt = Date.now();
+        const RL_KEY = 'zdm_contact_sends';
+        const RL_MAX = 3;                    // max messages...
+        const RL_WINDOW = 60 * 60 * 1000;    // ...per hour per browser
+        const RL_COOLDOWN = 60 * 1000;       // min 60s between messages
+        const MIN_FILL_MS = 3000;            // humans need >3s to fill the form
+        const DISPOSABLE = ['mailinator.com','guerrillamail.com','10minutemail.com','tempmail.com','temp-mail.org','yopmail.com','trashmail.com','sharklasers.com','getnada.com','throwawaymail.com','dispostable.com','maildrop.cc'];
+
+        function getSends() {
+            try {
+                const arr = JSON.parse(localStorage.getItem(RL_KEY) || '[]');
+                return arr.filter(t => Date.now() - t < RL_WINDOW);
+            } catch { return []; }
+        }
+
+        function setBtn(btn, html, bg, color) {
+            btn.innerHTML = html;
+            btn.style.background = bg || '';
+            btn.style.color = color || '';
+        }
+
+        form.addEventListener('submit', async e => {
+            e.preventDefault();
+            const btn = form.querySelector('button[type="submit"]');
+            const orig = btn.innerHTML;
+            const fail = (msg) => {
+                setBtn(btn, msg, '#f43f5e', '#fff');
+                setTimeout(() => { setBtn(btn, orig); lucide.createIcons(); }, 4000);
+            };
+
+            // 1) Honeypot - bots fill hidden field; pretend success silently
+            if (form.querySelector('[name="_gotcha"]').value) {
+                setBtn(btn, '✓ Message Sent!', 'var(--neon)', '#000');
+                return;
+            }
+
+            // 2) Too fast = bot
+            if (Date.now() - formLoadedAt < MIN_FILL_MS) return fail('Please slow down and try again');
+
+            // 3) Validation
+            const data = new FormData(form);
+            const name = (data.get('name') || '').toString().trim();
+            const email = (data.get('email') || '').toString().trim().toLowerCase();
+            const message = (data.get('message') || '').toString().trim();
+            if (name.length < 2 || name.length > 80) return fail('Please enter a valid name');
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || email.length > 120) return fail('Please enter a valid email');
+            if (DISPOSABLE.includes(email.split('@')[1])) return fail('Disposable emails are not allowed');
+            if (message.length < 10 || message.length > 3000) return fail('Message must be 10–3000 characters');
+            if ((message.match(/https?:\/\//gi) || []).length > 2) return fail('Too many links in message');
+
+            // 4) Rate limit (per browser)
+            const sends = getSends();
+            if (sends.length && Date.now() - sends[sends.length - 1] < RL_COOLDOWN) return fail('Please wait a minute before sending again');
+            if (sends.length >= RL_MAX) return fail('Limit reached. Try again later');
+
+            btn.innerHTML = 'Sending...';
+            btn.disabled = true;
+
+            try {
+                const res = await fetch('https://formspree.io/f/xykdojdv', {
+                    method: 'POST',
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (res.ok) {
+                    sends.push(Date.now());
+                    localStorage.setItem(RL_KEY, JSON.stringify(sends));
+                    setBtn(btn, '✓ Message Sent!', 'var(--neon)', '#000');
+                    form.reset();
+                    setTimeout(() => { setBtn(btn, orig); lucide.createIcons(); }, 4000);
+                } else {
+                    fail(res.status === 429 ? 'Too many requests. Try later' : 'Failed to send. Try again');
+                }
+            } catch { fail('Network error. Try again'); }
+            finally { btn.disabled = false; }
+        });
+    </script>
+</body>
+</html>
