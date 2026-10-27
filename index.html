@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZDM_ | Zeandrei D. Militante</title>
+    <title>Zeandrei D. Militante | Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -885,6 +885,7 @@
             .project-flow-media img { max-height: 170px; object-fit: contain; }
         }
     </style>
+    <link rel="stylesheet" href="css/scroll-layout.css">
 </head>
 <body>
     <!-- Cursor glow -->
@@ -893,23 +894,24 @@
     <div class="os-shell">
 
         <!-- ── Top Bar ── -->
-        <div class="top-bar">
+        <header class="top-bar">
             <div class="flex items-center gap-4">
-                <!-- Mobile hamburger -->
-                <button id="mobile-menu-btn" class="mobile-menu-btn items-center justify-center w-8 h-8 text-slate-300 hover:text-primary transition-colors mr-1" style="color:#cbd5e1;">
-                    <i data-lucide="menu" style="width:18px;height:18px;"></i>
-                </button>
-                <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.2rem;letter-spacing:0.15em;color:#fff;">ZDM<span class="neon-text">_</span></span>
-                <span style="font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:#94a3b8;letter-spacing:0.12em;font-weight:600;">PORTFOLIO</span>
+                <a href="#home" class="brand-link">Zeandrei Militante</a>
             </div>
+            <nav class="desktop-nav" aria-label="Main navigation">
+                <a href="#home">Home</a><a href="#about">About</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
+            </nav>
             <div class="flex items-center gap-5">
-                <span class="flex items-center gap-2" style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#cbd5e1;font-weight:500;">
+                <span class="flex items-center gap-2 availability-label">
                     <span class="status-dot"></span>
-                    OPEN FOR WORK
+                    Available for internship
                 </span>
-                <span style="font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:#94a3b8;" id="clock">--:--</span>
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+                    <i data-lucide="moon" aria-hidden="true"></i>
+                    <span class="theme-toggle-label">Dark mode</span>
+                </button>
             </div>
-        </div>
+        </header>
 
         <!-- ── Main Area ── -->
         <div class="main-area">
@@ -950,14 +952,6 @@
                         <i data-lucide="folder-code" style="width:17px;height:17px;flex-shrink:0;color:#f59e0b;"></i>
                         Projects
                     </a>
-                    <a class="nav-item" data-panel="skills" onclick="switchPanel('skills',this)">
-                        <i data-lucide="cpu" style="width:17px;height:17px;flex-shrink:0;color:#c084fc;"></i>
-                        Skills
-                    </a>
-                    <a class="nav-item" data-panel="certs" onclick="switchPanel('certs',this)">
-                        <i data-lucide="award" style="width:17px;height:17px;flex-shrink:0;color:#fb7185;"></i>
-                        Certifications
-                    </a>
                     <a class="nav-item" data-panel="contact" onclick="switchPanel('contact',this)">
                         <i data-lucide="send" style="width:17px;height:17px;flex-shrink:0;color:#2dd4bf;"></i>
                         Contact
@@ -987,45 +981,29 @@
                 <div class="panels-slider" id="panels-slider">
 
                 <!-- ════ HOME PANEL ════ -->
-                <div class="panel active" id="panel-home">
+                <section class="panel active" id="home">
                     <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;max-width:680px;margin:0 auto;width:100%;">
+                        <div class="home-avatar"><img src="assets/profile.jpg?v=2" alt="Portrait of Zeandrei D. Militante"></div>
 
                         <!-- Status badge -->
-                        <div class="flex items-center gap-3 mb-6" style="background:rgba(0,255,65,0.05);border:1px solid rgba(0,255,65,0.2);padding:8px 18px;border-radius:4px;">
+                        <div class="home-intro-label">
                             <span class="status-dot"></span>
-                            <span style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.18em;color:#cbd5e1;font-weight:600;">OPEN FOR FREELANCE WORK</span>
+                            <span>Information Technology Student</span>
                         </div>
 
                         <!-- Name -->
                         <h1 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(2.8rem,7vw,5.5rem);line-height:0.95;letter-spacing:-0.01em;margin-bottom:16px;">
-                            ZEANDREI<br>
-                            <span class="gradient-text">MILITANTE</span>
+                            Zeandrei<br>
+                            <span class="gradient-text">Militante</span>
                         </h1>
 
-                        <!-- Typewriter -->
-                        <div class="flex items-center justify-center gap-2 mb-4">
-                            <span style="font-family:'Rajdhani',sans-serif;font-weight:600;color:#cbd5e1;font-size:1.05rem;letter-spacing:0.06em;text-transform:uppercase;">Specialization:</span>
-                            <span style="font-family:'Share Tech Mono',monospace;color:var(--neon);font-size:1.05rem;" id="typewriter">Developer</span>
-                            <span class="neon-text blink" style="font-family:'Share Tech Mono',monospace;font-size:1.05rem;">|</span>
-                        </div>
-
                         <p style="color:#cbd5e1;font-size:0.95rem;max-width:440px;line-height:1.75;margin-bottom:28px;">
-                            IT student &amp; Freelance Web/App Developer from <span style="color:#ffffff;font-weight:600;">Marilao, Bulacan</span>.
-                            Clean code. Sharp designs. Delivered on time.
+                            Fourth-year student seeking an internship or on-the-job training opportunity. Interested in building websites and mobile apps, working with databases, and solving computer problems.
                         </p>
-
-                        <!-- Tech badges -->
-                        <div class="flex flex-wrap justify-center gap-2 mb-8">
-                            <span class="tech-badge">PHP</span>
-                            <span class="tech-badge">MySQL</span>
-                            <span class="tech-badge">JavaScript</span>
-                            <span class="tech-badge">UI/UX</span>
-                            <span class="tech-badge">Graphic Design</span>
-                        </div>
 
                         <!-- CTAs -->
                         <div class="flex flex-wrap justify-center gap-3">
-                            <a onclick="switchPanel('projects',null)" class="btn-solid flex items-center gap-2 px-6 py-2.5 rounded text-sm cursor-pointer">
+                            <a href="#projects" class="btn-solid flex items-center gap-2 px-6 py-2.5 rounded text-sm cursor-pointer">
                                 View Projects
                                 <i data-lucide="arrow-right" style="width:14px;height:14px;color:#000;"></i>
                             </a>
@@ -1033,7 +1011,7 @@
                                 <i data-lucide="github" style="width:14px;height:14px;color:#e2e8f0;"></i>
                                 GitHub
                             </a>
-                            <a onclick="switchPanel('contact',null)" class="btn-neon flex items-center gap-2 px-6 py-2.5 rounded text-sm cursor-pointer">
+                            <a href="#contact" class="btn-neon flex items-center gap-2 px-6 py-2.5 rounded text-sm cursor-pointer">
                                 <i data-lucide="send" style="width:14px;height:14px;color:#2dd4bf;"></i>
                                 Contact
                             </a>
@@ -1043,131 +1021,68 @@
                     <!-- Stats bar at bottom of home -->
                     <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #1a1a1a;flex-shrink:0;">
                         <div style="padding:14px 18px;border-right:1px solid #1a1a1a;text-align:center;">
-                            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;color:var(--neon);line-height:1;">3+</p>
+                            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;color:var(--neon);line-height:1;">3</p>
                             <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;letter-spacing:0.1em;margin-top:3px;font-weight:600;">PROJECTS</p>
                         </div>
                         <div style="padding:14px 18px;border-right:1px solid #1a1a1a;text-align:center;">
-                            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;color:var(--neon);line-height:1;">2024</p>
-                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;letter-spacing:0.1em;margin-top:3px;font-weight:600;">FREELANCE SINCE</p>
+                            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;color:var(--neon);line-height:1;">4th</p>
+                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;letter-spacing:0.1em;margin-top:3px;font-weight:600;">YEAR IT</p>
                         </div>
                         <div style="padding:14px 18px;text-align:center;">
-                            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;color:var(--neon);line-height:1;">2027</p>
-                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;letter-spacing:0.1em;margin-top:3px;font-weight:600;">GRADUATING</p>
+                            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.6rem;color:var(--neon);line-height:1;">2</p>
+                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;letter-spacing:0.1em;margin-top:3px;font-weight:600;">LANGUAGES</p>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <!-- ════ ABOUT PANEL ════ -->
-                <div class="panel" id="panel-about">
-                    <p class="section-label mb-1">About Me</p>
-                    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.4rem);margin-bottom:18px;">Building Real Solutions with <span class="gradient-text">Precision</span></h2>
-
-                    <div class="about-grid">
-
-                        <!-- Left: Bio + photo -->
-                        <div style="display:flex;flex-direction:column;gap:14px;overflow-y:auto;min-height:0;">
-                            <!-- Photo + floating stats -->
-                            <div class="neon-card rounded-xl p-5" style="position:relative;flex-shrink:0;">
-                                <div style="display:flex;align-items:center;gap:14px;">
-                                    <div style="width:80px;height:80px;border-radius:50%;border:1px solid rgba(0,255,65,0.3);overflow:hidden;box-shadow:0 0 18px rgba(0,255,65,0.15);flex-shrink:0;">
-                                        <img src="assets/profile.jpg?v=2" alt="Zeandrei" style="width:100%;height:100%;object-fit:cover;">
-                                    </div>
-                                    <div>
-                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.2rem;color:#fff;">Zeandrei D. Militante</p>
-                                        <p style="font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:var(--neon);font-weight:600;">Web &amp; App Developer</p>
-                                        <p style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:#cbd5e1;margin-top:4px;font-weight:500;">📍 Marilao, Bulacan, PH</p>
-                                    </div>
-                                </div>
-                                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px;border-top:1px solid #1a1a1a;padding-top:14px;">
-                                    <div style="text-align:center;">
-                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.3rem;color:var(--neon);">3+</p>
-                                        <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;font-weight:600;">PROJECTS</p>
-                                    </div>
-                                    <div style="text-align:center;border-left:1px solid #1a1a1a;border-right:1px solid #1a1a1a;">
-                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.3rem;color:var(--neon);">4th</p>
-                                        <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;font-weight:600;">YEAR IT</p>
-                                    </div>
-                                    <div style="text-align:center;">
-                                        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.3rem;color:var(--neon);">2+</p>
-                                        <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#94a3b8;font-weight:600;">LANG</p>
-                                    </div>
-                                </div>
+                <!-- ════ ABOUT ════ -->
+                <section class="panel" id="about">
+                    <div class="about-hero">
+                        <div class="about-intro-card">
+                            <p class="about-eyebrow"><span class="about-eyebrow-dot"></span> A LITTLE ABOUT ME</p>
+                            <h2 class="about-title">Curious by nature.<br><span>Building with purpose.</span></h2>
+                            <p class="about-lead">I’m Zeandrei, a fourth-year BSIT student who enjoys turning ideas into useful websites and mobile apps. I’m looking for an internship or OJT where I can learn, contribute, and grow with a team.</p>
+                            <div class="about-facts">
+                                <span><i data-lucide="graduation-cap" aria-hidden="true"></i> Fourth-year BSIT</span>
+                                <span><i data-lucide="map-pin" aria-hidden="true"></i> Marilao, Bulacan</span>
                             </div>
-
-                            <!-- Bio text -->
-                            <div class="neon-card rounded-xl p-5" style="flex-shrink:0;">
-                                <p class="section-label mb-3">Biography</p>
-                                <div style="color:#cbd5e1;font-size:0.88rem;line-height:1.75;display:flex;flex-direction:column;gap:10px;">
-                                    <p>I'm an IT student at <strong style="color:#ffffff;">Pambayang Dalubhasaan ng Marilao</strong> (graduating 2027), currently in my 4th year — studying web development, databases, and software design.</p>
-                                    <p>Since June 2024, I've been doing <strong style="color:#ffffff;">freelance web and app projects</strong> for real clients. I build both the back-end logic and the front-end — from scratch.</p>
-                                    <p>I always finish work <strong style="color:#ffffff;">before the deadline</strong> and communicate clearly in English and Tagalog.</p>
-                                </div>
-                            </div>
+                            <a class="about-cta" href="#projects">See what I’ve been building <i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
                         </div>
-
-                        <!-- Right: traits + languages -->
-                        <div style="display:flex;flex-direction:column;gap:14px;overflow-y:auto;min-height:0;">
-                            <!-- 2 trait cards -->
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex-shrink:0;">
-                                <div class="neon-card rounded-xl p-4 bracket" style="position:relative;">
-                                    <i data-lucide="clock" style="width:22px;height:22px;color:#f59e0b;margin-bottom:8px;"></i>
-                                    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;margin-bottom:4px;">Early Delivery</p>
-                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.5;">Done before deadline, every time.</p>
-                                </div>
-                                <div class="neon-card rounded-xl p-4 bracket" style="position:relative;">
-                                    <i data-lucide="layers" style="width:22px;height:22px;color:#c084fc;margin-bottom:8px;"></i>
-                                    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;margin-bottom:4px;">Design + Code</p>
-                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.5;">Good-looking and fully working.</p>
-                                </div>
-                                <div class="neon-card rounded-xl p-4 bracket" style="position:relative;">
-                                    <i data-lucide="git-branch" style="width:22px;height:22px;color:#38bdf8;margin-bottom:8px;"></i>
-                                    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;margin-bottom:4px;">Full-Stack</p>
-                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.5;">Front + back from scratch.</p>
-                                </div>
-                                <div class="neon-card rounded-xl p-4 bracket" style="position:relative;">
-                                    <i data-lucide="users" style="width:22px;height:22px;color:#fb7185;margin-bottom:8px;"></i>
-                                    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;margin-bottom:4px;">Client-Focused</p>
-                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.5;">Clear comms, smooth process.</p>
-                                </div>
-                            </div>
-
-                            <!-- Languages -->
-                            <div class="neon-card rounded-xl p-5" style="flex-shrink:0;">
-                                <p class="section-label mb-3">Languages Spoken</p>
-                                <div style="display:flex;flex-direction:column;gap:10px;">
-                                    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border:1px solid rgba(255,255,255,0.08);border-radius:8px;background:rgba(255,255,255,0.02);">
-                                        <div style="display:flex;align-items:center;gap:10px;">
-                                            <span style="font-size:1.3rem;">🇺🇸</span>
-                                            <div>
-                                                <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;">English</p>
-                                                <p style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:#cbd5e1;">Spoken &amp; written proficiency</p>
-                                            </div>
-                                        </div>
-                                        <span class="tech-badge" style="font-size:0.65rem;padding:3px 10px;">Fluent</span>
-                                    </div>
-                                    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border:1px solid rgba(255,255,255,0.08);border-radius:8px;background:rgba(255,255,255,0.02);">
-                                        <div style="display:flex;align-items:center;gap:10px;">
-                                            <span style="font-size:1.3rem;">🇵🇭</span>
-                                            <div>
-                                                <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;">Tagalog</p>
-                                                <p style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:#cbd5e1;">Native / First language</p>
-                                            </div>
-                                        </div>
-                                        <span class="tech-badge" style="font-size:0.65rem;padding:3px 10px;">Native</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                         
-                        </div>
+                        <figure class="about-photo-card">
+                            <img src="assets/profile.jpg?v=2" alt="Portrait of Zeandrei D. Militante">
+                            <figcaption><span class="about-photo-caption-label">HELLO, I’M</span><strong>Zeandrei Militante</strong><span>IT student · aspiring developer</span></figcaption>
+                            <span class="about-photo-mark" aria-hidden="true">Z</span>
+                        </figure>
                     </div>
-                </div>
+
+                    <div class="about-details-grid">
+                        <article class="about-detail-card about-education-card">
+                            <div class="about-detail-icon"><i data-lucide="book-open" aria-hidden="true"></i></div>
+                            <p class="about-card-label">EDUCATION</p>
+                            <h3>Bachelor of Science in Information Technology</h3>
+                            <p>Pambayang Dalubhasaan ng Marilao</p>
+                        </article>
+                        <article class="about-detail-card about-skills-card">
+                            <div class="about-skills-heading">
+                                <div>
+                                    <p class="about-card-label">WHAT I BRING</p>
+                                    <h3>Skills I use to make things work</h3>
+                                </div>
+                                <div class="about-detail-icon"><i data-lucide="sparkles" aria-hidden="true"></i></div>
+                            </div>
+                            <div class="about-skill-tags">
+                                <span>Website development</span><span>Mobile apps</span><span>Word &amp; Excel</span><span>Computer troubleshooting</span>
+                            </div>
+                            <div class="about-languages"><span>Languages</span><strong>English</strong><strong>Filipino</strong></div>
+                        </article>
+                    </div>
+                </section>
 
                 <!-- ════ PROJECTS PANEL ════ -->
-                <div class="panel" id="panel-projects">
-                    <p class="section-label mb-1">Featured Projects</p>
-                    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:4px;">Featured <span class="gradient-text">Projects</span></h2>
-                    <p style="font-size:0.85rem;color:#cbd5e1;margin-bottom:18px;">Real apps built from scratch. Source code on GitHub.</p>
+                <section class="panel" id="projects">
+                    <p class="section-label mb-1">Projects</p>
+                    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:4px;">Selected Projects</h2>
+                    <p style="font-size:0.85rem;color:#cbd5e1;margin-bottom:18px;">A few projects I’ve worked on.</p>
 
                     <div class="projects-grid" style="flex:1;min-height:0;overflow-y:auto;">
 
@@ -1180,7 +1095,7 @@
                             onclick="openProjectModal(this)"
                             onkeydown="onProjectCardKeydown(event, this)"
                             data-project-title="Edebt"
-                            data-project-description="Web dashboard for admins to track debts. Paired with a mobile app that reads handwritten order slips and auto-saves data."
+                            data-project-description="A website and mobile app that help keep customer debts and orders organized. Users can add information from handwritten order slips."
                         >
                             <div class="project-img-wrap" style="aspect-ratio: 16/9; flex-shrink:0; overflow: hidden; position: relative;">
                                 <img src="assets/projects/edebt_admin1.png" alt="Edebt" style="width:100%; height:100%; object-fit:cover; opacity:0.65;">
@@ -1204,7 +1119,7 @@
                                         <i data-lucide="external-link" style="width:14px;height:14px;color:#38bdf8;"></i>
                                     </a>
                                 </div>
-                                <p style="font-size:0.82rem;color:#cbd5e1;line-height:1.6;flex:1;">Web dashboard for admins to track debts. Paired with a mobile app that reads handwritten order slips and auto-saves data.</p>
+                                <p style="font-size:0.82rem;color:#cbd5e1;line-height:1.6;flex:1;">A website and mobile app that help keep customer debts and orders organized.</p>
                                 <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;">
                                     <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;padding:2px 8px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);border-radius:4px;color:#cbd5e1;">JavaScript</span>
                                     <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;padding:2px 8px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);border-radius:4px;color:#cbd5e1;">HTML/CSS</span>
@@ -1222,7 +1137,7 @@
                             onclick="openProjectModal(this)"
                             onkeydown="onProjectCardKeydown(event, this)"
                             data-project-title="EcoDefill"
-                            data-project-description="Tracks waste-to-water refill machines in real time. Users earn points for dropping off waste and redeem points to refill drinking water."
+                            data-project-description="A recycling and water refill project where people earn points for dropping off waste and can use those points for drinking water."
                         >
                             <div class="project-img-wrap" style="aspect-ratio: 16/9; flex-shrink:0; overflow: hidden; position: relative;">
                                 <img src="assets/projects/ecodefilldashboard.png" alt="EcoDefill" style="width:100%; height:100%; object-fit:cover; opacity:0.65;">
@@ -1240,13 +1155,13 @@
                                 <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
                                     <div>
                                         <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;">EcoDefill</p>
-                                        <p style="font-size:0.75rem;color:#94a3b8;font-weight:500;">Eco-friendly refill machine + IoT</p>
+                                        <p style="font-size:0.75rem;color:#94a3b8;font-weight:500;">Recycling and water refills</p>
                                     </div>
                                     <a href="https://github.com/militantezeandrei-ops/EcoDefill" target="_blank" style="color:#94a3b8;transition:color 0.2s;padding:4px;" class="hover:text-primary" onclick="event.stopPropagation();">
                                         <i data-lucide="external-link" style="width:14px;height:14px;color:#38bdf8;"></i>
                                     </a>
                                 </div>
-                                <p style="font-size:0.82rem;color:#cbd5e1;line-height:1.6;flex:1;">Tracks waste-to-water refill machines in real time. Users earn points for dropping off waste and redeem points to refill drinking water.</p>
+                                <p style="font-size:0.82rem;color:#cbd5e1;line-height:1.6;flex:1;">People earn points for recycling and can use them to refill drinking water.</p>
                                 <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;">
                                     <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;padding:2px 8px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);border-radius:4px;color:#cbd5e1;">TypeScript</span>
                                     <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;padding:2px 8px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);border-radius:4px;color:#cbd5e1;">Node.js</span>
@@ -1264,7 +1179,7 @@
                             onclick="openProjectModal(this)"
                             onkeydown="onProjectCardKeydown(event, this)"
                             data-project-title="Marmet"
-                            data-project-description="Full e-commerce site where customers order live. Staff confirm orders, admins track stock, and the system shows sales charts and demand trends."
+                            data-project-description="An online store where customers can order products and staff can manage orders, stock, and sales."
                         >
                             <div class="project-img-wrap" style="aspect-ratio: 16/9; flex-shrink:0; overflow: hidden; position: relative;">
                                 <img src="assets/projects/marmet_showcase.png" alt="Marmet" style="width:100%; height:100%; object-fit:cover; opacity:0.65;">
@@ -1282,13 +1197,13 @@
                                 <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
                                     <div>
                                         <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;">Marmet</p>
-                                        <p style="font-size:0.75rem;color:#94a3b8;font-weight:500;">E-commerce with full admin control</p>
+                                        <p style="font-size:0.75rem;color:#94a3b8;font-weight:500;">Online store and order management</p>
                                     </div>
                                     <a href="https://github.com/militantezeandrei-ops/Marmet" target="_blank" style="color:#94a3b8;transition:color 0.2s;padding:4px;" class="hover:text-primary" onclick="event.stopPropagation();">
                                         <i data-lucide="external-link" style="width:14px;height:14px;color:#38bdf8;"></i>
                                     </a>
                                 </div>
-                                <p style="font-size:0.82rem;color:#cbd5e1;line-height:1.6;flex:1;">Full e-commerce site where customers order live. Staff confirm orders, admins track stock, and the system shows sales charts and demand trends.</p>
+                                <p style="font-size:0.82rem;color:#cbd5e1;line-height:1.6;flex:1;">An online store where customers order products and staff manage orders and stock.</p>
                                 <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;">
                                     <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;padding:2px 8px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);border-radius:4px;color:#cbd5e1;">PHP</span>
                                     <span style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;padding:2px 8px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.03);border-radius:4px;color:#cbd5e1;">MySQL</span>
@@ -1309,153 +1224,13 @@
                             View This Portfolio's Source
                         </a>
                     </div>
-                </div>
+                </section>
 
-                <!-- ════ SKILLS PANEL ════ -->
-                <div class="panel" id="panel-skills">
-                    <p class="section-label mb-1">Skills &amp; Expertise</p>
-                    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:4px;">Expertise <span class="gradient-text">Stack</span></h2>
-                    <p style="font-size:0.85rem;color:#cbd5e1;margin-bottom:18px;">What I know and how well I know it — no fluff.</p>
-
-                    <div class="skills-grid" style="flex:1;min-height:0;overflow-y:auto;">
-
-                        <!-- Coding & Web -->
-                        <div class="neon-card rounded-xl p-5">
-                            <div style="width:38px;height:38px;border-radius:8px;background:rgba(0,255,65,0.12);border:1px solid rgba(0,255,65,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
-                                <i data-lucide="code-2" style="width:18px;height:18px;color:#00FF41;"></i>
-                            </div>
-                            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:16px;color:#fff;">Coding &amp; Web</h3>
-                            <div style="display:flex;flex-direction:column;gap:14px;">
-                                <div class="group">
-                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">PHP</span>
-                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Custom back-end logic, robust APIs, and secure server-side systems.</p>
-                                </div>
-                                <div>
-                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">JavaScript</span>
-                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Dynamic web interactions, DOM manipulation, and modern ES6 features.</p>
-                                </div>
-                                <div>
-                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">MySQL</span>
-                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Database schema architecture, optimized complex queries, and data management.</p>
-                                </div>
-                                <div>
-                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">HTML / CSS</span>
-                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Responsive layouts, modern styling interfaces, and clean structural design.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Design & Tools -->
-                        <div class="neon-card rounded-xl p-5">
-                            <div style="width:38px;height:38px;border-radius:8px;background:rgba(236,72,153,0.12);border:1px solid rgba(236,72,153,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
-                                <i data-lucide="palette" style="width:18px;height:18px;color:#ec4899;"></i>
-                            </div>
-                            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:16px;color:#fff;">Design &amp; Tools</h3>
-                            <div style="display:flex;flex-direction:column;gap:14px;">
-                                <div>
-                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">Graphic Design</span>
-                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Visual asset creation, brand identity, and engaging marketing materials.</p>
-                                </div>
-                                <div>
-                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">UI/UX Design</span>
-                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">User-centric interfaces, clear navigation, and intuitive digital experiences.</p>
-                                </div>
-                                <div>
-                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">MS Office</span>
-                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Advanced document formatting, systematic data organization, and reporting.</p>
-                                </div>
-                                <div>
-                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">Presentations</span>
-                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Compelling professional pitch decks, visual storytelling, and slide design.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- People Skills -->
-                        <div class="neon-card rounded-xl p-5">
-                            <div style="width:38px;height:38px;border-radius:8px;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
-                                <i data-lucide="users" style="width:18px;height:18px;color:#f59e0b;"></i>
-                            </div>
-                            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:16px;color:#fff;">People Skills</h3>
-                            <div style="display:flex;flex-direction:column;gap:14px;">
-                                <div>
-                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">Time Management</span>
-                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Consistent early deliveries, strict punctuality, and task prioritization.</p>
-                                </div>
-                                <div>
-                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">Troubleshooting</span>
-                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Efficiently identifying, debugging, and resolving complex technical issues.</p>
-                                </div>
-                                <div>
-                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">English / Tagalog</span>
-                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Clear and professional communication with local and international clients.</p>
-                                </div>
-                                <div>
-                                    <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:#ffffff;font-weight:600;display:block;margin-bottom:4px;">Client Relations</span>
-                                    <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.55;">Managing client expectations, requirements gathering, and progress tracking.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- ════ CERTS PANEL ════ -->
-                <div class="panel" id="panel-certs">
-                    <p class="section-label mb-1">Certifications &amp; Training</p>
-                    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:4px;">Always <span class="gradient-text">Learning</span></h2>
-                    <p style="font-size:0.85rem;color:#cbd5e1;margin-bottom:22px;">Courses and workshops that leveled up my skills.</p>
-
-                    <div class="certs-grid">
-
-                        <div class="neon-card cert-card rounded-xl p-6 bracket" style="position:relative;">
-                            <div style="width:38px;height:38px;border-radius:8px;background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
-                                <i data-lucide="award" style="width:18px;height:18px;color:#38bdf8;"></i>
-                            </div>
-                            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;margin-bottom:4px;">Advanced Web Development</h3>
-                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--neon);margin-bottom:8px;font-weight:600;">Certificate of Completion</p>
-                            <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.6;">Hands-on training in modern web tools and best practices.</p>
-                        </div>
-
-                        <div class="neon-card cert-card rounded-xl p-6 bracket" style="position:relative;">
-                            <div style="width:38px;height:38px;border-radius:8px;background:rgba(236,72,153,0.12);border:1px solid rgba(236,72,153,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
-                                <i data-lucide="pen-tool" style="width:18px;height:18px;color:#ec4899;"></i>
-                            </div>
-                            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;margin-bottom:4px;">Graphic Design &amp; Branding</h3>
-                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--neon);margin-bottom:8px;font-weight:600;">Certificate of Participation</p>
-                            <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.6;">Workshop on making visual brands that clients actually want.</p>
-                        </div>
-
-                        <div class="neon-card cert-card rounded-xl p-6 bracket" style="position:relative;">
-                            <div style="width:38px;height:38px;border-radius:8px;background:rgba(192,132,252,0.12);border:1px solid rgba(192,132,252,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
-                                <i data-lucide="smartphone" style="width:18px;height:18px;color:#c084fc;"></i>
-                            </div>
-                            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#fff;margin-bottom:4px;">App Development Trends</h3>
-                            <p style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--neon);margin-bottom:8px;font-weight:600;">Seminar Attendee</p>
-                            <p style="font-size:0.8rem;color:#cbd5e1;line-height:1.6;">Latest tools and ideas shaping mobile app development.</p>
-                        </div>
-                    </div>
-
-                    <!-- Timeline -->
-                    <div class="neon-card rounded-xl p-5 mt-4" style="flex:1;min-height:0;overflow-y:auto;">
-                        <p class="section-label mb-3">Milestones &amp; Journey</p>
-                        <div style="font-family:'Share Tech Mono',monospace;font-size:0.75rem;line-height:2.1;color:#cbd5e1;">
-                            <p><span style="color:var(--neon);font-weight:600;">[2024]</span> Started freelance development career</p>
-                            <p><span style="color:var(--neon);font-weight:600;">[2024]</span> Completed Advanced Web Development cert</p>
-                            <p><span style="color:var(--neon);font-weight:600;">[2024]</span> Completed Graphic Design &amp; Branding workshop</p>
-                            <p><span style="color:var(--neon);font-weight:600;">[2023]</span> Attended App Development Trends seminar</p>
-                            <p><span style="color:var(--neon);font-weight:600;">[2023]</span> Enrolled at Pambayang Dalubhasaan ng Marilao</p>
-                            <p><span style="color:var(--neon);font-weight:600;">[2023]</span> Started learning PHP &amp; MySQL</p>
-                            <p><span style="color:var(--neon);font-weight:bold;">[Present]</span> Always learning, improving, and taking on new projects</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ════ CONTACT PANEL ════ -->
-                <div class="panel" id="panel-contact">
+                <!-- ════ CONTACT ════ -->
+                <section class="panel" id="contact">
                     <p class="section-label mb-1">Get In Touch</p>
                     <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:4px;">Let's Build Something <span class="gradient-text">Together</span></h2>
-                    <p style="font-size:0.85rem;color:#cbd5e1;margin-bottom:18px;">Available for freelance work right now.</p>
+                    <p style="font-size:0.85rem;color:#cbd5e1;margin-bottom:18px;">I’m looking for an internship or on-the-job training opportunity.</p>
 
                     <div class="contact-grid" style="flex:1; min-height:0; overflow-y:auto; padding-bottom: 30px;">
 
@@ -1556,8 +1331,7 @@
                         </div>
 
                     </div>
-                </div>
-
+                </section><!-- /contact -->
                 </div><!-- /panels-slider -->
             </div><!-- /content-panel -->
         </div><!-- /main-area -->
@@ -1585,31 +1359,14 @@
         </div><!-- /status-bar -->
 
         <!-- ── Mobile Bottom Nav ── -->
-        <nav class="mobile-bottom-nav">
-            <a class="nav-item-mobile active" data-panel="home" onclick="switchPanel('home', this)">
-                <i data-lucide="home" style="color:#00FF41;"></i>
-                <span>Home</span>
-            </a>
-            <a class="nav-item-mobile" data-panel="about" onclick="switchPanel('about', this)">
-                <i data-lucide="user" style="color:#38bdf8;"></i>
-                <span>About</span>
-            </a>
-            <a class="nav-item-mobile" data-panel="projects" onclick="switchPanel('projects', this)">
-                <i data-lucide="folder-code" style="color:#f59e0b;"></i>
-                <span>Projects</span>
-            </a>
-            <a class="nav-item-mobile" data-panel="skills" onclick="switchPanel('skills', this)">
-                <i data-lucide="cpu" style="color:#c084fc;"></i>
-                <span>Skills</span>
-            </a>
-            <a class="nav-item-mobile" data-panel="certs" onclick="switchPanel('certs', this)">
-                <i data-lucide="award" style="color:#fb7185;"></i>
-                <span>Certs</span>
-            </a>
-            <a class="nav-item-mobile" data-panel="contact" onclick="switchPanel('contact', this)">
-                <i data-lucide="send" style="color:#2dd4bf;"></i>
-                <span>Contact</span>
-            </a>
+        <button id="mobile-nav-fab" class="mobile-nav-fab" type="button" aria-controls="mobile-nav-list" aria-expanded="false" aria-label="Open navigation">
+            <i data-lucide="plus" aria-hidden="true"></i>
+        </button>
+        <nav id="mobile-nav-list" class="mobile-nav-list" aria-label="Page navigation" aria-hidden="true" inert>
+            <a href="#home" aria-label="Home"><span class="mobile-nav-icon"><i data-lucide="house" aria-hidden="true"></i></span><span>Home</span></a>
+            <a href="#about" aria-label="About"><span class="mobile-nav-icon"><i data-lucide="user-round" aria-hidden="true"></i></span><span>About</span></a>
+            <a href="#projects" aria-label="Projects"><span class="mobile-nav-icon"><i data-lucide="folder-kanban" aria-hidden="true"></i></span><span>Projects</span></a>
+            <a href="#contact" aria-label="Contact"><span class="mobile-nav-icon"><i data-lucide="mail" aria-hidden="true"></i></span><span>Contact</span></a>
         </nav>
 
         <div id="project-modal-overlay" class="project-modal-overlay" onclick="closeProjectModal(event)">
@@ -1645,90 +1402,12 @@
 
     <script>
         // ── Lucide icons
-        lucide.createIcons();
+        if (window.lucide) lucide.createIcons();
 
-        // ── Clock
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('clock').textContent =
-                now.toLocaleTimeString('en-PH', { hour: '2-digit', minute: '2-digit', hour12: false });
-        }
-        updateClock();
-        setInterval(updateClock, 1000);
-
-        // ── Cursor glow
-        const glow = document.getElementById('cursor-glow');
-        document.addEventListener('mousemove', e => {
-            glow.style.left = e.clientX + 'px';
-            glow.style.top = e.clientY + 'px';
-        });
-
-        // ── Typewriter
-        const typeTarget = document.getElementById('typewriter');
-        const sideType = document.getElementById('sidebar-type');
-        const words = ['Developer', 'Designer', 'Builder', 'Freelancer'];
-        let wi = 0, ci = 0, del = false;
-
-        function type() {
-            const cur = words[wi];
-            if (!del) {
-                const t = cur.substring(0, ci + 1);
-                typeTarget.textContent = t;
-                sideType.textContent = t;
-                ci++;
-                if (ci === cur.length) { del = true; setTimeout(type, 1800); return; }
-            } else {
-                const t = cur.substring(0, ci - 1);
-                typeTarget.textContent = t;
-                sideType.textContent = t;
-                ci--;
-                if (ci === 0) { del = false; wi = (wi + 1) % words.length; }
-            }
-            setTimeout(type, del ? 55 : 95);
-        }
-        type();
-
-        // ── Panel switching with smooth sliding
-        const panelOrder = ['home', 'about', 'projects', 'skills', 'certs', 'contact'];
-
+        // Legacy buttons and links now scroll to the matching page section.
         function switchPanel(id, navEl) {
-            const panelIndex = panelOrder.indexOf(id);
-            const slider = document.getElementById('panels-slider');
-            if (slider && panelIndex !== -1) {
-                slider.style.transform = `translateX(-${panelIndex * (100 / panelOrder.length)}%)`;
-            }
-
-            // Update panel active states
-            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            document.querySelectorAll('.nav-item-mobile').forEach(n => n.classList.remove('active'));
-
-            // Show target
-            const target = document.getElementById('panel-' + id);
-            if (target) {
-                target.classList.add('active');
-            }
-
-            const label = document.getElementById('active-panel-label');
-            if (label) {
-                label.textContent = id.charAt(0).toUpperCase() + id.slice(1);
-            }
-
-            // Activate nav
-            if (navEl) {
-                navEl.classList.add('active');
-            } else {
-                const desktopMatch = document.querySelector('.sidebar [data-panel="' + id + '"]');
-                const mobileMatch = document.querySelector('.mobile-bottom-nav [data-panel="' + id + '"]');
-                if (desktopMatch) desktopMatch.classList.add('active');
-                if (mobileMatch) mobileMatch.classList.add('active');
-            }
-
-            // Sync other nav items (mobile vs desktop)
-            document.querySelectorAll('[data-panel="' + id + '"]').forEach(el => el.classList.add('active'));
-
-            // Close mobile sidebar
-            closeSidebar();
+            const target = document.getElementById(id);
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         // ── Project modal
@@ -1745,67 +1424,67 @@
         const projectFlowGuides = {
             Edebt: [
                 {
-                    tag: 'Mobile Input',
-                    title: 'Step 1: Scan handwritten debt slip in mobile app',
-                    text: 'The collector captures the handwritten order or debt note directly in the app so no one has to encode entries manually.',
+                    tag: 'Add an Order',
+                    title: 'Take a photo of the handwritten order',
+                    text: 'Use the mobile app to capture the order slip and start a customer record.',
                     image: 'assets/projects/edebt_handwritten_slip.png'
                 },
                 {
-                    tag: 'Text Extraction',
-                    title: 'Step 2: Extract customer details and debt values',
-                    text: 'The system reads handwritten text, then maps the name, total amount, items, and due date into editable fields before submit.',
+                    tag: 'Check Details',
+                    title: 'Review the customer and order details',
+                    text: 'Check the customer name, amount, items, and due date before saving.',
                     image: 'assets/projects/edebt_admin.png'
                 },
                 {
-                    tag: 'Organize + Save',
-                    title: 'Step 3: Validate and save organized debt records',
-                    text: 'After review, the app stores each debt in a structured ledger grouped by customer and payment status for quick retrieval.',
+                    tag: 'Save Records',
+                    title: 'Keep each customer’s records together',
+                    text: 'Saved orders are organized by customer and payment status.',
                     image: 'assets/projects/edebt_admin1.png'
                 },
                 {
-                    tag: 'Admin Monitoring',
-                    title: 'Step 4: Admin monitors user activity and repayments',
-                    text: 'Web admins track who created or updated records, monitor repayment progress, and identify overdue accounts in one dashboard.',
+                    tag: 'Track Payments',
+                    title: 'See payment progress in one place',
+                    text: 'The website helps staff follow payments and find overdue accounts.',
                     image: 'assets/projects/edebt_admin1.png'
                 }
             ],
             EcoDefill: [
                 {
-                    tag: 'Mobile UI',
-                    title: 'Step 1: Use the mobile interface',
-                    text: 'This mobile screen shows the core user journey for scanning, points, and refill interactions in one flow.',
+                    tag: 'For Users',
+                    title: 'Recycle and earn points',
+                    text: 'Use the app to see recycling points and water refill options.',
                     image: 'assets/projects/EcoDefillMobile.jpg'
                 },
                 {
-                    tag: 'Dashboard',
-                    title: 'Step 2: View machine status and refill metrics',
-                    text: 'Admins can see station health, refill activity, and daily usage from the EcoDefill dashboard.',
+                    tag: 'For Staff',
+                    title: 'Check refill activity',
+                    text: 'Staff can review refill activity and machine status.',
                     image: 'assets/projects/ecodefilldashboard.png'
                 },
                 {
-                    tag: 'Users',
-                    title: 'Step 3: Manage users and reward points',
-                    text: 'Track user accounts, monitor point balances, and validate reward eligibility in one place.',
+                    tag: 'Points',
+                    title: 'Review user points',
+                    text: 'Staff can check each user’s account and points.',
                     image: 'assets/projects/ecodefillusers.png'
                 },
                 {
-                    tag: 'Transactions',
-                    title: 'Step 4: Review refill and redemption logs',
-                    text: 'Every refill and point redemption is recorded so admins can audit activity and resolve disputes quickly.',
+                    tag: 'History',
+                    title: 'Look back at refills and rewards',
+                    text: 'Past refills and point use are saved for staff to review.',
                     image: 'assets/projects/ecodefillTransactionLog.png'
                 },
                 {
                     tag: 'Reports',
-                    title: 'Step 5: Analyze recycling impact and trends',
-                    text: 'Generate performance reports to monitor waste converted, user engagement, and machine efficiency.',
+                    title: 'See recycling and refill totals',
+                    text: 'Reports help staff understand how people use the stations.',
                     image: 'assets/projects/ecodefillReports.png'
                 }
             ],
             Marmet: [
                 {
-                    tag: 'Quick Guide',
-                    title: 'Order, stock, and sales workflow',
-                    text: 'Customers order live, staff fulfill transactions, and admins manage inventory plus sales insights from the web dashboard.',
+                    tag: 'How It Works',
+                    title: 'Customers order, staff manage the store',
+                    text: 'Staff can manage orders and stock, then review store sales.',
                     image: 'assets/projects/marmet_showcase.png'
                 }
             ]
@@ -1916,20 +1595,6 @@
             goToProjectSlide(Number(dot.getAttribute('data-slide-index')));
         });
 
-        // ── Mobile sidebar
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('sidebar-overlay');
-
-        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-            sidebar.classList.add('open');
-            overlay.classList.add('open');
-        });
-
-        function closeSidebar() {
-            sidebar.classList.remove('open');
-            overlay.classList.remove('open');
-        }
-
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape' && projectModalOverlay.classList.contains('open')) {
                 closeProjectModal();
@@ -2022,5 +1687,7 @@
             finally { btn.disabled = false; }
         });
     </script>
+    <script src="js/mobile-nav.js"></script>
+    <script src="js/theme-toggle.js"></script>
 </body>
 </html>
