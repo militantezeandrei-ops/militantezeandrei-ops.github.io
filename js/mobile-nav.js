@@ -2,6 +2,7 @@
 (() => {
     const button = document.getElementById('mobile-nav-fab');
     const menu = document.getElementById('mobile-nav-list');
+    const backdrop = document.getElementById('mobile-nav-backdrop');
     if (!button || !menu) return;
 
     const setOpen = (open) => {
@@ -10,6 +11,10 @@
         menu.classList.toggle('open', open);
         menu.setAttribute('aria-hidden', String(!open));
         menu.inert = !open;
+        if (backdrop) {
+            backdrop.classList.toggle('open', open);
+            backdrop.setAttribute('aria-hidden', String(!open));
+        }
     };
 
     const toggleOpen = () => setOpen(button.getAttribute('aria-expanded') !== 'true');
@@ -17,6 +22,13 @@
         event.stopPropagation();
         toggleOpen();
     });
+
+    if (backdrop) {
+        backdrop.addEventListener('click', () => {
+            setOpen(false);
+            button.focus();
+        });
+    }
 
     menu.addEventListener('click', (event) => {
         const link = event.target.closest('a, button');

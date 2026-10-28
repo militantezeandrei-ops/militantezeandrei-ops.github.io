@@ -900,6 +900,7 @@
             </div>
             <nav class="desktop-nav" aria-label="Main navigation">
                 <a href="#home">Home</a><a href="#about">About</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
+                <button class="desktop-nav-message" type="button" data-open-contact>Send a message</button>
             </nav>
             <div class="flex items-center gap-5">
                 <span class="flex items-center gap-2 availability-label">
@@ -982,7 +983,17 @@
 
                 <!-- ════ HOME PANEL ════ -->
                 <section class="panel active" id="home">
-                    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;max-width:680px;margin:0 auto;width:100%;">
+                    <div class="home-workflow-layout">
+                    <aside class="workflow-rail workflow-rail-left" aria-label="Workflow: discovery and planning">
+                        <p class="workflow-heading">01—04 · START</p>
+                        <ol>
+                            <li><span>01</span><i data-lucide="messages-square" aria-hidden="true"></i><div><strong>Collaborate</strong><small>Listen and align</small></div></li>
+                            <li><span>02</span><i data-lucide="clipboard-list" aria-hidden="true"></i><div><strong>Define</strong><small>Clarify requirements</small></div></li>
+                            <li><span>03</span><i data-lucide="list-checks" aria-hidden="true"></i><div><strong>Plan</strong><small>Map the approach</small></div></li>
+                            <li><span>04</span><i data-lucide="pen-tool" aria-hidden="true"></i><div><strong>Design</strong><small>Shape the experience</small></div></li>
+                        </ol>
+                    </aside>
+                    <div class="home-center-content" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;width:100%;">
                         <div class="home-avatar"><img src="assets/profile.jpg?v=2" alt="Portrait of Zeandrei D. Militante"></div>
 
                         <!-- Status badge -->
@@ -1017,6 +1028,16 @@
                             </a>
                         </div>
                     </div>
+                    <aside class="workflow-rail workflow-rail-right" aria-label="Workflow: building and delivery">
+                        <p class="workflow-heading">05—08 · SHIP</p>
+                        <ol>
+                            <li><span>05</span><i data-lucide="code-2" aria-hidden="true"></i><div><strong>Build</strong><small>Develop the solution</small></div></li>
+                            <li><span>06</span><i data-lucide="bug" aria-hidden="true"></i><div><strong>Test</strong><small>Check and refine</small></div></li>
+                            <li><span>07</span><i data-lucide="send" aria-hidden="true"></i><div><strong>Deliver</strong><small>Share the result</small></div></li>
+                            <li><span>08</span><i data-lucide="refresh-cw" aria-hidden="true"></i><div><strong>Improve</strong><small>Use feedback to iterate</small></div></li>
+                        </ol>
+                    </aside>
+                    </div>
 
                     <!-- Stats bar at bottom of home -->
                     <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #1a1a1a;flex-shrink:0;">
@@ -1039,7 +1060,10 @@
                 <section class="panel" id="about">
                     <div class="about-hero">
                         <div class="about-intro-card">
-                            <p class="about-eyebrow"><span class="about-eyebrow-dot"></span> A LITTLE ABOUT ME</p>
+                            <div class="about-card-top">
+                                <p class="about-eyebrow"><span class="about-eyebrow-dot"></span> A LITTLE ABOUT ME</p>
+                                <img class="about-portrait" src="assets/profile.jpg?v=2" alt="Portrait of Zeandrei D. Militante">
+                            </div>
                             <h2 class="about-title">Curious by nature.<br><span>Building with purpose.</span></h2>
                             <p class="about-lead">I’m Zeandrei, a fourth-year BSIT student who enjoys turning ideas into useful websites and mobile apps. I’m looking for an internship or OJT where I can learn, contribute, and grow with a team.</p>
                             <div class="about-facts">
@@ -1048,11 +1072,6 @@
                             </div>
                             <a class="about-cta" href="#projects">See what I’ve been building <i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
                         </div>
-                        <figure class="about-photo-card">
-                            <img src="assets/profile.jpg?v=2" alt="Portrait of Zeandrei D. Militante">
-                            <figcaption><span class="about-photo-caption-label">HELLO, I’M</span><strong>Zeandrei Militante</strong><span>IT student · aspiring developer</span></figcaption>
-                            <span class="about-photo-mark" aria-hidden="true">Z</span>
-                        </figure>
                     </div>
 
                     <div class="about-details-grid">
@@ -1071,9 +1090,29 @@
                                 <div class="about-detail-icon"><i data-lucide="sparkles" aria-hidden="true"></i></div>
                             </div>
                             <div class="about-skill-tags">
-                                <span>Website development</span><span>Mobile apps</span><span>Word &amp; Excel</span><span>Computer troubleshooting</span>
+                                <span>Website development</span><span>Mobile apps</span><span>Computer troubleshooting</span>
                             </div>
-                            <div class="about-languages"><span>Languages</span><strong>English</strong><strong>Filipino</strong></div>
+                            <div class="about-icon-skills">
+                                <div class="icon-skill-group" role="group" aria-label="Programming languages and web technologies">
+                                    <span class="icon-skill-heading">CODE &amp; WEB</span>
+                                    <div class="icon-skill-list">
+                                        <span class="skill-logo logo-js" role="img" aria-label="JavaScript" title="JavaScript">JS</span>
+                                        <span class="skill-logo logo-ts" role="img" aria-label="TypeScript" title="TypeScript">TS</span>
+                                        <span class="skill-logo logo-php" role="img" aria-label="PHP" title="PHP">php</span>
+                                        <span class="skill-logo logo-html" role="img" aria-label="HTML5" title="HTML5"><b>5</b></span>
+                                        <span class="skill-logo logo-css" role="img" aria-label="CSS3" title="CSS3"><b>3</b></span>
+                                    </div>
+                                </div>
+                                <div class="icon-skill-group" role="group" aria-label="Productivity software">
+                                    <span class="icon-skill-heading">PRODUCTIVITY</span>
+                                    <div class="icon-skill-list">
+                                        <span class="skill-logo logo-word" role="img" aria-label="Microsoft Word" title="Microsoft Word">W</span>
+                                        <span class="skill-logo logo-excel" role="img" aria-label="Microsoft Excel" title="Microsoft Excel">X</span>
+                                        <span class="skill-logo logo-canva" role="img" aria-label="Canva" title="Canva">C</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="about-languages"><span>Spoken languages</span><strong>English</strong><strong>Filipino</strong></div>
                         </article>
                     </div>
                 </section>
@@ -1232,10 +1271,10 @@
                     <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:4px;">Let's Build Something <span class="gradient-text">Together</span></h2>
                     <p style="font-size:0.85rem;color:#cbd5e1;margin-bottom:18px;">I’m looking for an internship or on-the-job training opportunity.</p>
 
-                    <div class="contact-grid" style="flex:1; min-height:0; overflow-y:auto; padding-bottom: 30px;">
+                    <div class="contact-grid contact-info-layout" style="display:block;max-width:1100px;width:100%;margin:0 auto;padding-bottom:30px;">
 
                         <!-- Contact Info -->
-                        <div style="display:flex;flex-direction:column;gap:12px;">
+                        <div class="contact-cards-row">
                             <div class="neon-card rounded-xl p-5" style="flex-shrink:0;">
                                 <p class="section-label mb-4">Contact Information</p>
                                 <div style="display:flex;flex-direction:column;gap:14px;">
@@ -1289,47 +1328,6 @@
                             </div>
                         </div>
 
-                        <!-- Contact Form -->
-                        <div class="form-card-container">
-                            <div class="neon-card rounded-xl p-6" style="flex-shrink:0; align-self:start; width: 100%; max-width: 550px;">
-                                <p class="section-label mb-4">Send a Message</p>
-                                <form id="contact-form" action="https://formspree.io/f/xykdojdv" method="POST" style="display:flex;flex-direction:column;gap:20px;">
-                                    <!-- Honeypot: hidden from humans, bots fill it in -->
-                                    <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
-                                        <label>Leave this empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
-                                    </div>
-                                    <div class="form-row-grid" style="gap:15px;">
-                                        <div class="form-group">
-                                            <label class="contact-label">Your Name</label>
-                                            <input type="text" name="name" placeholder="John Doe" required class="contact-input">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="contact-label">Email Address</label>
-                                            <input type="email" name="email" placeholder="john@example.com" required class="contact-input">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="contact-label">Service Needed</label>
-                                        <select name="service" class="contact-input" style="background:#0a0a0a;">
-                                            <option value="">Select service...</option>
-                                            <option value="web">Full-Stack Development</option>
-                                            <option value="app">Mobile Application</option>
-                                            <option value="design">UI/UX &amp; Graphic Design</option>
-                                            <option value="other">Consultation / Other</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="contact-label">Project Details</label>
-                                        <textarea name="message" rows="5" placeholder="Tell me about your project, ideas, or timeline..." required class="contact-input" style="resize:none;"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn-solid flex items-center justify-center gap-3 py-3.5 px-6 rounded-lg text-sm font-bold tracking-widest uppercase transition-all hover:scale-[1.02] active:scale-[0.98]" style="width:100%; font-family:'Share Tech Mono', monospace;">
-                                        Send Message
-                                        <i data-lucide="send" style="width:16px;height:16px;color:#000;"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-
                     </div>
                 </section><!-- /contact -->
                 </div><!-- /panels-slider -->
@@ -1362,12 +1360,64 @@
         <button id="mobile-nav-fab" class="mobile-nav-fab" type="button" aria-controls="mobile-nav-list" aria-expanded="false" aria-label="Open navigation">
             <i data-lucide="plus" aria-hidden="true"></i>
         </button>
+        <div id="mobile-nav-backdrop" class="mobile-nav-backdrop" aria-hidden="true"></div>
         <nav id="mobile-nav-list" class="mobile-nav-list" aria-label="Page navigation" aria-hidden="true" inert>
-            <a href="#home" aria-label="Home"><span class="mobile-nav-icon"><i data-lucide="house" aria-hidden="true"></i></span><span>Home</span></a>
-            <a href="#about" aria-label="About"><span class="mobile-nav-icon"><i data-lucide="user-round" aria-hidden="true"></i></span><span>About</span></a>
-            <a href="#projects" aria-label="Projects"><span class="mobile-nav-icon"><i data-lucide="folder-kanban" aria-hidden="true"></i></span><span>Projects</span></a>
-            <a href="#contact" aria-label="Contact"><span class="mobile-nav-icon"><i data-lucide="mail" aria-hidden="true"></i></span><span>Contact</span></a>
+            <a href="#home"><span class="mobile-nav-icon"><i data-lucide="house" aria-hidden="true"></i></span><span>Home</span></a>
+            <a href="#about"><span class="mobile-nav-icon"><i data-lucide="user-round" aria-hidden="true"></i></span><span>About</span></a>
+            <a href="#projects"><span class="mobile-nav-icon"><i data-lucide="folder-kanban" aria-hidden="true"></i></span><span>Projects</span></a>
+            <a href="#contact"><span class="mobile-nav-icon"><i data-lucide="mail" aria-hidden="true"></i></span><span>Contact</span></a>
+            <button type="button" data-open-contact><span class="mobile-nav-icon"><i data-lucide="send" aria-hidden="true"></i></span><span>Send a message</span></button>
         </nav>
+
+        <div id="contact-modal-overlay" class="contact-modal-overlay" aria-hidden="true">
+            <section id="contact-dialog" class="contact-dialog" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title" tabindex="-1">
+                <header class="contact-dialog-head">
+                    <div>
+                        <p class="section-label">GET IN TOUCH</p>
+                        <h2 id="contact-modal-title">Send a Message</h2>
+                    </div>
+                    <button class="contact-modal-close" type="button" aria-label="Close message form" data-close-contact>
+                        <i data-lucide="x" aria-hidden="true"></i>
+                    </button>
+                </header>
+                <div class="neon-card rounded-xl p-6 contact-form-card">
+                    <form id="contact-form" action="https://formspree.io/f/xykdojdv" method="POST" style="display:flex;flex-direction:column;gap:16px;">
+                        <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+                            <label>Leave this empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+                        </div>
+                        <div class="form-row-grid" style="gap:15px;">
+                            <div class="form-group">
+                                <label class="contact-label" for="contact-name">Your Name</label>
+                                <input id="contact-name" type="text" name="name" required autocomplete="name" class="contact-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="contact-label" for="contact-email">Email Address</label>
+                                <input id="contact-email" type="email" name="email" placeholder="you@example.com" required autocomplete="email" class="contact-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="contact-label" for="contact-service">Service Needed</label>
+                            <select id="contact-service" name="service" class="contact-input">
+                                <option value="">Select service...</option>
+                                <option value="web">Full-Stack Development</option>
+                                <option value="app">Mobile Application</option>
+                                <option value="iot">IoT Systems &amp; Connected Devices</option>
+                                <option value="design">UI/UX &amp; Graphic Design</option>
+                                <option value="other">Consultation / Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="contact-label" for="contact-message">Project Details</label>
+                            <textarea id="contact-message" name="message" rows="5" placeholder="Tell me about your project, ideas, or timeline..." required class="contact-input" style="resize:vertical;"></textarea>
+                        </div>
+                        <button type="submit" class="btn-solid flex items-center justify-center gap-3 py-3.5 px-6 rounded-lg text-sm font-bold tracking-widest uppercase transition-all hover:scale-[1.02] active:scale-[0.98]" style="width:100%;font-family:'Share Tech Mono',monospace;">
+                            Send Message
+                            <i data-lucide="send" style="width:16px;height:16px;color:#000;" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </div>
 
         <div id="project-modal-overlay" class="project-modal-overlay" onclick="closeProjectModal(event)">
             <div class="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" onclick="event.stopPropagation();">
@@ -1604,6 +1654,57 @@
             }
             if (e.key === 'ArrowRight' && projectModalOverlay.classList.contains('open')) {
                 goToProjectSlide(projectSlideIndex + 1);
+            }
+        });
+
+        // ── Contact form modal
+        const contactModalOverlay = document.getElementById('contact-modal-overlay');
+        const contactDialog = document.getElementById('contact-dialog');
+        const contactModalClose = contactModalOverlay?.querySelector('[data-close-contact]');
+        let contactModalReturnFocus = null;
+
+        function openContactModal() {
+            if (!contactModalOverlay || !contactDialog) return;
+            contactModalReturnFocus = document.activeElement;
+            contactModalOverlay.classList.add('open');
+            contactModalOverlay.setAttribute('aria-hidden', 'false');
+            document.documentElement.classList.add('contact-modal-open');
+            contactDialog.querySelector('input:not([name="_gotcha"])')?.focus();
+        }
+
+        function closeContactModal() {
+            if (!contactModalOverlay?.classList.contains('open')) return;
+            contactModalOverlay.classList.remove('open');
+            contactModalOverlay.setAttribute('aria-hidden', 'true');
+            document.documentElement.classList.remove('contact-modal-open');
+            const returnTarget = contactModalReturnFocus;
+            if (returnTarget && !returnTarget.closest('[inert]')) returnTarget.focus();
+            else document.getElementById('mobile-nav-fab')?.focus();
+        }
+
+        document.querySelectorAll('[data-open-contact]').forEach(button => button.addEventListener('click', openContactModal));
+        contactModalClose?.addEventListener('click', closeContactModal);
+        contactModalOverlay?.addEventListener('click', event => {
+            if (event.target === contactModalOverlay) closeContactModal();
+        });
+        document.addEventListener('keydown', event => {
+            if (!contactModalOverlay?.classList.contains('open')) return;
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                closeContactModal();
+                return;
+            }
+            if (event.key !== 'Tab') return;
+            const focusable = [...contactDialog.querySelectorAll('input:not([name="_gotcha"]), select, textarea, button:not(:disabled)')];
+            if (!focusable.length) return;
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
             }
         });
 
